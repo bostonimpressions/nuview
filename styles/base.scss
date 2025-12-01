@@ -1,0 +1,65 @@
+@theme {
+  --color-sapphire-50: #f2f7fa;
+  --color-sapphire-100: #e6eef5;
+  --color-sapphire-200: #c3d6e8;
+  --color-sapphire-300: #a2bcdb;
+  --color-sapphire-400: #6986bf;
+  --color-sapphire-500: #394fa2;
+  --color-sapphire-600: #2f4394;
+  --color-sapphire-700: #20307a;
+  --color-sapphire-800: #142161;
+  --color-sapphire-900: #0c154a;
+  --color-sapphire-950: #050b30;
+}
+
+@theme {
+  --color-perano-50: #fcfeff;
+  --color-perano-100: #f5f9fc;
+  --color-perano-200: #e8f1fa;
+  --color-perano-300: #d7e4f5;
+  --color-perano-400: #bbcbed;
+  --color-perano-500: #a1afe5;
+  --color-perano-600: #8290cf;
+  --color-perano-700: #5967ab;
+  --color-perano-800: #3a478a;
+  --color-perano-900: #202a66;
+  --color-perano-950: #0d1442;
+}
+
+@theme {
+  --color-biscay-50: #f0f4f7;
+  --color-biscay-100: #e1e9f0;
+  --color-biscay-200: #b4c6d6;
+  --color-biscay-300: #8ca2bd;
+  --color-biscay-400: #4d628c;
+  --color-biscay-500: #202c59;
+  --color-biscay-600: #1a2552;
+  --color-biscay-700: #121b42;
+  --color-biscay-800: #0c1336;
+  --color-biscay-900: #070c29;
+  --color-biscay-950: #03061a;
+}
+
+@utility btn-primary {
+  @apply rounded-4xl bg-sapphire-500 hover:bg-sapphire-600 cursor-pointer border-2 border-transparent px-4 py-1 text-sm font-semibold text-white shadow-md transition duration-150;
+}
+
+@utility btn-secondary {
+  @apply rounded-4xl border-sapphire-500 text-sapphire-500 hover:border-sapphire-600 cursor-pointer border-2 bg-transparent px-4 py-1 text-sm font-semibold shadow-md transition duration-150;
+}
+
+@utility btn-primary-light {
+  @apply rounded-4xl bg-perano-500 hover:bg-perano-600 text-biscay-500 cursor-pointer border-2 border-transparent px-4 py-1 text-sm font-semibold shadow-md transition duration-150;
+}
+
+@utility btn-secondary-light {
+  @apply rounded-4xl border-perano-500 text-perano-500 hover:border-perano-600 cursor-pointer border-2 bg-transparent px-4 py-1 text-sm font-semibold shadow-md transition duration-150;
+}
+
+.container {
+  @apply mx-auto px-6 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8;
+}
+
+.text-highlight {
+  @apply text-sapphire-600;
+}
