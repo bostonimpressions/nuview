@@ -5,6 +5,7 @@ import blockContentMinimal from './blockContentMinimal';
 import sectionHeroMain from './sectionHeroMain';
 import sectionHeroSubpage from './sectionHeroSubpage';
 import sectionFeature from './sectionFeature';
+import sectionOverview from './sectionOverview';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -14,5 +15,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     sectionHeroMain,
     sectionHeroSubpage,
     sectionFeature,
+    sectionOverview,
   ],
 };

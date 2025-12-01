@@ -22,12 +22,17 @@ interface Button {
 }
 
 interface Slide {
-  label?: string;
   heading: PortableTextBlock[];
   body?: PortableTextBlock[];
   buttons?: Button[];
   theme?: 'default' | 'service';
-  backgroundImage?: SanityImageSource; // Changed type
+  backgroundType?: 'image' | 'video';
+  backgroundImage?: SanityImageSource;
+  backgroundVideo?: {
+    asset: {
+      url: string;
+    };
+  };
 }
 
 interface Props {
@@ -36,6 +41,14 @@ interface Props {
 
 export default function HeroSection({ slides }: Props) {
   const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    slides.forEach((slide) => {
+      if (!slide.backgroundImage) return;
+      const img = new Image();
+      img.src = urlFor(slide.backgroundImage).width(1920).url();
+    });
+  }, [slides]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -69,25 +82,63 @@ export default function HeroSection({ slides }: Props) {
 
   return (
     <section
-      className="relative min-h-[500] overflow-hidden py-[20] pb-[40] md:py-[60]"
+      className="relative min-h-[500px] overflow-hidden py-[20] pb-[40] md:py-[60]"
       style={{ ...backgroundStyle }}
     >
-      {/* Overlay the background image at 10% opacity with appropriate blend mode */}
-      {backgroundImageUrl && (
-        <div
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={`${slide.theme}-bg`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.2, ease: 'easeInOut' }}
           className="absolute inset-0"
           style={{
-            backgroundImage: `url(${backgroundImageUrl})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: 0.1,
-            mixBlendMode: blendMode,
+            background:
+              slide.theme === 'default'
+                ? 'radial-gradient(118.67% 95.24% at 91.36% 7.49%, #202C59 0%, #2A2A2A 100%)'
+                : '#394FA2',
           }}
         />
-      )}
+      </AnimatePresence>
 
-      {/* Optional gradient overlay */}
-      <div className="pointer-events-none absolute left-0 top-0 h-full w-full"></div>
+      <AnimatePresence mode="wait">
+        {/* IMAGE BACKGROUND */}
+        {slide.backgroundType === 'image' && backgroundImageUrl && (
+          <motion.div
+            key={backgroundImageUrl}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: 'easeInOut' }}
+            className="will-change-opacity absolute inset-0"
+            style={{
+              backgroundImage: `url(${backgroundImageUrl})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              mixBlendMode: blendMode,
+            }}
+          />
+        )}
+
+        {/* VIDEO BACKGROUND */}
+        {slide.backgroundType === 'video' && slide.backgroundVideo?.asset?.url && (
+          <motion.video
+            key={slide.backgroundVideo.asset.url}
+            autoPlay
+            muted
+            loop
+            playsInline
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.8, ease: 'easeInOut' }}
+            className="will-change-opacity absolute inset-0 h-full w-full object-cover"
+            style={{ mixBlendMode: blendMode }}
+            src={slide.backgroundVideo.asset.url}
+          />
+        )}
+      </AnimatePresence>
 
       <div className="container relative z-10">
         <AnimatePresence mode="wait">
@@ -100,8 +151,8 @@ export default function HeroSection({ slides }: Props) {
             className="grid grid-cols-1 gap-4 md:grid-cols-3"
           >
             <div className="md:col-span-2">
-              {slide.label && (
-                <div className="mb-4 text-xl font-semibold text-white">{slide.label}</div>
+              {slide.theme === 'service' && (
+                <div className="mb-4 text-sm font-semibold text-white">Services</div>
               )}
 
               <h1 className="text-perano-500">
@@ -123,7 +174,7 @@ export default function HeroSection({ slides }: Props) {
                     value={slide.body}
                     components={{
                       block: {
-                        normal: ({ children }) => <p className="text-xl text-white">{children}</p>,
+                        normal: ({ children }) => <p className="text-white">{children}</p>,
                       },
                       marks: {
                         highlight: ({ children }) => (
@@ -147,11 +198,11 @@ export default function HeroSection({ slides }: Props) {
 
               {slide.buttons && (
                 <div className="flex gap-2">
-                  {slide.buttons.map((btn) => (
+                  {slide.buttons.map((btn, i) => (
                     <a
                       key={btn.title}
                       href={btn.url}
-                      className={btn.internal ? 'btn-primary-light' : 'btn-secondary-light'}
+                      className={i === 0 ? 'btn-primary-light' : 'btn-secondary-light'}
                     >
                       {btn.title}
                     </a>

@@ -1,5 +1,6 @@
 import SectionHeroMain from '@/components/sections/SectionHeroMain';
 import SectionFeature from '@/components/sections/SectionFeature';
+import SectionOverview from '@/components/sections/SectionOverview';
 import { getPageData } from '@/lib/getPageData';
 
 export default async function Home() {
@@ -16,6 +17,8 @@ export default async function Home() {
         switch (_type) {
           case 'sectionHeroMain': // Sanity schema -- sanity/schemaTypes/
             return <SectionHeroMain key={i} {...props} />; // React component -- components/sections
+          case 'sectionOverview':
+            return <SectionOverview key={i} {...props} />;
           case 'sectionFeature':
             return <SectionFeature key={i} {...props} />;
 

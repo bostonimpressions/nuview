@@ -20,6 +20,7 @@ export default defineType({
         { type: 'sectionHeroMain' },
         { type: 'sectionHeroSubpage' },
         { type: 'sectionFeature' },
+        { type: 'sectionOverview' },
         // add more section types as needed
       ],
     }),

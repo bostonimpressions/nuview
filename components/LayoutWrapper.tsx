@@ -4,7 +4,6 @@ import React, { useState, useEffect, useCallback, ReactNode, SVGProps, MouseEven
 import Image from 'next/image';
 import Link from 'next/link';
 
-// --- Type Definitions ---
 interface NavListItem {
   name: string;
   href: string;
@@ -27,7 +26,6 @@ interface LayoutWrapperProps {
   children: ReactNode;
 }
 
-// --- Icon Definitions ---
 const Menu = (props: SVGIconProps) => (
   <svg
     {...props}
@@ -64,7 +62,6 @@ const X = (props: SVGIconProps) => (
   </svg>
 );
 
-// --- Navigation Data ---
 const navigationItems: NavListItem[] = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
@@ -131,7 +128,7 @@ const Header = ({ isScrolled }: HeaderProps) => {
   return (
     <header className={headerClasses + ' h-20 transition-all duration-300'}>
       <div className="container mx-auto flex h-full items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex-shrink-0">
+        <div className="shrink-0">
           <span className={`text-2xl font-black transition-colors duration-300 ${logoColorClass}`}>
             <Link href="/">
               <Image src="/logo.svg" alt="DataBridge Sites" width={140} height={40} />

@@ -16,9 +16,21 @@ export default defineType({
           title: 'Hero Slide',
           type: 'object',
           fields: [
-            defineField({ name: 'label', title: 'Label', type: 'string' }),
-            defineField({ name: 'heading', title: 'Heading', type: 'blockContentMinimal' }),
-            defineField({ name: 'body', title: 'Body', type: 'blockContentMinimal' }),
+            // HEADING
+            defineField({
+              name: 'heading',
+              title: 'Heading',
+              type: 'blockContentMinimal',
+            }),
+
+            // BODY
+            defineField({
+              name: 'body',
+              title: 'Body',
+              type: 'blockContentMinimal',
+            }),
+
+            // BUTTONS
             defineField({
               name: 'buttons',
               title: 'Buttons',
@@ -29,45 +41,88 @@ export default defineType({
                   title: 'Button',
                   type: 'object',
                   fields: [
-                    { name: 'title', title: 'Title', type: 'string' },
-                    { name: 'url', title: 'URL', type: 'string' },
-                    {
+                    defineField({ name: 'title', title: 'Title', type: 'string' }),
+                    defineField({ name: 'url', title: 'URL', type: 'string' }),
+                    defineField({
                       name: 'internal',
                       title: 'Internal link?',
                       type: 'boolean',
                       initialValue: false,
-                    },
+                    }),
                   ],
+                  preview: {
+                    select: { title: 'title', url: 'url' },
+                    prepare({ title, url }) {
+                      return {
+                        title: title || 'Untitled Button',
+                        subtitle: url,
+                      };
+                    },
+                  },
                 }),
               ],
               validation: (Rule) => Rule.max(2),
             }),
+
+            // THEME
             defineField({
               name: 'theme',
               title: 'Theme',
               type: 'string',
-              options: { list: ['default', 'service'], layout: 'radio' },
+              options: {
+                list: ['default', 'service'],
+                layout: 'radio',
+              },
               initialValue: 'default',
             }),
+
+            // BACKGROUND TYPE SWITCH
+            defineField({
+              name: 'backgroundType',
+              title: 'Background Type',
+              type: 'string',
+              options: {
+                list: ['image', 'video'],
+                layout: 'radio',
+              },
+              initialValue: 'image',
+            }),
+
+            // IMAGE BACKGROUND
             defineField({
               name: 'backgroundImage',
               title: 'Background Image',
               type: 'image',
               options: { hotspot: true },
+              hidden: ({ parent }) => parent?.backgroundType !== 'image',
+            }),
+
+            // VIDEO BACKGROUND
+            defineField({
+              name: 'backgroundVideo',
+              title: 'Background Video',
+              type: 'file',
+              options: {
+                accept: 'video/*',
+              },
+              hidden: ({ parent }) => parent?.backgroundType !== 'video',
             }),
           ],
+
+          // ✅ EDITOR PREVIEW FIX (No more "Untitled Slide")
           preview: {
             select: {
               label: 'label',
               heading: 'heading',
               theme: 'theme',
+              bgType: 'backgroundType',
             },
             prepare({ heading, theme }) {
-              // Use label if available, otherwise first text in heading
-              const title = (heading && heading[0]?.children?.[0]?.text) || 'Untitled Slide';
+              const title = (heading && toPlainText(heading)) || 'Untitled Slide';
+
               return {
                 title,
-                subtitle: theme || 'default',
+                subtitle: `${theme || 'default'} slide`,
               };
             },
           },
@@ -76,6 +131,7 @@ export default defineType({
       validation: (Rule) => Rule.min(1).max(5),
     }),
   ],
+
   preview: {
     prepare() {
       return {

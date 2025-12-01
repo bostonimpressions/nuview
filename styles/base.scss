@@ -41,19 +41,19 @@
 }
 
 @utility btn-primary {
-  @apply rounded-4xl bg-sapphire-500 hover:bg-sapphire-600 cursor-pointer border-2 border-transparent px-4 py-1 text-sm font-semibold text-white shadow-md transition duration-150;
+  @apply rounded-4xl bg-sapphire-500 hover:bg-sapphire-600 cursor-pointer border-2 border-transparent px-4 py-1 text-center text-xs font-semibold text-white shadow-md transition duration-150 md:text-sm;
 }
 
 @utility btn-secondary {
-  @apply rounded-4xl border-sapphire-500 text-sapphire-500 hover:border-sapphire-600 cursor-pointer border-2 bg-transparent px-4 py-1 text-sm font-semibold shadow-md transition duration-150;
+  @apply rounded-4xl border-sapphire-500 text-sapphire-500 hover:border-sapphire-600 cursor-pointer border-2 bg-transparent px-4 py-1 text-center text-xs font-semibold shadow-md transition duration-150 md:text-sm;
 }
 
 @utility btn-primary-light {
-  @apply rounded-4xl bg-perano-500 hover:bg-perano-600 text-biscay-500 cursor-pointer border-2 border-transparent px-4 py-1 text-sm font-semibold shadow-md transition duration-150;
+  @apply rounded-4xl bg-perano-500 hover:bg-perano-600 text-biscay-500 cursor-pointer border-2 border-transparent px-4 py-1 text-center text-xs font-semibold shadow-md transition duration-150 md:text-sm;
 }
 
 @utility btn-secondary-light {
-  @apply rounded-4xl border-perano-500 text-perano-500 hover:border-perano-600 cursor-pointer border-2 bg-transparent px-4 py-1 text-sm font-semibold shadow-md transition duration-150;
+  @apply rounded-4xl border-perano-500 text-perano-500 hover:border-perano-600 cursor-pointer border-2 bg-transparent px-4 py-1 text-center text-xs font-semibold shadow-md transition duration-150 md:text-sm;
 }
 
 .container {
