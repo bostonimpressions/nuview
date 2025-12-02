@@ -3,17 +3,10 @@
 import { PortableText, PortableTextBlock } from '@portabletext/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import imageUrlBuilder from '@sanity/image-url';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { urlFor } from '@/utils/sanity-image';
+import TextHeading from '@/components/ui/TextHeading'; // Adjust path to your sanity client
 
-// Import your sanity client config
-import { client } from '@/sanity/lib/client'; // Adjust path to your sanity client
-
-const builder = imageUrlBuilder(client);
-
-function urlFor(source: SanityImageSource) {
-  return builder.image(source);
-}
 
 interface Button {
   title: string;
@@ -150,12 +143,12 @@ export default function HeroSection({ slides }: Props) {
             transition={{ duration: 0.6 }}
             className="grid grid-cols-1 gap-4 md:grid-cols-3"
           >
-            <div className="md:col-span-2">
+            <div className="md:col-span-2 max-w-xl">
               {slide.theme === 'service' && (
                 <div className="mb-4 text-sm font-semibold text-white">Services</div>
               )}
 
-              <h1 className="text-perano-500">
+              <TextHeading color={'text-white'} border={current != 0}>
                 <PortableText
                   value={slide.heading}
                   components={{
@@ -166,10 +159,10 @@ export default function HeroSection({ slides }: Props) {
                     },
                   }}
                 />
-              </h1>
+              </TextHeading>
 
               {slide.body && (
-                <div className="mb-6">
+                <div className="mb-6 max-w-lg">
                   <PortableText
                     value={slide.body}
                     components={{

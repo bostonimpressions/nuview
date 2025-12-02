@@ -3,7 +3,11 @@
 import { PortableText } from '@portabletext/react';
 import type { PortableTextBlock } from '@portabletext/types';
 import Image from 'next/image';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { urlFor } from '@/utils/sanity-image';
 import List from '@/components/ui/List/List';
+import TextHeading from '@/components/ui/TextHeading';
+import React from 'react';
 
 interface ListItem {
   heading: PortableTextBlock[];
@@ -24,7 +28,7 @@ interface ListSection {
 interface CTA {
   heading?: PortableTextBlock[];
   body?: PortableTextBlock[];
-  icon?: string;
+  icon?: SanityImageSource;
   link?: string;
 }
 
@@ -32,7 +36,7 @@ interface Props {
   heading: PortableTextBlock[];
   subheading?: PortableTextBlock[];
   body?: PortableTextBlock[];
-  image?: { url: string; alt?: string };
+  image?: SanityImageSource;
   imageLayout?: 'imgLeft' | 'imgRight';
   imageGrid?: '1/1' | '2/3' | '3/2';
   list?: ListSection;
@@ -68,71 +72,72 @@ export default function SectionOverview({
 
   return (
     <section
-      className={`relative overflow-hidden py-12 ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}
+      className={`relative overflow-hidden py-12 ${theme === 'dark' ? 'bg-perano-200' : 'bg-white'}`}
     >
       <div className="container mx-auto px-4">
-        <div className={`grid gap-6 ${getGridClasses()} items-center`}>
+        <div className={`grid gap-6 ${getGridClasses()} items-center gap-10 pb-20`}>
           {/* Image Column */}
           {image && isImageLeft && (
             <div className="order-1 md:order-1">
-              <Image
-                src={image.url}
-                alt={image.alt || ''}
-                width={800}
-                height={600}
-                className="h-auto w-full rounded-xl object-cover"
-              />
+              <div className="relative w-full h-auto aspect-[3/2]">
+                <Image
+                  src={urlFor(image).url()}
+                  alt="Illustration"
+                  fill
+                  className="h-auto w-full rounded-xl object-cover"
+                />
+              </div>
+
             </div>
           )}
 
           {/* Text Column */}
           <div className="order-2 md:order-2">
             {heading && (
-              <h2 className="mb-2 text-3xl font-bold">
+              <TextHeading level={'h2'}>
                 <PortableText value={heading} />
-              </h2>
+              </TextHeading>
             )}
             {subheading && (
-              <h3 className="mb-4 text-xl">
+              <h4>
                 <PortableText value={subheading} />
-              </h3>
+              </h4>
             )}
             {body && (
-              <div className="mb-6">
-                <PortableText value={body} />
-              </div>
+              <PortableText value={body} />
             )}
           </div>
 
           {/* Image Column on right */}
           {image && !isImageLeft && (
             <div className="order-1 md:order-3">
-              <Image
-                src={image.url}
-                alt={image.alt || ''}
-                width={800}
-                height={600}
-                className="h-auto w-full rounded-xl object-cover"
-              />
+              <div className="relative w-full h-auto aspect-[3/2]">
+                <Image
+                  src={urlFor(image).url()}
+                  alt="Illustration"
+                  fill
+                  className="h-auto w-full rounded-xl object-cover"
+                />
+              </div>
             </div>
           )}
         </div>
 
         {/* List Section */}
         {list && list.items.length > 0 && (
-          <div className="mt-12">
+          <div className="">
             {list.heading && (
-              <h3 className="mb-2 text-2xl font-bold">
+              <h3>
                 <PortableText value={list.heading} />
               </h3>
             )}
             {list.subheading && (
-              <h4 className="mb-4 text-lg">
+              <h4>
                 <PortableText value={list.subheading} />
               </h4>
             )}
             {list.body && (
-              <div className="mb-6">
+              <div className="mb-2">
                 <PortableText value={list.body} />
               </div>
             )}
@@ -143,23 +148,31 @@ export default function SectionOverview({
 
         {/* CTA Section */}
         {cta && (
-          <div className="mt-12 flex flex-col items-center gap-4 md:flex-row">
-            {cta.icon && <div className="text-4xl">{cta.icon}</div>}
-            <div>
-              {cta.heading && (
-                <h4 className="mb-1 font-bold">
-                  <PortableText value={cta.heading} />
-                </h4>
-              )}
+          <div className="call-to-action mt-8">
+            {cta.heading && (
+              <h3>
+                <PortableText value={cta.heading} />
+              </h3>
+            )}
+
+
+            <div className="flex bg-sapphire-500 text-white p-10 rounded-lg items-center gap-8">
+              {cta?.icon ? (
+                <Image
+                  src={urlFor(cta.icon).url()}
+                  alt="check"
+                  width={67}
+                  height={67}
+                />
+              ) : <Image src={'/images/icon-check-green.png'} alt={'check'} width={67} height={67}/>}
+
               {cta.body && (
-                <div className="mb-2">
-                  <PortableText value={cta.body} />
-                </div>
+                <PortableText value={cta.body} />
               )}
               {cta.link && (
                 <a
                   href={cta.link}
-                  className="inline-block rounded bg-blue-600 px-6 py-2 text-white transition hover:bg-blue-700"
+                  className=""
                 >
                   Learn More
                 </a>

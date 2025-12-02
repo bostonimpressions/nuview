@@ -9,7 +9,7 @@
 /* Define the utility outside of @layer */
 @utility heading-style {
   font-family: var(--font-open-sans);
-  @apply mb-5 font-semibold leading-none md:mb-7;
+  @apply mb-4 font-semibold leading-none;
   @apply tracking-tight md:tracking-tighter;
 }
 
@@ -25,7 +25,7 @@
   }
 
   h2 {
-    font-size: clamp(1.25rem, 5vw, 1.5rem);
+    font-size: clamp(1.5rem, 5vw, 2.25rem);
     @apply heading-style;
     p {
       font-size: 1em;
@@ -34,7 +34,7 @@
   }
 
   h3 {
-    font-size: clamp(1.125rem, 5vw, 1.25rem);
+    font-size: clamp(1.25rem, 5vw, 1.5rem);
     @apply heading-style;
     p {
       font-size: 1em;
