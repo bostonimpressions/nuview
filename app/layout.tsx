@@ -16,9 +16,9 @@ const shareTech = Share_Tech({
 });
 
 export const metadata: Metadata = {
-  title: 'DataBridge Sites',
+  title: 'Managed IT & Cybersecurity for Regulated Industries | NuView',
   description:
-    'DataBridge Sites provides managed cloud and colocation in our industry-leading data centers to keep your hybrid infrastructure secure.',
+    '•Managed IT services, cybersecurity, and compliance support for healthcare, finance, and manufacturing. 24/7 SOC, CMMC, HIPAA, and NIST expertise.',
 };
 
 export default function RootLayout({
