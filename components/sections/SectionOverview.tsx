@@ -3,7 +3,7 @@
 import { PortableText } from '@portabletext/react';
 import type { PortableTextBlock } from '@portabletext/types';
 import Image from 'next/image';
-import List from '@/components/ui/List';
+import List from '@/components/ui/List/List';
 
 interface ListItem {
   heading: PortableTextBlock[];

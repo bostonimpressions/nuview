@@ -1,7 +1,9 @@
 @import 'tailwindcss';
 /* dont use '//single-line comments in these scss files or nextjs breaks, use option+cmd+/' */
+@import './colors.scss';
 @import './typography.scss';
 @import './base.scss';
+@import './components/list.scss';
 
 :root {
   --background: #ffffff;
