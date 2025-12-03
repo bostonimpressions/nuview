@@ -6,6 +6,24 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  theme: {
+    extend: {
+      colors: {
+        sapphire: {
+          500: '#3f51b5',
+          700: '#2c387e',
+        },
+        perano: {
+          200: '#e0e4ff',
+          300: '#c0c5ff',
+          500: '#7f8cff',
+        },
+        biscay: {
+          600: '#2b3a4d',
+        },
+      },
+    },
+  },
 };
 
 export default config;

@@ -42,14 +42,16 @@
   &[data-theme='cards-white'] {
     @apply gap-4;
     .list-item {
-      @apply text-biscay-600 bg-white;
+      background: white;
+      color: var(--color-biscay-600);
     }
   }
 
   &[data-theme='negatives'] {
     @apply gap-4;
     .list-item {
-      @apply bg-perano-300 text-sapphire-500;
+      background: var(--color-perano-300);
+      color: var(--color-sapphire-500);
     }
   }
 
@@ -86,7 +88,7 @@
 }
 
 .list-content {
-  @apply flex-1;
+  flex: 1;
 }
 
 .heading {
@@ -98,5 +100,8 @@
 }
 
 .flag-bar {
-  @apply bg-perano-500 rounded-4xl w-3.5 self-stretch;
+  width: 14px;
+  background: var(--color-perano-500);
+  border-radius: 50px;
+  align-self: stretch;
 }
