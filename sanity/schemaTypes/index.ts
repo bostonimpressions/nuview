@@ -7,6 +7,7 @@ import sectionHeroSubpage from './sectionHeroSubpage';
 import sectionOverview from './sectionOverview';
 import sectionBanner from './sectionBanner';
 import sectionFeatureList from './sectionFeatureList';
+import sectionFeature from './sectionFeature';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -18,5 +19,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     sectionOverview,
     sectionBanner,
     sectionFeatureList,
+    sectionFeature,
   ],
 };

@@ -2,6 +2,7 @@ import SectionHeroMain from '@/components/sections/SectionHeroMain';
 import SectionOverview from '@/components/sections/SectionOverview';
 import SectionBanner from '@/components/sections/SectionBanner';
 import SectionFeatureList from '@/components/sections/SectionFeatureList';
+import SectionFeature from '@/components/sections/SectionFeature';
 import { getPageData } from '@/lib/getPageData';
 
 export default async function Home() {
@@ -24,6 +25,8 @@ export default async function Home() {
             return <SectionBanner key={i} {...props} />;
           case 'sectionFeatureList':
             return <SectionFeatureList key={i} {...props} />;
+          case 'sectionFeature':
+            return <SectionFeature key={i} {...props} />;
 
           default:
             return null;

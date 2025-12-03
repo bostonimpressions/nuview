@@ -12,6 +12,7 @@ interface ListItemProps {
 }
 
 interface ListProps {
+  compact?: boolean;
   items: ListItemProps[];
   columns?: 1 | 2 | 3;
   theme?: 'default' | 'cards' | 'cards-white' | 'checks' | 'flags' | 'negatives' | 'positives';
@@ -23,8 +24,9 @@ const defaultIcons: Record<string, string> = {
   positives: '/images/icon-list-check.png',
 };
 
-export default function List({ items, columns = 2, theme = 'default' }: ListProps) {
+export default function List({ items, columns = 2, theme = 'default', compact }: ListProps) {
   const colClass = `cols-${columns}`;
+  const spacingClass = compact && 'compact';
 
   const shouldShowImage = (item: ListItemProps) => {
     if (theme === 'flags') return false;
@@ -40,7 +42,7 @@ export default function List({ items, columns = 2, theme = 'default' }: ListProp
   };
 
   return (
-    <ul className={`list ${colClass}`} data-theme={theme} role="list">
+    <ul className={`list ${colClass} ${spacingClass}`} data-theme={theme} role="list">
       {items.map((item, i) => (
         <li key={i} className="list-item">
           {theme === 'flags' && <span className="flag-bar" />}

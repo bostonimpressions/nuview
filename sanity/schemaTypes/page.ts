@@ -22,6 +22,7 @@ export default defineType({
         { type: 'sectionOverview' },
         { type: 'sectionBanner' },
         { type: 'sectionFeatureList' },
+        { type: 'sectionFeature' },
         // add more section types as needed
       ],
     }),

@@ -76,7 +76,7 @@ export default function SectionOverview({
     >
       <div className="container mx-auto px-4">
         <div
-          className={`grid gap-6 ${getGridClasses()} items-center gap-10 ${image && 'pb-10 md:pb-20'}`}
+          className={`grid ${getGridClasses()} items-center gap-10 ${image && 'pb-10 md:pb-20'}`}
         >
           {/* Image Column */}
           {image && isImageLeft && (
@@ -123,7 +123,7 @@ export default function SectionOverview({
         </div>
 
         {/* List Section */}
-        {list && list.items.length > 0 && (
+        {list?.items && list.items.length > 0 && (
           <div className="">
             {list.heading && (
               <h3>
@@ -141,7 +141,7 @@ export default function SectionOverview({
               </div>
             )}
 
-            <List items={list.items} columns={list.columns} theme={list.theme} />
+            <List items={list.items || []} columns={list.columns} theme={list.theme} />
           </div>
         )}
 

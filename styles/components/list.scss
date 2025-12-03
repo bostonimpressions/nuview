@@ -21,51 +21,63 @@
     }
   }
 
-  &[data-theme='default'] .list-item {
-    border: 1px solid rgba(0, 0, 0, 0.11);
-    background: rgba(161, 175, 229, 0.06);
-    color: var(--color-sapphire-500);
-    h4 {
-      @apply mb-4;
+  &[data-theme='default'] {
+    @apply gap-4;
+    .list-item {
+      border: 1px solid rgba(0, 0, 0, 0.11);
+      background: rgba(161, 175, 229, 0.06);
+      color: var(--color-sapphire-500);
     }
   }
 
-  &[data-theme='cards'] .list-item {
-    border: 1px solid rgba(0, 0, 0, 0.11);
-    background: rgba(161, 175, 229, 0.06);
-    color: var(--color-sapphire-500);
-    h4 {
-      @apply mb-4;
+  &[data-theme='cards'] {
+    @apply gap-4;
+    .list-item {
+      border: 1px solid rgba(0, 0, 0, 0.11);
+      background: rgba(161, 175, 229, 0.06);
+      color: var(--color-sapphire-500);
     }
   }
 
-  &[data-theme='cards-white'] .list-item {
-    background: white;
-    color: var(--color-biscay-600);
+  &[data-theme='cards-white'] {
+    @apply gap-4;
+    .list-item {
+      @apply text-biscay-600 bg-white;
+    }
   }
 
-  &[data-theme='checks'] .list-item {
-    background: var(--color-nugreen-100);
-    color: var(--color-nugreen-700);
+  &[data-theme='negatives'] {
+    @apply gap-4;
+    .list-item {
+      @apply bg-perano-300 text-sapphire-500;
+    }
   }
 
-  &[data-theme='negatives'] .list-item {
-    background: var(--color-perano-300);
-    color: var(--color-sapphire-500);
+  &[data-theme='positives'] {
+    @apply gap-1;
+    .list-item {
+      @apply text-sapphire-500 bg-transparent pl-0;
+    }
   }
 
-  &[data-theme='positives'] .list-item {
-    padding-left: 0;
-    background: transparent;
-    color: var(--color-sapphire-500);
+  &[data-theme='flags'] {
+    @apply gap-12;
+    .list-item {
+      @apply text-sapphire-700 items-start gap-8 bg-transparent p-0;
+    }
   }
 
-  &[data-theme='flags'] .list-item {
-    align-items: flex-start;
-    gap: 24px;
-    padding-left: 0;
-    background: transparent;
-    color: var(--color-sapphire-700);
+  .list-item {
+    h4 {
+      @apply mb-1;
+    }
+  }
+
+  &.compact {
+    @apply gap-4;
+    .list-item {
+      @apply p-0! bg-transparent! border-0!;
+    }
   }
 }
 
@@ -74,7 +86,7 @@
 }
 
 .list-content {
-  flex: 1;
+  @apply flex-1;
 }
 
 .heading {
@@ -86,8 +98,5 @@
 }
 
 .flag-bar {
-  width: 14px;
-  background: var(--color-perano-500);
-  border-radius: 50px;
-  align-self: stretch;
+  @apply bg-perano-500 rounded-4xl w-3.5 self-stretch;
 }
