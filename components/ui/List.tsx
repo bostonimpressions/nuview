@@ -26,7 +26,6 @@ const defaultIcons: Record<string, string> = {
 
 export default function List({ items, columns = 2, theme = 'default', compact }: ListProps) {
   const colClass = `cols-${columns}`;
-  const spacingClass = compact && 'compact';
 
   const shouldShowImage = (item: ListItemProps) => {
     if (theme === 'flags') return false;
@@ -42,7 +41,7 @@ export default function List({ items, columns = 2, theme = 'default', compact }:
   };
 
   return (
-    <ul className={`list ${colClass} ${spacingClass}`} data-theme={theme} role="list">
+    <ul className={`list ${colClass} ${compact ? 'compact' : ''}`} data-theme={theme} role="list">
       {items.map((item, i) => (
         <li key={i} className="list-item">
           {theme === 'flags' && <span className="flag-bar" />}
