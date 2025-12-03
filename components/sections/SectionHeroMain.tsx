@@ -7,7 +7,6 @@ import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { urlFor } from '@/utils/sanity-image';
 import TextHeading from '@/components/ui/TextHeading'; // Adjust path to your sanity client
 
-
 interface Button {
   title: string;
   url: string;
@@ -75,7 +74,7 @@ export default function HeroSection({ slides }: Props) {
 
   return (
     <section
-      className="relative min-h-[500px] overflow-hidden py-[20] pb-[40] md:py-[60]"
+      className="relative min-h-[600px] overflow-hidden py-[20] pb-[40] md:py-[60]"
       style={{ ...backgroundStyle }}
     >
       <AnimatePresence mode="wait">
@@ -143,7 +142,7 @@ export default function HeroSection({ slides }: Props) {
             transition={{ duration: 0.6 }}
             className="grid grid-cols-1 gap-4 md:grid-cols-3"
           >
-            <div className="md:col-span-2 max-w-xl">
+            <div className="max-w-xl md:col-span-2">
               {slide.theme === 'service' && (
                 <div className="mb-4 text-sm font-semibold text-white">Services</div>
               )}
@@ -195,7 +194,7 @@ export default function HeroSection({ slides }: Props) {
                     <a
                       key={btn.title}
                       href={btn.url}
-                      className={i === 0 ? 'btn-primary-light' : 'btn-secondary-light'}
+                      className={i === 0 ? 'btn-primary-green' : 'btn-secondary-green'}
                     >
                       {btn.title}
                     </a>

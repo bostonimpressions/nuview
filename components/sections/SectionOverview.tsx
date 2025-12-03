@@ -5,7 +5,7 @@ import type { PortableTextBlock } from '@portabletext/types';
 import Image from 'next/image';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { urlFor } from '@/utils/sanity-image';
-import List from '@/components/ui/List/List';
+import List from '@/components/ui/List';
 import TextHeading from '@/components/ui/TextHeading';
 import React from 'react';
 
@@ -75,11 +75,13 @@ export default function SectionOverview({
       className={`relative overflow-hidden py-12 ${theme === 'dark' ? 'bg-perano-200' : 'bg-white'}`}
     >
       <div className="container mx-auto px-4">
-        <div className={`grid gap-6 ${getGridClasses()} items-center gap-10 pb-20`}>
+        <div
+          className={`grid gap-6 ${getGridClasses()} items-center gap-10 ${image && 'pb-10 md:pb-20'}`}
+        >
           {/* Image Column */}
           {image && isImageLeft && (
             <div className="order-1 md:order-1">
-              <div className="relative w-full h-auto aspect-[3/2]">
+              <div className="relative aspect-[3/2] h-auto w-full">
                 <Image
                   src={urlFor(image).url()}
                   alt="Illustration"
@@ -87,7 +89,6 @@ export default function SectionOverview({
                   className="h-auto w-full rounded-xl object-cover"
                 />
               </div>
-
             </div>
           )}
 
@@ -103,15 +104,13 @@ export default function SectionOverview({
                 <PortableText value={subheading} />
               </h4>
             )}
-            {body && (
-              <PortableText value={body} />
-            )}
+            {body && <PortableText value={body} />}
           </div>
 
           {/* Image Column on right */}
           {image && !isImageLeft && (
             <div className="order-1 md:order-3">
-              <div className="relative w-full h-auto aspect-[3/2]">
+              <div className="relative aspect-[3/2] h-auto w-full">
                 <Image
                   src={urlFor(image).url()}
                   alt="Illustration"
@@ -155,25 +154,20 @@ export default function SectionOverview({
               </h3>
             )}
 
-
-            <div className="flex bg-sapphire-500 text-white p-10 rounded-lg items-center gap-8">
+            <div className="bg-sapphire-500 flex items-center gap-5 rounded-lg p-5 text-white md:gap-8 md:p-10">
               {cta?.icon ? (
-                <Image
-                  src={urlFor(cta.icon).url()}
-                  alt="check"
-                  width={67}
-                  height={67}
-                />
-              ) : <Image src={'/images/icon-check-green.png'} alt={'check'} width={67} height={67}/>}
-
-              {cta.body && (
-                <PortableText value={cta.body} />
+                <div className="icon-wrapper">
+                  <Image src={urlFor(cta.icon).url()} alt="check" fill />
+                </div>
+              ) : (
+                <div className="icon-wrapper aspect-[1/.8]!">
+                  <Image src={'/images/icon-check-green.png'} alt={'check'} fill />
+                </div>
               )}
+
+              {cta.body && <PortableText value={cta.body} />}
               {cta.link && (
-                <a
-                  href={cta.link}
-                  className=""
-                >
+                <a href={cta.link} className="">
                   Learn More
                 </a>
               )}

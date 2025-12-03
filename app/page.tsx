@@ -1,7 +1,6 @@
 import SectionHeroMain from '@/components/sections/SectionHeroMain';
-import SectionFeature from '@/components/sections/SectionFeature';
 import SectionOverview from '@/components/sections/SectionOverview';
-import SectionOverviewTwo from '@/components/sections/SectionOverviewTwo';
+import SectionBanner from '@/components/sections/SectionBanner';
 import { getPageData } from '@/lib/getPageData';
 
 export default async function Home() {
@@ -20,15 +19,13 @@ export default async function Home() {
             return <SectionHeroMain key={i} {...props} />; // React component -- components/sections
           case 'sectionOverview':
             return <SectionOverview key={i} {...props} />;
-          // case 'sectionFeature':
-          //   return <SectionFeature key={i} {...props} />;
+          case 'sectionBanner':
+            return <SectionBanner key={i} {...props} />;
 
           default:
             return null;
         }
       })}
-
-      <SectionOverviewTwo />
     </main>
   );
 }

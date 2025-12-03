@@ -19,8 +19,8 @@ export default defineType({
       of: [
         { type: 'sectionHeroMain' },
         { type: 'sectionHeroSubpage' },
-        { type: 'sectionFeature' },
         { type: 'sectionOverview' },
+        { type: 'sectionBanner' },
         // add more section types as needed
       ],
     }),

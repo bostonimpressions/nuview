@@ -45,13 +45,8 @@ export default function List({ items, columns = 2, theme = 'default' }: ListProp
         <li key={i} className="list-item">
           {theme === 'flags' && <span className="flag-bar" />}
           {shouldShowImage(item) && (
-            <div className="list-img">
-              <Image
-                src={getImageUrl(item) || ''}
-                alt={item.image?.alt || ''}
-                width={64}
-                height={64}
-              />
+            <div className="icon-wrapper">
+              <Image src={getImageUrl(item) || ''} alt={item.image?.alt || ''} fill />
             </div>
           )}
           <div className="list-content">
@@ -65,7 +60,11 @@ export default function List({ items, columns = 2, theme = 'default' }: ListProp
                 <PortableText value={item.subheading} />
               </h5>
             )}
-            {item.body && <div><PortableText value={item.body} /></div>}
+            {item.body && (
+              <div>
+                <PortableText value={item.body} />
+              </div>
+            )}
           </div>
         </li>
       ))}

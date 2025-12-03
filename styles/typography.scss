@@ -43,8 +43,7 @@
   }
 
   h4 {
-    font-size: clamp(1.125rem, 5vw, 1.25rem);
-    @apply heading-style;
+    @apply heading-style text-base md:text-lg lg:text-xl;
     p {
       font-size: 1em;
       margin: 0;
@@ -53,8 +52,8 @@
 
   p {
     margin-bottom: 1em;
-    font-size: clamp(1rem, 4vw, 1.125rem);
-    line-height: 1.1;
+    @apply text-sm md:text-base lg:text-lg;
+    line-height: 1.375em;
     &:last-child {
       margin-bottom: 0;
     }

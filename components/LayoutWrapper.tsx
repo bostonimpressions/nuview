@@ -142,7 +142,7 @@ const Header = ({ isScrolled }: HeaderProps) => {
           ))}
           <button
             // Button is always solid blue for contrast
-            className="btn-primary"
+            className="btn-primary-green"
           >
             Contact us
           </button>
