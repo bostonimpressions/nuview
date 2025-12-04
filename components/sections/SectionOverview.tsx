@@ -3,8 +3,8 @@
 import { PortableText } from '@portabletext/react';
 import type { PortableTextBlock } from '@portabletext/types';
 import Image from 'next/image';
-import { SanityImageSource } from '@sanity/image-url/lib/types/types';
-import { urlFor } from '@/utils/sanity-image';
+import { SanityImageSource } from '@sanity/image-url';
+import { urlFor } from '@/sanity/lib/image';
 import List from '@/components/ui/List';
 import TextHeading from '@/components/ui/TextHeading';
 import React from 'react';

@@ -3,8 +3,8 @@
 import { PortableText, PortableTextBlock } from '@portabletext/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
-import { SanityImageSource } from '@sanity/image-url/lib/types/types';
-import { urlFor } from '@/utils/sanity-image';
+import { SanityImageSource } from '@sanity/image-url';
+import { urlFor } from '@/sanity/lib/image';
 import TextHeading from '@/components/ui/TextHeading'; // Adjust path to your sanity client
 
 interface Button {
