@@ -25,6 +25,7 @@ export default defineType({
         { type: 'sectionFeature' },
         { type: 'sectionSnapshots' },
         { type: 'sectionComparison' },
+        { type: 'sectionCallToAction' },
         // add more section types as needed
       ],
     }),

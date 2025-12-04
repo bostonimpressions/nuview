@@ -5,6 +5,7 @@ import SectionFeatureList from '@/components/sections/SectionFeatureList';
 import SectionFeature from '@/components/sections/SectionFeature';
 import SectionSnapshots from '@/components/sections/SectionSnapshots';
 import SectionComparison from '@/components/sections/SectionComparison';
+import SectionCallToAction from '@/components/sections/SectionCallToAction';
 import { getPageData } from '@/lib/getPageData';
 
 export default async function Home() {
@@ -33,6 +34,8 @@ export default async function Home() {
             return <SectionSnapshots key={i} {...props} />;
           case 'sectionComparison':
             return <SectionComparison key={i} {...props} />;
+          case 'sectionCallToAction':
+            return <SectionCallToAction key={i} {...props} />;
 
           default:
             return null;
