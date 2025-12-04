@@ -45,7 +45,7 @@ export default function SectionFeature({
 
   return (
     <section
-      className={`relative overflow-hidden py-12 ${theme === 'dark' ? 'bg-perano-200' : 'bg-white'}`}
+      className={`relative overflow-hidden py-20 ${theme === 'dark' ? 'bg-perano-200' : 'bg-white'}`}
     >
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 items-center gap-20 md:grid-cols-2">

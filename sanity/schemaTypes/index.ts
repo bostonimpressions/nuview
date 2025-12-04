@@ -8,6 +8,8 @@ import sectionOverview from './sectionOverview';
 import sectionBanner from './sectionBanner';
 import sectionFeatureList from './sectionFeatureList';
 import sectionFeature from './sectionFeature';
+import sectionSnapshots from './sectionSnapshots';
+import sectionComparison from './sectionComparison';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -20,5 +22,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     sectionBanner,
     sectionFeatureList,
     sectionFeature,
+    sectionSnapshots,
+    sectionComparison,
   ],
 };

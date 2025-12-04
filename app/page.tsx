@@ -3,6 +3,8 @@ import SectionOverview from '@/components/sections/SectionOverview';
 import SectionBanner from '@/components/sections/SectionBanner';
 import SectionFeatureList from '@/components/sections/SectionFeatureList';
 import SectionFeature from '@/components/sections/SectionFeature';
+import SectionSnapshots from '@/components/sections/SectionSnapshots';
+import SectionComparison from '@/components/sections/SectionComparison';
 import { getPageData } from '@/lib/getPageData';
 
 export default async function Home() {
@@ -27,11 +29,16 @@ export default async function Home() {
             return <SectionFeatureList key={i} {...props} />;
           case 'sectionFeature':
             return <SectionFeature key={i} {...props} />;
+          case 'sectionSnapshots':
+            return <SectionSnapshots key={i} {...props} />;
+          case 'sectionComparison':
+            return <SectionComparison key={i} {...props} />;
 
           default:
             return null;
         }
       })}
+
     </main>
   );
 }

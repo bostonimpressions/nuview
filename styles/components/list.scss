@@ -30,6 +30,20 @@
     }
   }
 
+  &[data-theme='snapshot'] {
+    @apply gap-8;
+    .list-item {
+      @apply p-0;
+      color: var(--color-sapphire-500);
+    }
+    .icon-wrapper {
+      @apply rounded-2xl bg-sapphire-500 max-w-[100px];
+      img {
+        @apply relative p-4;
+      }
+    }
+  }
+
   &[data-theme='cards'] {
     @apply gap-4;
     .list-item {
@@ -69,6 +83,26 @@
     }
   }
 
+  &[data-theme='good'],
+  &[data-theme='bad'] {
+    @apply gap-4;
+    .list-item {
+      @apply p-0 pt-2 pb-2;
+    }
+  }
+
+  &[data-theme='good'] {
+    .list-item {
+      color: var(--color-sapphire-500);
+    }
+  }
+
+  &[data-theme='bad'] {
+    .list-item {
+      color: var(--color-orange-500);
+    }
+  }
+
   .list-item {
     h4 {
       @apply mb-1;
@@ -78,7 +112,7 @@
   &.compact {
     @apply gap-4;
     .list-item {
-      @apply p-0! bg-transparent! border-0!;
+      @apply p-0 bg-transparent border-0;
     }
   }
 }

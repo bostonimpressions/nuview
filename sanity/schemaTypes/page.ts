@@ -23,6 +23,8 @@ export default defineType({
         { type: 'sectionBanner' },
         { type: 'sectionFeatureList' },
         { type: 'sectionFeature' },
+        { type: 'sectionSnapshots' },
+        { type: 'sectionComparison' },
         // add more section types as needed
       ],
     }),
