@@ -1,6 +1,6 @@
 'use client';
 
-import { PortableText } from '@portabletext/react';
+import { PortableText, toPlainText } from '@portabletext/react';
 import type { PortableTextBlock } from '@portabletext/types';
 import Image from 'next/image';
 import { SanityImageSource } from '@sanity/image-url';
@@ -84,7 +84,7 @@ export default function SectionOverview({
               <div className="relative aspect-[3/2] h-auto w-full">
                 <Image
                   src={urlFor(image).url()}
-                  alt="Illustration"
+                  alt={`Illustration ${heading && '- ' + toPlainText(heading)}`}
                   fill
                   className="h-auto w-full rounded-xl object-cover"
                 />
@@ -113,7 +113,7 @@ export default function SectionOverview({
               <div className="relative aspect-[3/2] h-auto w-full">
                 <Image
                   src={urlFor(image).url()}
-                  alt="Illustration"
+                  alt={`Illustration ${heading && '- ' + toPlainText(heading)}`}
                   fill
                   className="h-auto w-full rounded-xl object-cover"
                 />
@@ -157,11 +157,15 @@ export default function SectionOverview({
             <div className="bg-sapphire-500 flex items-center gap-5 rounded-lg p-5 text-white md:gap-8 md:p-10">
               {cta?.icon ? (
                 <div className="icon-wrapper">
-                  <Image src={urlFor(cta.icon).url()} alt="check" fill />
+                  <Image
+                    src={urlFor(cta.icon).url()}
+                    alt="Icon"
+                    fill
+                  />
                 </div>
               ) : (
                 <div className="icon-wrapper aspect-[1/.8]!">
-                  <Image src={'/images/icon-check-green.png'} alt={'check'} fill />
+                  <Image src={'/images/icon-check-green.png'} alt="Icon - Check" fill />
                 </div>
               )}
 

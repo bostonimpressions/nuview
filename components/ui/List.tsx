@@ -1,6 +1,6 @@
 'use client';
 
-import { PortableText } from '@portabletext/react';
+import { PortableText, toPlainText } from '@portabletext/react';
 import Image from 'next/image';
 import { SanityImageSource } from '@sanity/image-url';
 import { urlFor } from '@/sanity/lib/image';
@@ -20,6 +20,7 @@ interface ListProps {
   columns?: 1 | 2 | 3;
   theme?:
     | 'default'
+    | 'image-only'
     | 'snapshot'
     | 'cards'
     | 'cards-white'
@@ -57,6 +58,7 @@ export default function List({
 
   const themeAllowsUploaded =
     theme === 'default' ||
+    theme === 'image-only' ||
     theme === 'cards' ||
     theme === 'cards-white';
 
@@ -98,32 +100,33 @@ export default function List({
               <div className="icon-wrapper">
                 <Image
                   src={src}
-                  alt=""
+                  alt={`Icon ${item.heading && '- ' + toPlainText(item.heading)}`}
                   fill
-                  sizes="48px"
                 />
               </div>
             )}
 
-            <div className="list-content">
-              {item.heading && (
-                <h4 className="heading">
-                  <PortableText value={item.heading} />
-                </h4>
-              )}
+            {theme != 'image-only' && (
+              <div className="list-content">
+                {item.heading && (
+                  <h4 className="heading">
+                    <PortableText value={item.heading} />
+                  </h4>
+                )}
 
-              {item.subheading && (
-                <h5 className="subheading">
-                  <PortableText value={item.subheading} />
-                </h5>
-              )}
+                {item.subheading && (
+                  <h5 className="subheading">
+                    <PortableText value={item.subheading} />
+                  </h5>
+                )}
 
-              {item.body && (
-                <div>
-                  <PortableText value={item.body} />
-                </div>
-              )}
-            </div>
+                {item.body && (
+                  <div>
+                    <PortableText value={item.body} />
+                  </div>
+                )}
+              </div>
+            )}
           </li>
         );
       })}

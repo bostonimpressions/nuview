@@ -1,5 +1,5 @@
 import { defineType, defineField } from 'sanity';
-import { toPlainText } from '../../utils/toPlainText';
+import { toPlainText } from '@portabletext/react';
 
 export default defineType({
   name: 'sectionCallToAction',

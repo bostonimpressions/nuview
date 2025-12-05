@@ -1,6 +1,6 @@
 'use client';
 
-import { PortableText } from '@portabletext/react';
+import { PortableText, toPlainText } from '@portabletext/react';
 import type { PortableTextBlock } from '@portabletext/types';
 import Image from 'next/image';
 import { SanityImageSource } from '@sanity/image-url';
@@ -55,7 +55,7 @@ export default function SectionFeature({
               <div className="relative aspect-square h-auto w-full">
                 <Image
                   src={urlFor(image).url()}
-                  alt="Illustration"
+                  alt={`Illustration ${heading && '- ' + toPlainText(heading)}`}
                   fill
                   className="h-auto w-full rounded-xl object-cover"
                 />
