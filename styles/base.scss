@@ -42,6 +42,6 @@
   @apply w-100 relative aspect-square h-auto min-w-[40px] max-w-[50px] md:max-w-[64px];
 
   img {
-    @apply w-100 h-100 object-contain;
+    @apply object-contain;
   }
 }

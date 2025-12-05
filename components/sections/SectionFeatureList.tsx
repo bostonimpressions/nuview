@@ -2,6 +2,7 @@
 
 import { PortableText } from '@portabletext/react';
 import type { PortableTextBlock } from '@portabletext/types';
+import { SanityImageSource } from '@sanity/image-url';
 import List from '@/components/ui/List';
 import TextHeading from '@/components/ui/TextHeading';
 import React from 'react';
@@ -10,7 +11,7 @@ interface ListItem {
   heading: PortableTextBlock[];
   subheading?: PortableTextBlock[];
   body?: PortableTextBlock[];
-  image?: { url: string; alt?: string };
+  icon?: SanityImageSource;
 }
 
 interface ListSection {

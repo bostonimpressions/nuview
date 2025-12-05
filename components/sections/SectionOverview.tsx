@@ -13,7 +13,7 @@ interface ListItem {
   heading: PortableTextBlock[];
   subheading?: PortableTextBlock[];
   body?: PortableTextBlock[];
-  image?: { url: string; alt?: string };
+  icon?: { url: string; alt?: string };
 }
 
 interface ListSection {

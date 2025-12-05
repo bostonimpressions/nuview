@@ -14,11 +14,11 @@ interface Props {
   link: Link;
 }
 
-function SectionComparison({ heading, body, link }: Props) {
+function SectionCallToAction({ heading, body, link }: Props) {
   return (
     <section className="bg-white py-12">
       <div className="container mx-auto">
-        <div className="relative rounded-xl overflow-hidden p-20">
+        <div className="relative rounded-xl overflow-hidden p-10 md:p-20">
 
           {/* Green background */}
           <div className="bg-nugreen-500 w-full h-full absolute inset-0"></div>
@@ -33,7 +33,7 @@ function SectionComparison({ heading, body, link }: Props) {
             </h2>
 
             {link && (
-              <Link href={link.url} className="btn-primary-white p-3 text-lg">{link.text}</Link>
+              <Link href={link.url} className="btn-primary-white w-fit mx-auto p-3 px-10 md:text-lg">{link.text}</Link>
 
             )}
 
@@ -53,4 +53,4 @@ function SectionComparison({ heading, body, link }: Props) {
   );
 }
 
-export default SectionComparison;
+export default SectionCallToAction;
