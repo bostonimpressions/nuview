@@ -15,8 +15,8 @@ interface ListItem {
 }
 
 interface ListSection {
-  theme?: 'default' | 'cards' | 'cards-white' | 'checks' | 'flags' | 'negatives' | 'positives';
-  columns?: 1 | 2 | 3;
+  theme?: 'default' | 'image-only' | 'cards' | 'cards-white' | 'checks' | 'flags' | 'negatives' | 'positives';
+  columns?: 1 | 2 | 3 | 4;
   items: ListItem[];
 }
 

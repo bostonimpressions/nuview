@@ -79,10 +79,10 @@ export default defineType({
       titleValue: 'heading',
     },
     prepare({ titleValue }) {
-      const plainTextTitle = toPlainText(titleValue);
+      const plainTextTitle = titleValue ? toPlainText(titleValue) : '';
       return {
         title: 'Snapshots Section',
-        subtitle: plainTextTitle,
+        subtitle: plainTextTitle || 'Snapshots Section',
       };
     },
   },

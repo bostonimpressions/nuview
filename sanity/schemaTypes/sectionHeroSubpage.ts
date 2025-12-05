@@ -33,11 +33,11 @@ export default defineType({
       titleValue: 'heading',
     },
     prepare({ titleValue }) {
-      const plainTextTitle = toPlainText(titleValue);
+      const plainTextTitle = titleValue ? toPlainText(titleValue) : '';
 
       return {
         title: 'Hero (subpage)',
-        subtitle: plainTextTitle,
+        subtitle: plainTextTitle || 'Hero (subpage)',
       };
     },
   },

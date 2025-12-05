@@ -33,7 +33,7 @@ export default defineType({
           title: 'Theme',
           type: 'string',
           options: {
-            list: ['default', 'cards', 'cards-white', 'checks', 'flags', 'negatives', 'positives'],
+            list: ['default', 'image-only', 'cards', 'cards-white', 'checks', 'flags', 'negatives', 'positives'],
             layout: 'radio',
           },
           initialValue: 'default',
@@ -47,6 +47,7 @@ export default defineType({
               { title: '1', value: 1 },
               { title: '2', value: 2 },
               { title: '3', value: 3 },
+              { title: '4', value: 4 },
             ],
           },
           initialValue: 2,
@@ -94,11 +95,11 @@ export default defineType({
       titleValue: 'heading',
     },
     prepare({ titleValue }) {
-      const plainTextTitle = toPlainText(titleValue);
+      const plainTextTitle = titleValue ? toPlainText(titleValue) : '';
 
       return {
         title: 'Feature List Section',
-        subtitle: plainTextTitle,
+        subtitle: plainTextTitle || 'Feature List',
       };
     },
   },

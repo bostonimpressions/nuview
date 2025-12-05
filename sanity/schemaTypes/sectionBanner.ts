@@ -31,11 +31,11 @@ export default defineType({
       titleValue: 'body',
     },
     prepare({ titleValue }) {
-      const plainTextTitle = toPlainText(titleValue);
+      const plainTextTitle = titleValue ? toPlainText(titleValue) : '';
 
       return {
         title: 'Banner Section',
-        subtitle: plainTextTitle,
+        subtitle: plainTextTitle || 'Banner Section',
       };
     },
   },

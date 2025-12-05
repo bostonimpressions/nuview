@@ -17,7 +17,7 @@ interface ListProps {
   compact?: boolean;
   className?: string;
   items: ListItemProps[];
-  columns?: 1 | 2 | 3;
+  columns?: 1 | 2 | 3 | 4;
   theme?:
     | 'default'
     | 'image-only'
