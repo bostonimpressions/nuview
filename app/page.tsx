@@ -7,6 +7,7 @@ import SectionSnapshots from '@/components/sections/SectionSnapshots';
 import SectionComparison from '@/components/sections/SectionComparison';
 import SectionCallToAction from '@/components/sections/SectionCallToAction';
 import { getPageData } from '@/lib/getPageData';
+// import SectionContact from '@/components/sections/SectionContact';
 
 export default async function Home() {
   // Fetch the "home" page content from Sanity
@@ -41,6 +42,8 @@ export default async function Home() {
             return null;
         }
       })}
+
+      {/*<SectionContact />*/}
 
     </main>
   );

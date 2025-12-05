@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, ReactNode, SVGProps, MouseEvent } from 'react';
+import { FaLinkedin, FaTwitter, FaFacebook, FaInstagram } from 'react-icons/fa';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -190,12 +191,98 @@ const LayoutWrapper = ({ children }: LayoutWrapperProps) => {
 
       <div className="pt-20">{children}</div>
 
-      <footer className="mt-10 bg-gray-800 p-12 text-white">
-        <div className="container mx-auto text-center">
-          <p className="text-sm opacity-80">
-            &copy; {new Date().getFullYear()} Acme Digital. All rights reserved.
-          </p>
+      <footer className="mt-10 bg-biscay-500 p-12 text-white">
+        <div className="container mx-auto">
+          <div className="md:flex justify-between pb-20  md:pb-50 border-b-2 border-dashed border-white/20">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-20 mb-20 md:m-0">
+              <div className="grid-col">
+                <h5 className="pb-1 mb-4 font-semibold text-xl border-white/10 border-b-5 text-white/40">Services</h5>
+                <ul className="flex flex-col gap-4">
+                  <li>
+                    <Link href={'/'}>
+                      Cybersecurity
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={'/'}>
+                      Managed IT
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="grid-col">
+                <h5 className="pb-1 mb-4 font-semibold text-xl border-white/10 border-b-5 text-white/40">Industries</h5>
+                <ul className="flex flex-col gap-4">
+                  <li>
+                    <Link href={'/'}>
+                      Education
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={'/'}>
+                      Financial
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="grid-col">
+                <ul className="flex flex-col gap-4">
+                  <li>
+                    <Link href={'/'}>
+                      About
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={'/'}>
+                      Blog
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={'/'}>
+                      Contact
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+            <div className="socials md:text-right">
+              <h3 className="text-3xl font-normal">Let&#39;s connect</h3>
+
+              <div className="flex gap-4 mt-2 justify-start md:justify-end">
+                <a
+                  href="https://www.linkedin.com/company/nuview-it/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-nugreen-500 hover:text-nugreen-600 transition duration-300"
+                  aria-label="LinkedIn"
+                >
+                  <FaLinkedin size={30} />
+                </a>
+
+              </div>
+            </div>
+          </div>
+
+          <div className="md:flex justify-between py-10">
+            <div className="branding mb-4 md:m-0">
+              <div className="pb-5">
+                <Image src="/logo-white.png" alt="nuview" width={140} height={40} />
+              </div>
+
+              <p className="text-sm opacity-80">
+                &copy; {new Date().getFullYear()} nuview. All rights reserved.
+              </p>
+            </div>
+            <ul className="flex mt-auto gap-6 md:gap-12">
+              <li><Link href={'/terms'} className="underline">Terms of Service</Link></li>
+              <li><Link href={'/privacy-policy'} className="underline">Privacy Policy</Link></li>
+            </ul>
+          </div>
         </div>
+
       </footer>
     </div>
   );
