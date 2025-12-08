@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { Open_Sans, Share_Tech } from 'next/font/google';
 import '@/styles/globals.css';
-// import '@/styles/main.scss';
 import LayoutWrapper from '@/components/LayoutWrapper';
+import { getServicePages } from '@/lib/getServicePages';
+import { getIndustryPages } from '@/lib/getIndustryPages';
 
 const openSans = Open_Sans({
   variable: '--font-open-sans',
@@ -21,15 +22,20 @@ export const metadata: Metadata = {
     'Managed IT services, cybersecurity, and compliance support for healthcare, finance, and manufacturing. 24/7 SOC, CMMC, HIPAA, and NIST expertise.',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Fetch pages for navigation
+  const [servicePages, industryPages] = await Promise.all([getServicePages(), getIndustryPages()]);
+
   return (
     <html lang="en">
       <body className={`${openSans.variable} ${shareTech.variable} antialiased`}>
-        <LayoutWrapper>{children}</LayoutWrapper>
+        <LayoutWrapper servicePages={servicePages} industryPages={industryPages}>
+          {children}
+        </LayoutWrapper>
       </body>
     </html>
   );

@@ -1,13 +1,48 @@
-import React from 'react';
+// app/[...slug]/page.tsx
+import SectionBanner from '@/components/sections/SectionBanner';
+import { getPageData } from '@/lib/getPageData';
 
-export default function DynamicPage() {
+interface PageProps {
+  params: Promise<{ slug: string[] }>;
+}
+
+export default async function DynamicPage(props: PageProps) {
+  // Await params before accessing its properties
+  const params = await props.params;
+
+  // join slug safely
+  const slug = params?.slug?.join('/') || '';
+
+  // fetch page from Sanity
+  const page = await getPageData(slug);
+
+  if (!page) {
+    return (
+      <div className="container mx-auto min-h-screen p-12 text-center">
+        <h1 className="mb-4 text-4xl font-bold text-red-600">404 - Page Not Found</h1>
+        <p className="text-xl text-gray-700">Could not find a page with slug: {slug}</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="container mx-auto p-12 text-center min-h-screen">
-      <h1 className="text-4xl font-bold text-red-600 mb-4">404 - Content Not Found</h1>
-      <p className="text-xl text-gray-700">
-        The route you are trying to access does not have a defined page component.
-      </p>
-      <p className="text-gray-500 mt-2">Path: /[...slug]</p>
-    </div>
+    <main className="font-sans">
+      {page.sections?.map((section: any, i: number) => {
+        const { _type, ...props } = section;
+        switch (_type) {
+          case 'sectionBanner':
+            return <SectionBanner key={i} {...props} />;
+          default:
+            return null;
+        }
+      })}
+    </main>
   );
+}
+
+// Optional: Generate static params for static generation
+export async function generateStaticParams() {
+  // You can fetch all possible slugs from Sanity here
+  // For now, return an empty array (all pages will be generated on-demand)
+  return [];
 }
