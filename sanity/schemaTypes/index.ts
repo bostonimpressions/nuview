@@ -1,5 +1,7 @@
 import { type SchemaTypeDefinition } from 'sanity';
 import page from './page';
+import { blogPage } from './blogPage';
+import { servicePage } from './servicePage';
 import blockContent from './blockContent';
 import blockContentMinimal from './blockContentMinimal';
 import sectionHeroMain from './sectionHeroMain';
@@ -15,6 +17,8 @@ import sectionCallToAction from './sectionCallToAction';
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     page,
+    blogPage,
+    servicePage,
     blockContent,
     blockContentMinimal,
     sectionHeroMain,
