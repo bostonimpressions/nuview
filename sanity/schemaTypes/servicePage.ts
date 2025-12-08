@@ -1,16 +1,15 @@
 // ./sanity/schemaTypes/servicePage.ts
 import { defineType, defineField } from 'sanity';
+import { orderRankField } from '@sanity/orderable-document-list';
 
 export const servicePage = defineType({
   name: 'servicePage',
   title: 'Service Page',
   type: 'document',
   fields: [
-    defineField({
-      name: 'orderRank',
-      title: 'Order Rank',
-      type: 'string',
-      hidden: true, // Hide this from the editor
+    orderRankField({
+      type: 'servicePage', // Crucial: This must match the schema name
+      newItemPosition: 'after', // Optional: Places new items at the bottom of the list automatically
     }),
     defineField({
       name: 'title',
@@ -31,10 +30,13 @@ export const servicePage = defineType({
           `services/${input
             .toLowerCase()
             .replace(/\s+/g, '-')
-            .replace(/[^\w\-]+/g, '')}`, // remove invalid chars
+            .replace(/[^\w\-]+/g, '')}`,
       },
-      hidden: true, // editors don’t see it
-      //validation: (Rule) => Rule.required(),
+      // 💡 FIX: Use a function to make it readOnly ONLY if a slug exists
+      // readOnly: ({ value }) => !!value?.current,
+      // Remove all conflicting settings:
+      // hidden: true,
+      // validation: (Rule) => Rule.required(),
     }),
 
     defineField({
