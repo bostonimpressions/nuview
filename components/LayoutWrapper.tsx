@@ -165,7 +165,7 @@ const NavLink = ({ item, isMobile = false, isScrolled, onClick }: NavLinkProps) 
             </Link>
           )}
         </div>
-        {hasDropdown && isDropdownOpen && (
+        {hasDropdown && isDropdownOpen && item.dropdown && (
           <DropdownMenu items={item.dropdown} isScrolled={isScrolled} isMobile={true} />
         )}
       </div>
@@ -187,7 +187,9 @@ const NavLink = ({ item, isMobile = false, isScrolled, onClick }: NavLinkProps) 
             className={`h-3 w-3 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}
           />
         </button>
-        {isDropdownOpen && <DropdownMenu items={item.dropdown} isScrolled={isScrolled} />}
+        {isDropdownOpen && item.dropdown && (
+          <DropdownMenu items={item.dropdown} isScrolled={isScrolled} />
+        )}
       </div>
     );
   }

@@ -7,6 +7,12 @@ export const servicePage = defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'orderRank',
+      title: 'Order Rank',
+      type: 'string',
+      hidden: true, // Hide this from the editor
+    }),
+    defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
@@ -28,16 +34,8 @@ export const servicePage = defineType({
             .replace(/[^\w\-]+/g, '')}`, // remove invalid chars
       },
       hidden: true, // editors don’t see it
-      validation: (Rule) => Rule.required(),
+      //validation: (Rule) => Rule.required(),
     }),
-
-    {
-      name: 'sortOrder',
-      title: 'Sort Order',
-      type: 'number',
-      description: 'Used to order pages in navigation menus (lower numbers appear first)',
-      validation: (Rule) => Rule.integer().min(0),
-    },
 
     defineField({
       name: 'sections',
@@ -55,12 +53,5 @@ export const servicePage = defineType({
         { type: 'sectionCallToAction' },
       ],
     }),
-  ],
-  orderings: [
-    {
-      title: 'Sort Order',
-      name: 'sortOrderAsc',
-      by: [{ field: 'sortOrder', direction: 'asc' }],
-    },
   ],
 });
