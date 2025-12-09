@@ -1,4 +1,4 @@
-// ./sanity/schemaTypes/servicePage.ts
+// ./sanity/schemaTypes/industryPage.ts
 import { defineType, defineField } from 'sanity';
 import { orderRankField } from '@sanity/orderable-document-list';
 
@@ -7,14 +7,13 @@ interface ServicePageDocument {
     current?: string;
   };
 }
-
-export const servicePage = defineType({
-  name: 'servicePage',
-  title: 'Service Page',
+export const industryPage = defineType({
+  name: 'industryPage',
+  title: 'Industry Page',
   type: 'document',
   fields: [
     orderRankField({
-      type: 'servicePage',
+      type: 'industryPage',
       newItemPosition: 'after',
     }),
     defineField({
@@ -23,6 +22,7 @@ export const servicePage = defineType({
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
+
     defineField({
       name: 'slug',
       title: 'Slug',
@@ -34,11 +34,9 @@ export const servicePage = defineType({
         slugify: (input: string) =>
           input
             .toLowerCase()
-            .trim()
             .replace(/\s+/g, '-')
-            .replace(/[^\w-]+/g, '')
-            .replace(/--+/g, '-')
-            .slice(0, 96)
+            .replace(/[^\w\-]+/g, '')
+            .slice(0, 96),
       },
       readOnly: ({ document }) => {
         const doc = document as ServicePageDocument;
@@ -46,20 +44,7 @@ export const servicePage = defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: 'metaTitle',
-      title: 'Meta Title',
-      type: 'string',
-    }),
-    defineField({
-      name: 'metaDescription',
-      title: 'Meta Description',
-      type: 'text',
-      description: 'Used for SEO meta description. Aim for 140–160 characters.',
-      rows: 3,
-      validation: (Rule) =>
-        Rule.max(200).warning('Meta descriptions should be 160 characters or less.'),
-    }),
+
     defineField({
       name: 'sections',
       title: 'Sections',

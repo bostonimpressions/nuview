@@ -2,6 +2,7 @@ import { type SchemaTypeDefinition } from 'sanity';
 import page from './page';
 import { blogPage } from './blogPage';
 import { servicePage } from './servicePage';
+import { industryPage } from './industryPage';
 import blockContent from './blockContent';
 import blockContentMinimal from './blockContentMinimal';
 import sectionHeroMain from './sectionHeroMain';
@@ -19,6 +20,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     page,
     blogPage,
     servicePage,
+    industryPage,
     blockContent,
     blockContentMinimal,
     sectionHeroMain,

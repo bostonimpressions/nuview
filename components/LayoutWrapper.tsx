@@ -217,7 +217,7 @@ const Header = ({ isScrolled, servicePages, industryPages }: HeaderProps) => {
       href: '/services',
       dropdown: servicePages.map((page) => ({
         name: page.title,
-        href: `/${page.slug}`,
+        href: `/services/${page.slug}`,
       })),
     },
     {

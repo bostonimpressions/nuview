@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { defaultMetadata } from '@/lib/seo';
+
 import { Open_Sans, Share_Tech } from 'next/font/google';
 import '@/styles/globals.css';
 import LayoutWrapper from '@/components/LayoutWrapper';
@@ -16,11 +18,7 @@ const shareTech = Share_Tech({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: 'Managed IT & Cybersecurity for Regulated Industries | NuView',
-  description:
-    'Managed IT services, cybersecurity, and compliance support for healthcare, finance, and manufacturing. 24/7 SOC, CMMC, HIPAA, and NIST expertise.',
-};
+export const metadata: Metadata = defaultMetadata;
 
 export default async function RootLayout({
   children,
