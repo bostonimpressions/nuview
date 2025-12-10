@@ -39,23 +39,33 @@ interface Props {
   image?: SanityImageSource;
   imageLayout?: 'imgLeft' | 'imgRight';
   imageGrid?: '1/1' | '2/3' | '3/2';
-  list?: ListSection;
+  list?: ListSection;        // legacy single list
+  lists?: ListSection[];     // new multiple lists
   cta?: CTA;
   theme?: 'light' | 'dark';
 }
 
 export default function SectionOverview({
-  heading,
-  subheading,
-  body,
-  image,
-  imageLayout = 'imgLeft',
-  imageGrid = '1/1',
-  list,
-  cta,
-  theme = 'light',
-}: Props) {
-  // Determine grid template based on imageGrid
+                                          heading,
+                                          subheading,
+                                          body,
+                                          image,
+                                          imageLayout = 'imgLeft',
+                                          imageGrid = '1/1',
+                                          list,
+                                          lists,
+                                          cta,
+                                          theme = 'light',
+                                        }: Props) {
+  // Combine legacy list with new lists array for backwards compatibility
+  const allLists: ListSection[] = lists?.length
+    ? lists
+    : list
+      ? [list]
+      : [];
+
+  const isImageLeft = imageLayout === 'imgLeft';
+
   const getGridClasses = () => {
     switch (imageGrid) {
       case '2/3':
@@ -68,23 +78,22 @@ export default function SectionOverview({
     }
   };
 
-  const isImageLeft = imageLayout === 'imgLeft';
-
   return (
     <section
       className={`relative overflow-hidden py-12 ${theme === 'dark' ? 'bg-perano-200' : 'bg-white'}`}
     >
       <div className="container mx-auto px-4">
+        {/* Top grid with image and text */}
         <div
           className={`grid ${getGridClasses()} items-center gap-10 ${image && 'pb-10 md:pb-20'}`}
         >
-          {/* Image Column */}
+          {/* Image left */}
           {image && isImageLeft && (
             <div className="order-1 md:order-1">
               <div className="relative aspect-[3/2] h-auto w-full">
                 <Image
                   src={urlFor(image).url()}
-                  alt={`Illustration ${heading && '- ' + toPlainText(heading)}`}
+                  alt={`Illustration ${heading ? '- ' + toPlainText(heading) : ''}`}
                   fill
                   className="h-auto w-full rounded-xl object-cover"
                 />
@@ -92,10 +101,10 @@ export default function SectionOverview({
             </div>
           )}
 
-          {/* Text Column */}
+          {/* Text */}
           <div className="order-2 md:order-2">
             {heading && (
-              <TextHeading level={'h2'}>
+              <TextHeading level="h2">
                 <PortableText value={heading} />
               </TextHeading>
             )}
@@ -107,13 +116,13 @@ export default function SectionOverview({
             {body && <PortableText value={body} />}
           </div>
 
-          {/* Image Column on right */}
+          {/* Image right */}
           {image && !isImageLeft && (
             <div className="order-1 md:order-3">
               <div className="relative aspect-[3/2] h-auto w-full">
                 <Image
                   src={urlFor(image).url()}
-                  alt={`Illustration ${heading && '- ' + toPlainText(heading)}`}
+                  alt={`Illustration ${heading ? '- ' + toPlainText(heading) : ''}`}
                   fill
                   className="h-auto w-full rounded-xl object-cover"
                 />
@@ -122,30 +131,37 @@ export default function SectionOverview({
           )}
         </div>
 
-        {/* List Section */}
-        {list?.items && list.items.length > 0 && (
-          <div className="">
-            {list.heading && (
-              <h3>
-                <PortableText value={list.heading} />
-              </h3>
-            )}
-            {list.subheading && (
-              <h4>
-                <PortableText value={list.subheading} />
-              </h4>
-            )}
-            {list.body && (
-              <div className="mb-2">
-                <PortableText value={list.body} />
+        {/* Lists */}
+        {allLists.length > 0 && (
+          <div className={`grid gap-10 ${allLists.length === 2 ? 'md:grid-cols-2' : 'md:grid-cols-1'}`}>
+            {allLists.map((listSection, i) => (
+              <div key={i}>
+                {listSection.heading && (
+                  <h3>
+                    <PortableText value={listSection.heading} />
+                  </h3>
+                )}
+                {listSection.subheading && (
+                  <h4>
+                    <PortableText value={listSection.subheading} />
+                  </h4>
+                )}
+                {listSection.body && (
+                  <div className="mb-2">
+                    <PortableText value={listSection.body} />
+                  </div>
+                )}
+                <List
+                  items={listSection.items || []}
+                  columns={listSection.columns}
+                  theme={listSection.theme}
+                />
               </div>
-            )}
-
-            <List items={list.items || []} columns={list.columns} theme={list.theme} />
+            ))}
           </div>
         )}
 
-        {/* CTA Section */}
+        {/* CTA */}
         {cta && (
           <div className="call-to-action mt-8">
             {cta.heading && (
@@ -153,22 +169,16 @@ export default function SectionOverview({
                 <PortableText value={cta.heading} />
               </h3>
             )}
-
             <div className="bg-sapphire-500 flex items-center gap-5 rounded-lg p-5 text-white md:gap-8 md:p-10">
-              {cta?.icon ? (
+              {cta.icon ? (
                 <div className="icon-wrapper">
-                  <Image
-                    src={urlFor(cta.icon).url()}
-                    alt="Icon"
-                    fill
-                  />
+                  <Image src={urlFor(cta.icon).url()} alt="Icon" fill />
                 </div>
               ) : (
                 <div className="icon-wrapper aspect-[1/.8]!">
-                  <Image src={'/images/icon-check-green.png'} alt="Icon - Check" fill />
+                  <Image src="/images/icon-check-green.png" alt="Icon - Check" fill />
                 </div>
               )}
-
               {cta.body && <PortableText value={cta.body} />}
               {cta.link && (
                 <a href={cta.link} className="">
