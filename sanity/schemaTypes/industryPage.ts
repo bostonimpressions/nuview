@@ -2,11 +2,12 @@
 import { defineType, defineField } from 'sanity';
 import { orderRankField } from '@sanity/orderable-document-list';
 
-interface ServicePageDocument {
+interface IndustryPageDocument {
   slug?: {
     current?: string;
   };
 }
+
 export const industryPage = defineType({
   name: 'industryPage',
   title: 'Industry Page',
@@ -39,7 +40,7 @@ export const industryPage = defineType({
             .slice(0, 96),
       },
       readOnly: ({ document }) => {
-        const doc = document as ServicePageDocument;
+        const doc = document as IndustryPageDocument;
         return !!doc?.slug?.current;
       },
       validation: (Rule) => Rule.required(),
