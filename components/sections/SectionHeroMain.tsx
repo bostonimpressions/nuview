@@ -31,7 +31,7 @@ interface Props {
   slides: Slide[];
 }
 
-export default function HeroSection({ slides }: Props) {
+export default function SectionHeroMain({ slides }: Props) {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {

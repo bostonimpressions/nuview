@@ -65,7 +65,6 @@ export const servicePage = defineType({
       title: 'Sections',
       type: 'array',
       of: [
-        { type: 'sectionHeroMain' },
         { type: 'sectionHeroSubpage' },
         { type: 'sectionOverview' },
         { type: 'sectionBanner' },

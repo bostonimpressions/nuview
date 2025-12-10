@@ -6,26 +6,50 @@ export default defineType({
   title: 'Hero (subpage)',
   type: 'object',
   fields: [
-    defineField({ name: 'label', title: 'Label', type: 'string' }),
     defineField({ name: 'heading', title: 'Heading', type: 'blockContentMinimal' }),
     defineField({ name: 'subheading', title: 'Subheading', type: 'blockContentMinimal' }),
+    defineField({ name: 'lead', title: 'Lead', type: 'blockContent' }),
     defineField({ name: 'body', title: 'Body', type: 'blockContent' }),
     defineField({
-      name: 'button',
-      title: 'Button',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'text',
-          title: 'Button Text',
-          type: 'string',
-        }),
-        defineField({
-          name: 'url',
-          title: 'Button URL',
-          type: 'url',
-        }),
-      ],
+      name: 'theme',
+      title: 'Theme',
+      type: 'string',
+      options: {
+        list: ['default', 'service', 'industry'],
+        layout: 'radio',
+      },
+      initialValue: 'default',
+    }),
+    // BACKGROUND TYPE SWITCH
+    defineField({
+      name: 'backgroundType',
+      title: 'Background Type',
+      type: 'string',
+      options: {
+        list: ['image', 'video'],
+        layout: 'radio',
+      },
+      initialValue: 'image',
+    }),
+
+    // IMAGE BACKGROUND
+    defineField({
+      name: 'backgroundImage',
+      title: 'Background Image',
+      type: 'image',
+      options: { hotspot: true },
+      hidden: ({ parent }) => parent?.backgroundType !== 'image',
+    }),
+
+    // VIDEO BACKGROUND
+    defineField({
+      name: 'backgroundVideo',
+      title: 'Background Video',
+      type: 'file',
+      options: {
+        accept: 'video/*',
+      },
+      hidden: ({ parent }) => parent?.backgroundType !== 'video',
     }),
   ],
   preview: {

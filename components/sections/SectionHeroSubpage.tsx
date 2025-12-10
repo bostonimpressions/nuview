@@ -1,209 +1,190 @@
 'use client';
 
-import { PortableText, PortableTextBlock } from '@portabletext/react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { PortableText, toPlainText } from '@portabletext/react';
+import type { PortableTextBlock } from '@portabletext/types';
+import React from 'react';
+import TextHeading from '@/components/ui/TextHeading';
 import { SanityImageSource } from '@sanity/image-url';
 import { urlFor } from '@/sanity/lib/image';
-import TextHeading from '@/components/ui/TextHeading'; // Adjust path to your sanity client
+import { usePathname } from 'next/navigation';
 
-interface Button {
-  title: string;
-  url: string;
-  internal?: boolean;
-}
-
-interface Slide {
+interface Props {
   heading: PortableTextBlock[];
+  subheading?: PortableTextBlock[];
+  lead?: PortableTextBlock[];
   body?: PortableTextBlock[];
-  buttons?: Button[];
-  theme?: 'default' | 'service';
   backgroundType?: 'image' | 'video';
   backgroundImage?: SanityImageSource;
   backgroundVideo?: {
-    asset: {
-      url: string;
-    };
+    asset: { url: string };
   };
+  theme?: 'default' | 'service' | 'industry';
 }
 
-interface Props {
-  slides: Slide[];
-}
+export default function SectionHeroSubpage({
+                                             heading,
+                                             subheading,
+                                             lead,
+                                             body,
+                                             backgroundType,
+                                             backgroundImage,
+                                             backgroundVideo,
+                                             theme = 'default',
+                                           }: Props) {
 
-export default function HeroSection({ slides }: Props) {
-  const [current, setCurrent] = useState(0);
+  // get breadcrumb
+  const pathname = usePathname();
+  const headingText = toPlainText(heading);
+  const section = pathname?.split('/').filter(Boolean)[0] ?? '';
+  const sectionTitle = section
+    ? section.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())
+    : '';
+  const breadcrumb = `${sectionTitle} › ${headingText}`;
 
-  useEffect(() => {
-    slides.forEach((slide) => {
-      if (!slide.backgroundImage) return;
-      const img = new Image();
-      img.src = urlFor(slide.backgroundImage).width(1920).url();
-    });
-  }, [slides]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % slides.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [slides.length]);
-
-  const slide = slides[current];
-
-  // Get the properly formatted image URL
-  const backgroundImageUrl = slide.backgroundImage
-    ? urlFor(slide.backgroundImage).width(1920).url()
+  // get bg url
+  const backgroundImageUrl = backgroundImage
+    ? urlFor(backgroundImage).width(1920).url()
     : undefined;
 
-  // Determine background based on theme
   const backgroundStyle =
-    slide.theme === 'default'
+    theme === 'default'
       ? {
-          background: 'radial-gradient(118.67% 95.24% at 91.36% 7.49%, #202C59 0%, #2A2A2A 100%)',
-        }
-      : slide.theme === 'service'
-        ? {
-            backgroundColor: '#394FA2',
-          }
+        background:
+          'radial-gradient(118.67% 95.24% at 91.36% 7.49%, #202C59 0%, #2A2A2A 100%)',
+      }
+      : theme === 'service'
+        ? { backgroundColor: '#394FA2' }
         : {};
 
-  // Determine blend mode for the background image
   const blendMode =
-    slide.theme === 'default' ? 'multiply' : slide.theme === 'service' ? 'color-dodge' : 'normal';
+    theme === 'default'
+      ? 'multiply'
+      : theme === 'service'
+        ? 'color-dodge'
+        : 'normal';
 
   return (
     <section
-      className="relative min-h-[600px] overflow-hidden py-[20] pb-[40] md:py-[60]"
-      style={{ ...backgroundStyle }}
+      className="relative min-h-[600px] overflow-hidden py-[20] pb-[40] md:py-[60] text-white"
+      style={backgroundStyle}
     >
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={`${slide.theme}-bg`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: 'easeInOut' }}
+      {/* IMAGE */}
+      {backgroundType === 'image' && backgroundImageUrl && (
+        <div
           className="absolute inset-0"
           style={{
-            background:
-              slide.theme === 'default'
-                ? 'radial-gradient(118.67% 95.24% at 91.36% 7.49%, #202C59 0%, #2A2A2A 100%)'
-                : '#394FA2',
+            backgroundImage: `url(${backgroundImageUrl})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.15,
+            mixBlendMode: blendMode,
           }}
         />
-      </AnimatePresence>
+      )}
 
-      <AnimatePresence mode="wait">
-        {/* IMAGE BACKGROUND */}
-        {slide.backgroundType === 'image' && backgroundImageUrl && (
-          <motion.div
-            key={backgroundImageUrl}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: 'easeInOut' }}
-            className="will-change-opacity absolute inset-0"
-            style={{
-              backgroundImage: `url(${backgroundImageUrl})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              mixBlendMode: blendMode,
+      {/* VIDEO */}
+      {backgroundType === 'video' && backgroundVideo?.asset?.url && (
+        <video
+          src={backgroundVideo.asset.url}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 h-full w-full object-cover"
+          style={{
+            opacity: 0.15,
+            mixBlendMode: blendMode,
+          }}
+        />
+      )}
+
+      {/* CONTENT */}
+      <div className="container relative z-10">
+
+        {/* REQUIRED BREADCRUMB */}
+        {breadcrumb && (
+          <div className="mb-4 text-sm font-semibold text-white/80 tracking-wide">
+            {breadcrumb}
+          </div>
+        )}
+
+        <TextHeading color="text-white max-w-2xl">
+          <PortableText
+            value={heading}
+            components={{
+              marks: {
+                highlight: ({ children }) => (
+                  <span className="text-highlight">{children}</span>
+                ),
+              },
             }}
           />
+        </TextHeading>
+
+        {subheading && (
+          <div className="mt-2 max-w-xl">
+            <PortableText
+              value={subheading}
+              components={{
+                block: {
+                  normal: ({ children }) => <p className="text-white text-xl md:text-2xl font-semibold">{children}</p>,
+                },
+                marks: {
+                  highlight: ({ children }) => (
+                    <span className="text-highlight">{children}</span>
+                  ),
+                },
+              }}
+            />
+          </div>
         )}
 
-        {/* VIDEO BACKGROUND */}
-        {slide.backgroundType === 'video' && slide.backgroundVideo?.asset?.url && (
-          <motion.video
-            key={slide.backgroundVideo.asset.url}
-            autoPlay
-            muted
-            loop
-            playsInline
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: 'easeInOut' }}
-            className="will-change-opacity absolute inset-0 h-full w-full object-cover"
-            style={{ mixBlendMode: blendMode }}
-            src={slide.backgroundVideo.asset.url}
-          />
+        {lead && (
+          <div className="mt-4 max-w-lg">
+            <PortableText
+              value={lead}
+              components={{
+                block: {
+                  normal: ({ children }) => <p className="text-white text-base md:text-lg font-semibold">{children}</p>,
+                },
+                marks: {
+                  highlight: ({ children }) => (
+                    <span className="text-highlight">{children}</span>
+                  )
+                }
+              }}
+            />
+          </div>
         )}
-      </AnimatePresence>
 
-      <div className="container relative z-10">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.6 }}
-            className="grid grid-cols-1 gap-4 md:grid-cols-3"
-          >
-            <div className="max-w-xl md:col-span-2">
-              {slide.theme === 'service' && (
-                <div className="mb-4 text-sm font-semibold text-white">Services</div>
-              )}
-
-              <TextHeading color={'text-white'} border={current != 0}>
-                <PortableText
-                  value={slide.heading}
-                  components={{
-                    marks: {
-                      highlight: ({ children }) => (
-                        <span className="text-highlight">{children}</span>
-                      ),
-                    },
-                  }}
-                />
-              </TextHeading>
-
-              {slide.body && (
-                <div className="mb-6 max-w-lg">
-                  <PortableText
-                    value={slide.body}
-                    components={{
-                      block: {
-                        normal: ({ children }) => <p className="text-white">{children}</p>,
-                      },
-                      marks: {
-                        highlight: ({ children }) => (
-                          <span className="text-highlight">{children}</span>
-                        ),
-                        link: ({ value, children }) => (
-                          <a
-                            href={value?.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 underline"
-                          >
-                            {children}
-                          </a>
-                        ),
-                      },
-                    }}
-                  />
-                </div>
-              )}
-
-              {slide.buttons && (
-                <div className="flex gap-2">
-                  {slide.buttons.map((btn, i) => (
+        {body && (
+          <div className="mt-6 max-w-lg">
+            <PortableText
+              value={body}
+              components={{
+                block: {
+                  normal: ({ children }) => <p className="text-white text-sm">{children}</p>,
+                },
+                marks: {
+                  highlight: ({ children }) => (
+                    <span className="text-highlight">{children}</span>
+                  ),
+                  link: ({ value, children }) => (
                     <a
-                      key={btn.title}
-                      href={btn.url}
-                      className={i === 0 ? 'btn-primary-green' : 'btn-secondary-green'}
+                      href={value?.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600 underline"
                     >
-                      {btn.title}
+                      {children}
                     </a>
-                  ))}
-                </div>
-              )}
-            </div>
-          </motion.div>
-        </AnimatePresence>
+                  ),
+                },
+              }}
+            />
+          </div>
+        )}
       </div>
     </section>
   );
