@@ -22,26 +22,34 @@ interface ListSection {
 
 interface Props {
   heading: PortableTextBlock[];
-  list: ListSection;
+  subheading?: PortableTextBlock[];
+  body?: PortableTextBlock[];
+  list?: ListSection;
   theme?: 'light' | 'dark';
 }
 
-export default function SectionOverview({ heading, list, theme = 'light' }: Props) {
+export default function SectionFeatureList({ heading, subheading, body, list, theme = 'light' }: Props) {
   return (
     <section
       className={`relative overflow-hidden py-12 ${theme === 'dark' ? 'bg-perano-200' : 'bg-white'}`}
     >
       <div className="container mx-auto px-4">
-        <div className="pb-10">
+        <div className="pb-10 max-w-xl">
           {heading && (
             <TextHeading level={'h2'}>
               <PortableText value={heading} />
             </TextHeading>
           )}
+          {subheading && (
+            <h4>
+              <PortableText value={subheading} />
+            </h4>
+          )}
+          {body && <PortableText value={body} />}
         </div>
 
         {/* List Section */}
-        {list && list.items.length > 0 && (
+        {list && list.items?.length > 0 && (
           <List items={list.items} columns={list.columns} theme={list.theme} />
         )}
       </div>

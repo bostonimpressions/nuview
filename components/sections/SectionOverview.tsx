@@ -85,7 +85,7 @@ export default function SectionOverview({
       <div className="container mx-auto px-4">
         {/* Top grid with image and text */}
         <div
-          className={`grid ${getGridClasses()} items-center gap-10 ${image && 'pb-10 md:pb-20'}`}
+          className={`grid ${getGridClasses()} items-center gap-10 pb-10 md:pb-20`}
         >
           {/* Image left */}
           {image && isImageLeft && (

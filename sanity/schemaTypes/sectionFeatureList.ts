@@ -21,6 +21,8 @@ export default defineType({
       initialValue: 'light',
     }),
     defineField({ name: 'heading', title: 'Heading', type: 'blockContentMinimal' }),
+    defineField({ name: 'subheading', title: 'Subheading', type: 'blockContentMinimal' }),
+    defineField({ name: 'body', title: 'Body', type: 'blockContent' }),
 
     // List Section
     defineField({
