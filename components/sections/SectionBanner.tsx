@@ -27,7 +27,7 @@ export default function SectionOverview({ body, reference, theme = 'light' }: Pr
           <PortableText value={body} />
         </h3>
         {reference && (
-          <div className="reference-text text-lg md:text-xl">
+          <div className="text-center text-lg md:text-xl">
             <PortableText value={reference} />
           </div>
         )}

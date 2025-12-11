@@ -193,7 +193,7 @@ async function importPage(mdFilePath) {
     delete section.type; // Remove the 'type' field
 
     // Convert text fields to blocks
-    ['heading', 'subheading', 'lead', 'body'].forEach((key) => {
+    ['heading', 'subheading', 'lead', 'body', 'reference'].forEach((key) => {
       if (section[key] && typeof section[key] === 'string') {
         section[key] = convertMarkdownToBlocks(section[key]);
       }
