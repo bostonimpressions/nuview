@@ -60,6 +60,20 @@ export default defineType({
       hidden: ({ parent }) => !parent?.image,
     }),
 
+    defineField({
+      name: 'listColumns',
+      title: 'List Layout Columns (for multiple lists)',
+      type: 'number',
+      options: {
+        list: [
+          { title: '1 Column (stacked)', value: 1 },
+          { title: '2 Columns', value: 2 },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 1,
+    }),
+
     // List Section
     defineField({
       name: 'lists',

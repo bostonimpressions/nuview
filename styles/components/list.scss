@@ -86,6 +86,17 @@
     }
   }
 
+  &[data-theme='checks'] {
+    @apply gap-1;
+    .list-item {
+      @apply text-sapphire-500 bg-transparent pl-0;
+    }
+    .list-content {
+      @apply max-w-[320px] lg:max-w-[480px];
+    }
+  }
+
+
   &[data-theme='negatives'] {
     @apply gap-4;
     .list-item {

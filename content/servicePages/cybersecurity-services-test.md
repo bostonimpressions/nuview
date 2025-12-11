@@ -46,7 +46,7 @@ sections:
     body: "We don’t bolt on security—we build it into every operation."
 
   - type: sectionOverview
-    theme: light
+    theme: dark
     heading: "Our Cybersecurity Ecosystem"
     subheading: "Complete, Managed Cybersecurity Coverage"
     body: "nuview’s cybersecurity ecosystem combines technology, process, and people for continuous protection and audit-ready resilience."
@@ -58,4 +58,81 @@ sections:
         items:
           - heading: "24/7 SOC Monitoring"
             body: "Real-time threat detection, triage, and response by certified analysts"
+          - heading: "Managed Detection & Response (MDR/XDR)"
+            body: "AI-driven analytics and proactive threat hunting."
+          - heading: "Vulnerability Management"
+            body: "Continuous scanning, patch validation, and risk scoring."
+          - heading: "Incident Response & Recovery"
+            body: "Containment, remediation, and forensic analysis with rapid restoration."
+          - heading: "Email & Endpoint Protection"
+            body: "Advanced anti-phishing, EDR, and DLP for users and devices."
+          - heading: "Identity & Access Management"
+            body: "MFA, SSO, zero-trust access for hybrid and remote environments."
+          - heading: "Compliance & Governance"
+            body: "CMMC, NIST, HIPAA, and SOC 2 alignment with evidence and audit reporting."
+          - heading: "Security Awareness Training"
+            body: "Ongoing education to strengthen the human layer of defense."
+            
+  - type: sectionBanner
+    theme: light
+    body: "Our 24/7 SOC transforms security data into action—before incidents become impact."
+
+  - type: sectionOverview
+    theme: light
+    heading: "Business Outcomes & Value"
+    subheading: "What You Gain from Integrated Cybersecurity"
+    lists:
+      - theme: checks
+        columns: 3
+        items:
+          - heading: "Resilience"
+            body: "Minimize downtime and loss with proactive defense."
+          - heading: "Compliance Confidence"
+            body: "Continuous alignment to frameworks and audit standards."
+          - heading: "Reduced Risk"
+            body: "Measurable reduction in threats and exposure."
+          - heading: "Visibility"
+            body: "Real-time reporting, dashboards, and strategic insights."
+          - heading: "Executive Strategy"
+            body: "Fractional CISO leadership for governance and maturity."
+
+  - type: sectionBanner
+    theme: medium
+    body: '“nuview doesn’t just monitor threats—they make cybersecurity a business advantage”'
+    reference: "— CIO, Regional Healthcare System"
+
+  - type: sectionOverview
+    theme: light
+    heading: "Why Organizations Choose nuview"
+    subheading: "Security Leadership You Can Rely On"
+    lists:
+      - theme: checks
+        columns: 3
+        items:
+          - heading: "24/7 SOC Protection"
+            body: "Continuous threat detection and response from U.S.-based analysts."
+          - heading: "Integrated Compliance"
+            body: "Security mapped to CMMC, HIPAA, and NIST frameworks."
+          - heading: "Strategic partnership"
+            body: "Fractional CIO/CISO oversight with quarterly governance reviews."
+          - heading: "Proactive Defense"
+            body: "Predictive monitoring and vulnerability management to prevent incidents."
+          - heading: "Enterprise-Grade for All"
+            body: "Scalable programs for SMBs, mid-market, and enterprise environments."
+
+  - type: sectionBanner
+    theme: light
+    body: 'Compliance built in, not bolted on.'
+    
+  - type: sectionCallToAction
+    heading: "Next Step: Protect What Drives Your Business"
+    body: "We’ll evaluate your environment, identify vulnerabilities, and deliver a clear roadmap for resilience, compliance, and operational freedom."
+    link:
+        text: "Schedule a Cybersecurity Assessment"
+        url: "#"
+        
+  - type: sectionBanner
+    theme: light
+    body: 'nuview — your complete IT and cybersecurity partner.'
+
 ---

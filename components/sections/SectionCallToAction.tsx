@@ -10,11 +10,12 @@ interface Link {
 
 interface Props {
   heading: PortableTextBlock[];
+  subheading?: PortableTextBlock[];
   body?: PortableTextBlock[];
   link: Link;
 }
 
-function SectionCallToAction({ heading, body, link }: Props) {
+function SectionCallToAction({ heading, subheading, body, link }: Props) {
   return (
     <section className="bg-white py-12">
       <div className="container mx-auto">
@@ -31,6 +32,12 @@ function SectionCallToAction({ heading, body, link }: Props) {
             <h2 className="text-white mb-0">
               <PortableText value={heading} />
             </h2>
+
+            {subheading && (
+              <div className="text-base text-white">
+                <PortableText value={subheading} />
+              </div>
+            )}
 
             {link && (
               <Link href={link.url} className="btn-primary-white w-fit mx-auto p-3 px-10 md:text-lg">{link.text}</Link>

@@ -14,6 +14,12 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'subheading',
+      title: 'Subheading',
+      type: 'blockContentMinimal',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
