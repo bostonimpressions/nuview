@@ -63,14 +63,14 @@ export default function SectionDetails({
 
           {/* Steps List */}
           {steps && steps.length > 0 && (
-            <div className="px-10 sm:px-14! md:px-20!">
+            <div className="px-10 sm:px-14! md:px-20! pb-20">
               <StepsList items={steps} />
             </div>
           )}
 
           {/* Secondary content row */}
           {secondary && (secondary.heading || secondary.subheading || secondary.body) && (
-            <div className="mt-36 px-10 sm:px-14! md:px-20!">
+            <div className="mt-16 px-10 sm:px-14! md:px-20! pb-20">
               {secondary.heading && <h3 className="font-semibold"><PortableText value={secondary.heading} /></h3>}
               {secondary.subheading && <h4 className="mt-1"><PortableText value={secondary.subheading} /></h4>}
               {secondary.body && <div className="text-perano-500 mt-2"><PortableText value={secondary.body} /></div>}
@@ -79,7 +79,7 @@ export default function SectionDetails({
 
           {/* Stats footer */}
           {stats && stats.length > 0 && (
-            <div className="mt-24 px-10 py-20! sm:px-14! md:px-20! bg-sapphire-500 sm:rounded-xl sm:rounded-t-none">
+            <div className="mt-4 px-10 py-20! sm:px-14! md:px-20! bg-sapphire-500 sm:rounded-xl sm:rounded-t-none">
               <StatsList stats={stats} />
             </div>
           )}

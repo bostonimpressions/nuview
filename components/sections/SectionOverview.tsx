@@ -97,7 +97,7 @@ export default function SectionOverview({
                   src={urlFor(image).url()}
                   alt={`Illustration ${heading ? '- ' + toPlainText(heading) : ''}`}
                   fill
-                  className="h-auto w-full rounded-xl object-cover"
+                  className="h-auto w-full rounded-xl object-contain"
                 />
               </div>
             </div>

@@ -106,12 +106,10 @@
   }
 
   &[data-theme='positives'] {
-    @apply gap-1;
+    @apply gap-4;
     .list-item {
-      @apply text-sapphire-500 bg-transparent pl-0;
-    }
-    .list-content {
-      @apply max-w-[320px] lg:max-w-[480px];
+      background: var(--color-solitude-500);
+      color: var(--color-sapphire-500);
     }
   }
 
