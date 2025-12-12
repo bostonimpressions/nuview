@@ -1,6 +1,6 @@
 'use client';
 
-import { PortableText, toPlainText } from '@portabletext/react';
+import { PortableText } from '@portabletext/react';
 import type { PortableTextBlock } from '@portabletext/types';
 import TextHeading from '@/components/ui/TextHeading';
 import StepsList from '@/components/ui/StepsList';
