@@ -229,7 +229,7 @@ const Header = ({ isScrolled, servicePages, industryPages }: HeaderProps) => {
       })),
     },
     { name: 'About', href: '/about' },
-    { name: 'Blog', href: '/blog' },
+    // { name: 'Blog', href: '/blog' },
   ];
 
   const headerClasses = isScrolled
@@ -309,40 +309,46 @@ const LayoutWrapper = ({ children, servicePages = [], industryPages = [] }: Layo
         <div className="container mx-auto">
           <div className="md:pb-50 justify-between border-b-2 border-dashed border-white/20 pb-20 md:flex">
             <div className="mb-20 grid grid-cols-1 gap-10 md:m-0 md:grid-cols-3 md:gap-20">
-              <div className="grid-col">
-                <h5 className="border-b-5 mb-4 border-white/10 pb-1 text-xl font-semibold text-white/40">
-                  Services
-                </h5>
-                <ul className="flex flex-col gap-4">
-                  {servicePages.map((page) => (
-                    <li key={page.slug}>
-                      <Link href={`/${page.slug}`}>{page.title}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
 
-              <div className="grid-col">
-                <h5 className="border-b-5 mb-4 border-white/10 pb-1 text-xl font-semibold text-white/40">
-                  Industries
-                </h5>
-                <ul className="flex flex-col gap-4">
-                  {industryPages.map((page) => (
-                    <li key={page.slug}>
-                      <Link href={`/${page.slug}`}>{page.title}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              {servicePages.length > 0 && (
+                <div className="grid-col">
+                  <h5 className="border-b-5 mb-4 border-white/10 pb-1 text-xl font-semibold text-white/40">
+                    Services
+                  </h5>
+                  <ul className="flex flex-col gap-4">
+                    {servicePages.map((page) => (
+                      <li key={page.slug}>
+                        <Link href={`/${page.slug}`}>{page.title}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {industryPages.length > 0 && (
+                <div className="grid-col">
+                  <h5 className="border-b-5 mb-4 border-white/10 pb-1 text-xl font-semibold text-white/40">
+                    Industries
+                  </h5>
+                  <ul className="flex flex-col gap-4">
+                    {industryPages.map((page) => (
+                      <li key={page.slug}>
+                        <Link href={`/${page.slug}`}>{page.title}</Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
 
               <div className="grid-col">
                 <ul className="flex flex-col gap-4">
                   <li>
                     <Link href={'/about'}>About</Link>
                   </li>
-                  <li>
-                    <Link href={'/blog'}>Blog</Link>
-                  </li>
+                  {/*<li>*/}
+                  {/*  <Link href={'/blog'}>Blog</Link>*/}
+                  {/*</li>*/}
                   <li>
                     <Link href={'/contact'}>Contact</Link>
                   </li>
