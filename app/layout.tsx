@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { defaultMetadata } from '@/lib/seo';
 
-import { Open_Sans, Share_Tech } from 'next/font/google';
+import { Inter, Share_Tech } from 'next/font/google';
 import '@/styles/globals.css';
 import LayoutWrapper from '@/components/LayoutWrapper';
 import { getServicePages } from '@/lib/getServicePages';
 import { getIndustryPages } from '@/lib/getIndustryPages';
 
-const openSans = Open_Sans({
+const inter = Inter({
   variable: '--font-open-sans',
   subsets: ['latin'],
 });
@@ -30,7 +30,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${openSans.variable} ${shareTech.variable} antialiased`}>
+      <body className={`${inter.variable} ${shareTech.variable} antialiased`}>
         <LayoutWrapper servicePages={servicePages} industryPages={industryPages}>
           {children}
         </LayoutWrapper>

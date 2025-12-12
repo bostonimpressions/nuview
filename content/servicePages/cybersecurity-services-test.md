@@ -124,12 +124,51 @@ sections:
     theme: light
     body: 'Compliance built in, not bolted on.'
     
+  - type: sectionDetails
+    heading: "How We Build Cybersecurity That Scales"
+    subheading: "The nuview Cybersecurity Maturity Path"
+
+    steps:
+      - heading: "Assess"
+        body: "Identify assets, risks, and compliance obligations."
+      - heading: "Align"
+        body: "Map controls to frameworks (CMMC, HIPAA, NIST)."
+      - heading: "Implement"
+        body: "Deploy 24/7 monitoring, endpoint protection, and governance tools."
+      - heading: "Govern"
+        body: "Track KPIs, incidents, and evidence through regular reviews."
+      - heading: "Evolve"
+        body: "Mature your security posture with ongoing optimization and leadership."
+
+    secondary:
+      subheading: "Trusted Across Industries:"
+      body: "Healthcare | Finance | Manufacturing | Education | Defense | Professional Services"
+
+    stats:
+      - heading: "Trusted By"
+        list:
+          - body: "Healthcare, Finance, and Manufacturing firms"
+          - body: "Education, Professional Services, and Nonprofits"
+          - body: "Defense contractors and regulated enterprises"
+
+      - heading: "Key Metrics"
+        list:
+          - heading: "99"
+            label: "%"
+            body: "99.9% uptime across managed environments"
+          - heading: "24/7"
+            body: "24/7 SOC coverage with 15-minute SLA response"
+          - heading: "30"
+            label: "%"
+            body: "30% reduction in incident volume after onboarding"
+
+    
   - type: sectionCallToAction
     heading: "Next Step: Protect What Drives Your Business"
     body: "We’ll evaluate your environment, identify vulnerabilities, and deliver a clear roadmap for resilience, compliance, and operational freedom."
     link:
         text: "Schedule a Cybersecurity Assessment"
-        url: "#"
+        url: "/contact"
         
   - type: sectionBanner
     theme: light

@@ -208,6 +208,88 @@ async function importPage(mdFilePath) {
       section.backgroundImage = await handleImage(section.backgroundImage);
     }
 
+
+    // -------------------------------------------
+// SECTION: sectionDetails
+// -------------------------------------------
+    if (section._type === 'sectionDetails') {
+      //
+      // Convert top-level text fields
+      //
+      ['heading', 'subheading', 'body'].forEach((key) => {
+        if (section[key] && typeof section[key] === 'string') {
+          section[key] = convertMarkdownToBlocks(section[key]);
+        }
+      });
+
+      // -------------------------------------------
+      // STEPS (array of objects)
+      // -------------------------------------------
+      if (Array.isArray(section.steps)) {
+        section.steps = section.steps.map((step) => {
+          step._key = generateKey();
+
+          ['heading', 'subheading', 'body'].forEach((key) => {
+            if (step[key] && typeof step[key] === 'string') {
+              step[key] = convertMarkdownToBlocks(step[key]);
+            }
+          });
+
+          return step;
+        });
+      }
+
+      // -------------------------------------------
+      // SECONDARY CONTENT (single object)
+      // -------------------------------------------
+      if (section.secondary) {
+        section.secondary._key = generateKey();
+
+        ['heading', 'subheading', 'body'].forEach((key) => {
+          if (section.secondary[key] && typeof section.secondary[key] === 'string') {
+            section.secondary[key] = convertMarkdownToBlocks(section.secondary[key]);
+          }
+        });
+      }
+
+      // -------------------------------------------
+      // STATS (array of statRow)
+      // -------------------------------------------
+      if (Array.isArray(section.stats)) {
+        section.stats = section.stats.map((statRow) => {
+          statRow._key = generateKey();
+
+          // Convert statRow heading
+          if (statRow.heading && typeof statRow.heading === 'string') {
+            statRow.heading = convertMarkdownToBlocks(statRow.heading);
+          }
+
+          // -------------------------------------------
+          // statRow.list (array of statItem)
+          // -------------------------------------------
+          if (Array.isArray(statRow.list)) {
+            statRow.list = statRow.list.map((item) => {
+              item._key = generateKey();
+
+              // Convert block fields
+              ['heading', 'subheading', 'body'].forEach((key) => {
+                if (item[key] && typeof item[key] === 'string') {
+                  item[key] = convertMarkdownToBlocks(item[key]);
+                }
+              });
+
+              // label = string (do not convert)
+              return item;
+            });
+          }
+
+          return statRow;
+        });
+      }
+    }
+
+
+
     // Handle CTAs (no _type field needed based on your JSON)
     if (section.cta) {
       ['heading', 'body'].forEach((key) => {

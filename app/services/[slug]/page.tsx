@@ -7,11 +7,8 @@ import SectionBanner from '@/components/sections/SectionBanner';
 import SectionHeroMain from '@/components/sections/SectionHeroMain';
 import SectionHeroSubpage from '@/components/sections/SectionHeroSubpage';
 import SectionOverview from '@/components/sections/SectionOverview';
-import SectionFeatureList from '@/components/sections/SectionFeatureList';
-import SectionFeature from '@/components/sections/SectionFeature';
-import SectionSnapshots from '@/components/sections/SectionSnapshots';
-import SectionComparison from '@/components/sections/SectionComparison';
 import SectionCallToAction from '@/components/sections/SectionCallToAction';
+import SectionDetails from '@/components/sections/SectionDetails';
 
 interface ServicePageProps {
   params: { slug: string } | Promise<{ slug: string }>;
@@ -22,11 +19,8 @@ const sectionComponents: Record<string, React.ComponentType<any>> = {
   sectionHeroMain: SectionHeroMain,
   sectionHeroSubpage: SectionHeroSubpage,
   sectionOverview: SectionOverview,
-  sectionFeatureList: SectionFeatureList,
-  sectionFeature: SectionFeature,
-  sectionSnapshots: SectionSnapshots,
-  sectionComparison: SectionComparison,
   sectionCallToAction: SectionCallToAction,
+  sectionDetails: SectionDetails,
 };
 
 export const revalidate = 0;
