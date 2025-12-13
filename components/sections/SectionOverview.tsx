@@ -20,7 +20,7 @@ interface ListSection {
   heading?: PortableTextBlock[];
   subheading?: PortableTextBlock[];
   body?: PortableTextBlock[];
-  theme?: 'default' | 'cards' | 'cards-white' | 'checks' | 'flags' | 'negatives' | 'positives';
+  theme?: 'default' | 'cards' | 'cards-blue' | 'cards-white' | 'checks' | 'flags' | 'negatives' | 'positives';
   columns?: 1 | 2 | 3;
   items: ListItem[];
 }

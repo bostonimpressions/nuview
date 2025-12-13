@@ -96,6 +96,7 @@ export default defineType({
                 list: [
                   'default',
                   'cards',
+                  'cards-blue',
                   'cards-white',
                   'checks',
                   'flags',

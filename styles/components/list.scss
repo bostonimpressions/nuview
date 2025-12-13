@@ -78,6 +78,14 @@
     }
   }
 
+  &[data-theme='cards-blue'] {
+    @apply gap-4;
+    .list-item {
+      background: var(--color-solitude-500);
+      color: var(--color-sapphire-500);
+    }
+  }
+
   &[data-theme='cards-white'] {
     @apply gap-4;
     .list-item {

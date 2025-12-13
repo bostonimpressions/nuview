@@ -23,6 +23,7 @@ interface ListProps {
     | 'image-only'
     | 'snapshot'
     | 'cards'
+    | 'cards-blue'
     | 'cards-white'
     | 'checks'
     | 'flags'
