@@ -117,9 +117,23 @@ sections:
         impact: |
           Fewer incidents, faster classroom startup, confident recovery posture.
 
+      - heading: |
+          Private School
+        subheading: |
+          Parent Portals & Privacy
+
+        challenge: |
+          Portal access risks, vendor sprawl, inconsistent policies.
+        solution: |
+          SSO/MFA, vendor due diligence, policy program and training.
+
+        impact: |
+          Stronger privacy controls, simplified user experience, audit‑ready evidence.
+
 
   - type: sectionCallToAction
-    heading: "Let’s align your environment to privacy frameworks, protect student data, and support teaching with confidence."
+    heading: "Next Step: Build a Secure, Student‑Centric Environment"
+    subheading: "Let’s align your environment to privacy frameworks, protect student data, and support teaching with confidence."
     body: "We’ll assess your environment, identify gaps, and deliver a clear roadmap to privacy‑aligned security and operational resilience."
     link:
       text: "Schedule an Education IT & Security Assessment"
