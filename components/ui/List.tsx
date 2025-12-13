@@ -66,22 +66,37 @@ export default function List({
   const shouldShowImage = (item: ListItemProps) => {
     if (theme === 'snapshot') return true;
     if (theme === 'flags') return false;
-
-    if (themeAllowsUploaded) {
-      return !!item.icon;
-    }
-
+    if (themeAllowsUploaded) return !!item.icon;
     return !!defaultIcons[theme];
   };
 
   const getImageUrl = (item: ListItemProps, index: number) => {
     if (theme === 'snapshot') return snapshotIcons[index];
-
-    if (themeAllowsUploaded && item.icon) {
-      return urlFor(item.icon).url();
-    }
-
+    if (themeAllowsUploaded && item.icon) return urlFor(item.icon).url();
     return defaultIcons[theme];
+  };
+
+  // ------------------------
+  // PortableText components for styling lists
+  // ------------------------
+  const portableComponents = {
+    // block: {
+    //   normal: ({ children }: any) => <p className="mb-2 ">{children}</p>,
+    // },
+    list: {
+      bullet: ({ children }: any) => (
+        <ul className="list-disc list-outside space-y-2 text-sapphire-500 marker:text-sapphire-500 my-3 pl-4">
+          {children}
+        </ul>
+      ),
+      number: ({ children }: any) => (
+        <ol className="list-decimal list-outside space-y-2 text-sapphire-500 my-3 pl-4">{children}</ol>
+      ),
+    },
+    listItem: {
+      bullet: ({ children }: any) => <li className="pl-2">{children}</li>,
+      number: ({ children }: any) => <li className="pl-2">{children}</li>,
+    },
   };
 
   return (
@@ -107,23 +122,23 @@ export default function List({
               </div>
             )}
 
-            {theme != 'image-only' && (
+            {theme !== 'image-only' && (
               <div className="list-content">
                 {item.heading && (
                   <h4 className="heading">
-                    <PortableText value={item.heading} />
+                    <PortableText value={item.heading} components={portableComponents} />
                   </h4>
                 )}
 
                 {item.subheading && (
                   <h5 className="subheading">
-                    <PortableText value={item.subheading} />
+                    <PortableText value={item.subheading} components={portableComponents} />
                   </h5>
                 )}
 
                 {item.body && (
                   <div>
-                    <PortableText value={item.body} />
+                    <PortableText value={item.body} components={portableComponents} />
                   </div>
                 )}
               </div>

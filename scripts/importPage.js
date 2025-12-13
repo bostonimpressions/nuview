@@ -84,59 +84,71 @@ async function handleImage(imagePath) {
 
 // ------------------------
 // Convert Markdown string to Sanity Portable Text blocks
+// Supports paragraphs, bold text, and bullet lists
 // ------------------------
 function convertMarkdownToBlocks(text) {
   if (!text || typeof text !== 'string') return [];
 
-  // Split into paragraphs
-  const paragraphs = text
-    .split(/\n\n+/)
-    .map((p) => p.trim())
-    .filter((p) => p.length > 0);
+  const lines = text.split('\n');
+  const blocks = [];
+  let currentList = [];
 
-  return paragraphs.map((para) => {
-    const children = [];
+  function flushList() {
+    currentList.forEach(item => blocks.push(item));
+    currentList = [];
+  }
 
-    // Split by bold markers (**text**)
-    const parts = para.split(/(\*\*[^*]+\*\*)/g);
+  lines.forEach((line) => {
+    const trimmed = line.trim();
 
-    parts.forEach((part) => {
-      if (!part) return;
+    // Bullet list item
+    if (/^[-*]\s+/.test(trimmed)) {
+      const content = trimmed.replace(/^[-*]\s+/, '');
+      currentList.push({
+        _type: 'block',
+        _key: generateKey(),
+        style: 'normal',
+        listItem: 'bullet',
+        level: 1,
+        children: [
+          {
+            _type: 'span',
+            _key: generateKey(),
+            text: content,
+            marks: [],
+          },
+        ],
+        markDefs: [],
+      });
+      return;
+    }
 
-      if (part.startsWith('**') && part.endsWith('**')) {
-        // Bold text - add "strong" mark
-        children.push({
-          _key: generateKey(),
-          _type: 'span',
-          text: part.slice(2, -2),
-          marks: ['strong'],
-        });
-      } else if (part.trim()) {
-        // Plain text
-        children.push({
-          _key: generateKey(),
-          _type: 'span',
-          text: part,
-          marks: [],
-        });
-      }
-    });
+    // Empty line ends a list
+    if (trimmed === '') {
+      flushList();
+      return;
+    }
 
-    return {
+    // Normal paragraph
+    flushList();
+    blocks.push({
       _type: 'block',
       _key: generateKey(),
       style: 'normal',
-      children: children.length > 0 ? children : [
+      children: [
         {
-          _key: generateKey(),
           _type: 'span',
-          text: para,
+          _key: generateKey(),
+          text: trimmed,
           marks: [],
         },
       ],
       markDefs: [],
-    };
+    });
   });
+
+  flushList();
+  return blocks;
 }
 
 // ------------------------
@@ -284,6 +296,39 @@ async function importPage(mdFilePath) {
           }
 
           return statRow;
+        });
+      }
+    }
+
+
+    // -------------------------------------------
+// SECTION: sectionSnapshots
+// -------------------------------------------
+    if (section._type === 'sectionSnapshots') {
+      // Convert section heading
+      if (section.heading && typeof section.heading === 'string') {
+        section.heading = convertMarkdownToBlocks(section.heading);
+      }
+
+      // Panels
+      if (Array.isArray(section.panels)) {
+        section.panels = section.panels.map((panel) => {
+          panel._key = generateKey();
+
+          [
+            'heading',
+            'subheading',
+            'body',
+            'challenge',
+            'solution',
+            'impact',
+          ].forEach((key) => {
+            if (panel[key] && typeof panel[key] === 'string') {
+              panel[key] = convertMarkdownToBlocks(panel[key]);
+            }
+          });
+
+          return panel;
         });
       }
     }

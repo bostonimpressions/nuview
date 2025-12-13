@@ -160,6 +160,42 @@ sections:
           - heading: ""
             label: ""
             body: ""
+            
+  - type: sectionSnapshots
+    theme: light
+    heading: ""
+    panels:
+      - heading: |
+          Healthcare Provider
+        subheading: |
+          Mid-size regional network
+        body: |
+          This organization struggled with visibility and compliance consistency across locations.
+
+        challenge: |
+          Fragmented security tooling and no centralized governance.
+
+        solution: |
+          Implemented managed SOC, unified monitoring, and compliance mapping.
+
+        impact: |
+          Reduced incident response time by 40% and improved audit readiness.
+
+      - heading: |
+          Manufacturing Firm
+        subheading: |
+          Multi-site operation
+        body: |
+          Legacy systems with minimal monitoring created operational risk.
+
+        challenge: |
+          No real-time detection or standardized response playbooks.
+
+        solution: |
+          Deployed MDR/XDR and standardized incident workflows.
+
+        impact: |
+          Achieved continuous monitoring and measurable risk reduction.
 
 
   - type: sectionCallToAction

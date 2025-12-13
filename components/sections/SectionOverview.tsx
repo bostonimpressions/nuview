@@ -21,7 +21,7 @@ interface ListSection {
   subheading?: PortableTextBlock[];
   body?: PortableTextBlock[];
   theme?: 'default' | 'cards' | 'cards-blue' | 'cards-white' | 'checks' | 'flags' | 'negatives' | 'positives';
-  columns?: 1 | 2 | 3;
+  columns?: 1 | 2 | 3 | 4;
   items: ListItem[];
 }
 

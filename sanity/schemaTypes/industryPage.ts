@@ -17,6 +17,7 @@ export const industryPage = defineType({
       type: 'industryPage',
       newItemPosition: 'after',
     }),
+
     defineField({
       name: 'title',
       title: 'Title',
@@ -35,8 +36,10 @@ export const industryPage = defineType({
         slugify: (input: string) =>
           input
             .toLowerCase()
+            .trim()
             .replace(/\s+/g, '-')
-            .replace(/[^\w\-]+/g, '')
+            .replace(/[^\w-]+/g, '')
+            .replace(/--+/g, '-')
             .slice(0, 96),
       },
       readOnly: ({ document }) => {
@@ -47,18 +50,31 @@ export const industryPage = defineType({
     }),
 
     defineField({
+      name: 'metaTitle',
+      title: 'Meta Title',
+      type: 'string',
+    }),
+
+    defineField({
+      name: 'metaDescription',
+      title: 'Meta Description',
+      type: 'text',
+      description: 'Used for SEO meta description. Aim for 140–160 characters.',
+      rows: 3,
+      validation: (Rule) =>
+        Rule.max(200).warning('Meta descriptions should be 160 characters or less.'),
+    }),
+
+    defineField({
       name: 'sections',
       title: 'Sections',
       type: 'array',
       of: [
-        { type: 'sectionHeroMain' },
         { type: 'sectionHeroSubpage' },
         { type: 'sectionOverview' },
         { type: 'sectionBanner' },
-        { type: 'sectionFeatureList' },
-        { type: 'sectionFeature' },
+        { type: 'sectionDetails' },
         { type: 'sectionSnapshots' },
-        { type: 'sectionComparison' },
         { type: 'sectionCallToAction' },
       ],
     }),
