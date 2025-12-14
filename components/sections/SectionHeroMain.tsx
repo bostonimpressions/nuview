@@ -15,6 +15,8 @@ interface Button {
 
 interface Slide {
   heading: PortableTextBlock[];
+  subheading?: PortableTextBlock[];
+  lead?: PortableTextBlock[];
   body?: PortableTextBlock[];
   buttons?: Button[];
   theme?: 'default' | 'service';
@@ -159,6 +161,38 @@ export default function SectionHeroMain({ slides }: Props) {
                   }}
                 />
               </TextHeading>
+
+              {slide.subheading && (
+                <PortableText
+                  value={slide.subheading}
+                  components={{
+                    block: {
+                      normal: ({ children }) => <h4 className="text-white">{children}</h4>,
+                    },
+                    marks: {
+                      highlight: ({ children }) => (
+                        <span className="text-highlight">{children}</span>
+                      ),
+                    },
+                  }}
+                />
+              )}
+
+              {slide.lead && (
+                <PortableText
+                  value={slide.lead}
+                  components={{
+                    block: {
+                      normal: ({ children }) => <p className="text-white text-lg font-semibold">{children}</p>,
+                    },
+                    marks: {
+                      highlight: ({ children }) => (
+                        <span className="text-highlight">{children}</span>
+                      ),
+                    },
+                  }}
+                />
+              )}
 
               {slide.body && (
                 <div className="mb-6 max-w-lg">

@@ -21,6 +21,19 @@ export default defineType({
               name: 'heading',
               title: 'Heading',
               type: 'blockContentMinimal',
+              validation: (Rule) => Rule.required(),
+            }),
+
+            defineField({
+              name: 'subheading',
+              title: 'Subheading',
+              type: 'blockContentMinimal',
+            }),
+
+            defineField({
+              name: 'lead',
+              title: 'Lead',
+              type: 'blockContentMinimal',
             }),
 
             // BODY

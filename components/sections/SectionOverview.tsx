@@ -52,7 +52,7 @@ export default function SectionOverview({
                                           body,
                                           image,
                                           imageLayout = 'imgLeft',
-                                          imageGrid = '1/1',
+                                          imageGrid = '3/2',
                                           listColumns = 1,
                                           list,
                                           lists,
@@ -69,16 +69,20 @@ export default function SectionOverview({
   const isImageLeft = imageLayout === 'imgLeft';
 
   const getGridClasses = () => {
+    if (!image) return 'md:grid-cols-[3fr_2fr]'; // default when no image
+
     switch (imageGrid) {
       case '2/3':
         return 'md:grid-cols-[2fr_3fr]';
       case '3/2':
         return 'md:grid-cols-[3fr_2fr]';
       case '1/1':
-      default:
         return 'md:grid-cols-2';
+      default:
+        return 'md:grid-cols-[3fr_2fr]';
     }
   };
+
 
   return (
     <section

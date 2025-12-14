@@ -1,4 +1,3 @@
-// app/[slug]/page.tsx
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { defaultMetadata } from '@/lib/seo';
@@ -14,6 +13,7 @@ import SectionSnapshots from '@/components/sections/SectionSnapshots';
 import SectionComparison from '@/components/sections/SectionComparison';
 import SectionCallToAction from '@/components/sections/SectionCallToAction';
 import SectionDetails from '@/components/sections/SectionDetails';
+import { toPlainText } from '@portabletext/react';
 
 interface PageProps {
   params: { slug: string } | Promise<{ slug: string }>;
@@ -32,14 +32,24 @@ const sectionComponents: Record<string, React.ComponentType<any>> = {
   sectionDetails: SectionDetails,
 };
 
+// Utility: generate safe anchor ID from heading or type
+function generateAnchorId(section: any, index: number) {
+  const title = section?.heading && toPlainText(section.heading[0]);
+  console.log(section)
+  const base = title || section._type || `section-${index}`;
+  return base
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, '-') // spaces → hyphens
+    .replace(/[^\w-]/g, ''); // remove invalid chars
+}
+
 export const revalidate = 0;
 
 export default async function Page(props: PageProps) {
   const params = props.params instanceof Promise ? await props.params : props.params;
 
-  // Map 'home' param to '/' slug in Sanity
   const slug = params.slug === 'home' ? '/' : params.slug;
-
   const page: PageData | null = await getPageData(slug);
 
   if (!page) notFound();
@@ -55,13 +65,24 @@ export default async function Page(props: PageProps) {
           return null;
         }
 
-        return <SectionComponent key={`${_type}-${i}`} {...sectionProps} />;
+        // Generate an anchor ID
+        const anchorId = generateAnchorId(section, i);
+
+        return (
+          <div
+            id={anchorId}
+            key={`${_type}-${i}`}
+            className="scroll-mt-24" // Tailwind: offset scroll for sticky nav (~6rem)
+          >
+            <SectionComponent {...sectionProps} />
+          </div>
+        );
       })}
     </main>
   );
 }
 
-// Generate static params for all pages in Sanity
+// Generate static params for all pages
 export async function generateStaticParams() {
   const slugs = await getAllPageSlugs();
   return slugs.map((slug) => ({
