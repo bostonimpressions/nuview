@@ -1,8 +1,8 @@
-// app/page.tsx
+// app/[slug]/page.tsx
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { defaultMetadata } from '@/lib/seo';
-import { getPageData, PageData } from '@/lib/getPageData';
+import { getPageData, getAllPageSlugs, PageData } from '@/lib/getPageData';
 
 import SectionBanner from '@/components/sections/SectionBanner';
 import SectionHeroMain from '@/components/sections/SectionHeroMain';
@@ -15,7 +15,10 @@ import SectionComparison from '@/components/sections/SectionComparison';
 import SectionCallToAction from '@/components/sections/SectionCallToAction';
 import SectionDetails from '@/components/sections/SectionDetails';
 
-// Map Sanity section types to React components
+interface PageProps {
+  params: { slug: string } | Promise<{ slug: string }>;
+}
+
 const sectionComponents: Record<string, React.ComponentType<any>> = {
   sectionBanner: SectionBanner,
   sectionHeroMain: SectionHeroMain,
@@ -31,9 +34,11 @@ const sectionComponents: Record<string, React.ComponentType<any>> = {
 
 export const revalidate = 0;
 
-export default async function Page() {
-  // Hardcode home page slug
-  const slug = 'home';
+export default async function Page(props: PageProps) {
+  const params = props.params instanceof Promise ? await props.params : props.params;
+
+  // Map 'home' param to '/' slug in Sanity
+  const slug = params.slug === 'home' ? '/' : params.slug;
 
   const page: PageData | null = await getPageData(slug);
 
@@ -56,9 +61,19 @@ export default async function Page() {
   );
 }
 
-// Generate metadata for root page
-export async function generateMetadata(): Promise<Metadata> {
-  const slug = '/';
+// Generate static params for all pages in Sanity
+export async function generateStaticParams() {
+  const slugs = await getAllPageSlugs();
+  return slugs.map((slug) => ({
+    slug: slug === '/' ? 'home' : slug,
+  }));
+}
+
+// Generate metadata
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = props.params instanceof Promise ? await props.params : props.params;
+  const slug = params.slug === 'home' ? '/' : params.slug;
+
   const page: PageData | null = await getPageData(slug);
 
   if (!page) return defaultMetadata;
@@ -72,7 +87,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title,
       description,
-      url: '/',
+      url: `/${slug === '/' ? '' : slug}`,
     },
   };
 }

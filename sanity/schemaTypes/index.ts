@@ -1,5 +1,5 @@
 import { type SchemaTypeDefinition } from 'sanity';
-import page from './page';
+import { page } from './page';
 import { blogPage } from './blogPage';
 import { servicePage } from './servicePage';
 import { industryPage } from './industryPage';
