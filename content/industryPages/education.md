@@ -35,7 +35,7 @@ sections:
             body: "FERPA, COPPA, CIPA, and state privacy requirements."
           - heading: "Device scale"
             body: "1:1 programs, testing devices, and unmanaged endpoints."
-          - heading: "Learning continuity:"
+          - heading: "Learning continuity"
             body: "LMS/SIS performance and resilient recovery."
 
   - type: sectionBanner
@@ -101,7 +101,7 @@ sections:
     
   - type: sectionSnapshots
     theme: light
-    heading: "Client Snapshot"
+    heading: "Client Snapshots"
     panels:
       - heading: |
           K‑12 District

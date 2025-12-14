@@ -318,7 +318,7 @@ const LayoutWrapper = ({ children, servicePages = [], industryPages = [] }: Layo
                   <ul className="flex flex-col gap-4">
                     {servicePages.map((page) => (
                       <li key={page.slug}>
-                        <Link href={`/${page.slug}`}>{page.title}</Link>
+                        <Link href={`/services/${page.slug}`}>{page.title}</Link>
                       </li>
                     ))}
                   </ul>
@@ -333,7 +333,7 @@ const LayoutWrapper = ({ children, servicePages = [], industryPages = [] }: Layo
                   <ul className="flex flex-col gap-4">
                     {industryPages.map((page) => (
                       <li key={page.slug}>
-                        <Link href={`/${page.slug}`}>{page.title}</Link>
+                        <Link href={`/industries/${page.slug}`}>{page.title}</Link>
                       </li>
                     ))}
                   </ul>
