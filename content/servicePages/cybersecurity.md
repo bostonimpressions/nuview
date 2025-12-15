@@ -98,7 +98,7 @@ sections:
 
   - type: sectionBanner
     theme: medium
-    body: '“nuview doesn’t just monitor threats—they make cybersecurity a business advantage”'
+    body: '"nuview doesn’t just monitor threats—they make cybersecurity a business advantage."'
     reference: "— CIO, Regional Healthcare System"
 
   - type: sectionOverview

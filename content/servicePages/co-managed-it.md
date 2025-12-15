@@ -124,7 +124,7 @@ sections:
 
   - type: sectionBanner
     theme: light
-    body: '“Our internal IT team didn’t need replacement—we needed reinforcement. nuview gave us visibility, security, and 24/7 confidence.”'
+    body: '"Our internal IT team didn’t need replacement—we needed reinforcement. nuview gave us visibility, security, and 24/7 confidence."'
     reference: "— IT Director, Healthcare Network"
 
   - type: sectionCallToAction
