@@ -124,13 +124,13 @@ export default function SectionOverview({
 
           {/* Image right */}
           {image && !isImageLeft && (
-            <div className="order-1 md:order-3">
-              <div className="relative aspect-[3/2] h-auto w-full">
+            <div className="order-1 md:order-3 justify-items-center">
+              <div className="relative aspect-[3/2] h-auto w-full max-w-[320px]">
                 <Image
                   src={urlFor(image).url()}
                   alt={`Illustration ${heading ? '- ' + toPlainText(heading) : ''}`}
                   fill
-                  className="h-auto w-full rounded-xl object-cover"
+                  className="h-auto w-full rounded-xl object-contain"
                 />
               </div>
             </div>
@@ -145,7 +145,7 @@ export default function SectionOverview({
             }`}
           >
             {allLists.map((listSection, i) => (
-              <div key={i} className={listSection.heading ? 'mt-20' : 'mt-10'}>
+              <div key={i} className={listSection.heading ? 'mt-10' : 'mt-10'}>
                 {listSection.heading && (
                   <h3>
                     <PortableText value={listSection.heading} />

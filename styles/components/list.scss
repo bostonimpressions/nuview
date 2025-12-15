@@ -82,9 +82,12 @@
   &[data-theme='cards-blue'] {
     @apply gap-4;
     .list-item {
-      @apply items-start;
+      @apply flex-col items-start;
       background: var(--color-solitude-500);
       color: var(--color-sapphire-500);
+    }
+    .icon-wrapper {
+      max-width: 100px;
     }
   }
 

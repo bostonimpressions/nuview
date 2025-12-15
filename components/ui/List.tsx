@@ -61,6 +61,7 @@ export default function List({
     theme === 'default' ||
     theme === 'image-only' ||
     theme === 'cards' ||
+    theme === 'cards-blue' ||
     theme === 'cards-white';
 
   const shouldShowImage = (item: ListItemProps) => {
