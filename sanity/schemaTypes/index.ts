@@ -15,6 +15,7 @@ import sectionSnapshots from './sectionSnapshots';
 import sectionComparison from './sectionComparison';
 import sectionCallToAction from './sectionCallToAction';
 import sectionDetails from './sectionDetails';
+import sectionBody from './sectionBody';
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -34,5 +35,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     sectionComparison,
     sectionCallToAction,
     sectionDetails,
+    sectionBody,
   ],
 };

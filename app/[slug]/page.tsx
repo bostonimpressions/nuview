@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { defaultMetadata } from '@/lib/seo';
+import { toPlainText } from '@portabletext/react';
 import { getPageData, getAllPageSlugs, PageData } from '@/lib/getPageData';
 
 import SectionBanner from '@/components/sections/SectionBanner';
@@ -13,7 +14,7 @@ import SectionSnapshots from '@/components/sections/SectionSnapshots';
 import SectionComparison from '@/components/sections/SectionComparison';
 import SectionCallToAction from '@/components/sections/SectionCallToAction';
 import SectionDetails from '@/components/sections/SectionDetails';
-import { toPlainText } from '@portabletext/react';
+import SectionBody from '@/components/sections/SectionBody';
 
 interface PageProps {
   params: { slug: string } | Promise<{ slug: string }>;
@@ -30,6 +31,7 @@ const sectionComponents: Record<string, React.ComponentType<any>> = {
   sectionComparison: SectionComparison,
   sectionCallToAction: SectionCallToAction,
   sectionDetails: SectionDetails,
+  sectionBody: SectionBody,
 };
 
 // Utility: generate safe anchor ID from heading or type

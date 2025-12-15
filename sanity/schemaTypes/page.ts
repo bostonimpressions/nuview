@@ -81,6 +81,7 @@ export const page = defineType({
         { type: 'sectionSnapshots' },
         { type: 'sectionComparison' },
         { type: 'sectionCallToAction' },
+        { type: 'sectionBody' },
       ],
     }),
   ],

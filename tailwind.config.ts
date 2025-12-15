@@ -21,6 +21,11 @@ const config: Config = {
         biscay: {
           600: '#2b3a4d',
         },
+        magenta: {
+          100: '#F6C3D0',
+          300: '#D05E66',
+          500: '#A4103B',
+        },
       },
     },
   },

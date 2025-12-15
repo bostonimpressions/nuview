@@ -31,9 +31,10 @@ interface Slide {
 
 interface Props {
   slides: Slide[];
+  height: string;
 }
 
-export default function SectionHeroMain({ slides }: Props) {
+export default function SectionHeroMain({ slides, height }: Props) {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -76,7 +77,7 @@ export default function SectionHeroMain({ slides }: Props) {
 
   return (
     <section
-      className="relative min-h-[600px] overflow-hidden py-[20] pb-[40] md:py-[60]"
+      className={`relative ${height ? `min-h-[${height}]` : 'min-h-[600px]'} overflow-hidden py-[20] pb-[40] md:py-[60]`}
       style={{ ...backgroundStyle }}
     >
       <AnimatePresence mode="wait">

@@ -120,6 +120,12 @@ export default defineType({
               },
               hidden: ({ parent }) => parent?.backgroundType !== 'video',
             }),
+
+            defineField({
+              name: 'height',
+              title: 'Height (override the min-height of the Hero )',
+              type: 'string',
+            }),
           ],
 
           // ✅ EDITOR PREVIEW FIX (No more "Untitled Slide")
