@@ -5,8 +5,6 @@ import { defaultMetadata } from '@/lib/seo';
 import { getPageData, PageData } from '@/lib/getPageData';
 
 import ContactForm from '@/components/contact/ContactForm';
-//import ContactDetails from '@/components/contact/ContactDetails';
-
 import SectionBanner from '@/components/sections/SectionBanner';
 import SectionHeroMain from '@/components/sections/SectionHeroMain';
 import SectionOverview from '@/components/sections/SectionOverview';
@@ -23,37 +21,23 @@ export default async function ContactPage() {
 
   return (
     <main className="font-sans">
-      {/* HERO */}
-      {sections.map((section, i) => {
-        if (section._type !== 'sectionHeroMain') return null;
-        return <SectionHeroMain key={`hero-${i}`} {...section} />;
-      })}
+      {sections.map((section, i) =>
+        section._type === 'sectionHeroMain' ? <SectionHeroMain key={`hero-${i}`} {...section} /> : null
+      )}
 
-      {/* CONTACT CONTENT */}
       <section className="relative overflow-hidden bg-white py-12">
         <div className="container">
-          {/*<ContactDetails />*/}
-
-          <ContactForm />
+          <ContactForm /> {/* this component itself can be 'use client' */}
         </div>
       </section>
 
-      {/* REMAINING SECTIONS */}
       {sections.map((section, i) => {
         switch (section._type) {
           case 'sectionBanner':
             return <SectionBanner key={i} {...section} />;
-
           case 'sectionOverview':
             return <SectionOverview key={i} {...section} />;
-
-
-          case 'sectionHeroMain':
-            // already rendered above
-            return null;
-
           default:
-            console.warn(`Unknown section type: ${section._type}`);
             return null;
         }
       })}
@@ -73,10 +57,6 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title,
     description,
-    openGraph: {
-      title,
-      description,
-      url: '/contact',
-    },
+    openGraph: { title, description, url: '/contact' },
   };
 }

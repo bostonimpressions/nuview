@@ -18,6 +18,7 @@
     "@sanity/orderable-document-list": "^1.4.0",
     "@sanity/vision": "^4.15.0",
     "@studio-freight/lenis": "^1.0.42",
+    "botid": "^1.5.10",
     "dotenv": "^17.2.3",
     "framer-motion": "^12.23.24",
     "fs-extra": "^11.3.2",

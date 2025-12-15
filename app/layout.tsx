@@ -1,3 +1,5 @@
+import './botid-client'; // <-- initialize BotID on the client
+
 import type { Metadata } from 'next';
 import { defaultMetadata } from '@/lib/seo';
 
