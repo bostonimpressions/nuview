@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ContactForm(props) {
+function ContactForm() {
   return (
     <div>Contact Form</div>
   );
