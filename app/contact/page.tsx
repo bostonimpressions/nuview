@@ -52,7 +52,7 @@ export default async function ContactPage() {
   return (
     <main className="font-sans">
       {heroMainSection && (
-        <SectionHeroMain {...heroMainSection} height={'auto'} />
+        <SectionHeroMain {...heroMainSection} />
       )}
 
       <section className="relative overflow-hidden py-12 bg-white">

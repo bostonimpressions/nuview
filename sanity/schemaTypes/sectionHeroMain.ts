@@ -122,10 +122,12 @@ export default defineType({
             }),
 
             defineField({
-              name: 'height',
-              title: 'Height (override the min-height of the Hero )',
-              type: 'string',
-            }),
+              name: 'autoHeight',
+              title: 'Auto Height',
+              type: 'boolean',
+              description: 'If true, the Hero section will use height:auto instead of min-height.',
+            })
+
           ],
 
           // ✅ EDITOR PREVIEW FIX (No more "Untitled Slide")

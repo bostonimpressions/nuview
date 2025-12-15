@@ -27,14 +27,14 @@ interface Slide {
       url: string;
     };
   };
+  autoHeight?: boolean;
 }
 
 interface Props {
   slides: Slide[];
-  height: string;
 }
 
-export default function SectionHeroMain({ slides, height }: Props) {
+export default function SectionHeroMain({ slides }: Props) {
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export default function SectionHeroMain({ slides, height }: Props) {
 
   return (
     <section
-      className={`relative ${height ? `min-h-[${height}]` : 'min-h-[600px]'} overflow-hidden py-[20] pb-[40] md:py-[60]`}
+      className={`${slide.autoHeight ? 'h-auto' : 'min-h-[600px]'} relative overflow-hidden py-[20] pb-[40] md:py-[60]`}
       style={{ ...backgroundStyle }}
     >
       <AnimatePresence mode="wait">
