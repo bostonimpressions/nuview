@@ -125,7 +125,7 @@ export default function SectionOverview({
           {/* Image right */}
           {image && !isImageLeft && (
             <div className="order-1 md:order-3 justify-items-center">
-              <div className="relative aspect-[3/2] h-auto w-full max-w-[320px]">
+              <div className="relative aspect-[3/2] h-auto w-full">
                 <Image
                   src={urlFor(image).url()}
                   alt={`Illustration ${heading ? '- ' + toPlainText(heading) : ''}`}
