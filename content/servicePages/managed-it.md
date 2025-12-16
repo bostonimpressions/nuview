@@ -88,8 +88,8 @@ sections:
 
   - type: sectionBanner
     theme: medium
-    body: '"nuview doesn’t just monitor threats—they make cybersecurity a business advantage."'
-    reference: "— CIO, Regional Healthcare System"
+    body: '"Since partnering with nuview, we’ve seen 99.9% uptime and a major drop in user tickets. Their proactive monitoring has completely changed how we think about IT."'
+    reference: "— Operations Director, Manufacturing Client"
 
   - type: sectionOverview
     theme: light
@@ -99,16 +99,16 @@ sections:
       - theme: checks
         columns: 3
         items:
-          - heading: "24/7 SOC Protection"
-            body: "Continuous threat detection and response from U.S.-based analysts."
-          - heading: "Integrated Compliance"
-            body: "Security mapped to CMMC, HIPAA, and NIST frameworks."
-          - heading: "Strategic partnership"
-            body: "Fractional CIO/CISO oversight with quarterly governance reviews."
-          - heading: "Proactive Defense"
-            body: "Predictive monitoring and vulnerability management to prevent incidents."
-          - heading: "Enterprise-Grade for All"
-            body: "Scalable programs for SMBs, mid-market, and enterprise environments."
+          - heading: "Proactive Partnership"
+            body: "Continuous improvement, not break/fix response."
+          - heading: "Integrated Approach"
+            body: "IT, cybersecurity, and compliance unified under one program."
+          - heading: "Executive-Level Strategy"
+            body: "Fractional CIO/CISO leadership for audit-ready performance."
+          - heading: "Trusted by Regulated Industries"
+            body: "CMMC, HIPAA, NIST, and SOC 2-aligned frameworks."
+          - heading: "Built for Scale"
+            body: "Flexible for SMBs, mid-market, and enterprise environments."
 
   - type: sectionBanner
     theme: light

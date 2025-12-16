@@ -53,7 +53,7 @@ export default defineType({
             }),
             defineField({
               name: 'impact',
-              title: 'Impact',
+              title: 'Outcome',
               type: 'blockContent',
             }),
           ],

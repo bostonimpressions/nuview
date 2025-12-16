@@ -72,7 +72,7 @@ function SectionSnapshots({ theme, heading, panels }: Props) {
                 items={[
                   { heading: [{ _type: 'block', style: 'normal', markDefs: [], children: [{ _type: 'span', text: 'Challenge', marks: [] }] }], body: panel.challenge },
                   { heading: [{ _type: 'block', style: 'normal', markDefs: [], children: [{ _type: 'span', text: 'Solution', marks: [] }] }], body: panel.solution },
-                  { heading: [{ _type: 'block', style: 'normal', markDefs: [], children: [{ _type: 'span', text: 'Impact', marks: [] }] }], body: panel.impact },
+                  { heading: [{ _type: 'block', style: 'normal', markDefs: [], children: [{ _type: 'span', text: 'Outcome', marks: [] }] }], body: panel.impact },
                 ]}
               />
             </div>
