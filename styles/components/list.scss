@@ -155,6 +155,10 @@
   &[data-theme='bad'] {
     .list-item {
       color: var(--color-magenta-300);
+
+      .heading {
+        @apply text-magenta-300;
+      }
     }
   }
 
@@ -181,7 +185,7 @@
 }
 
 .heading {
-  @apply mb-2;
+  @apply mb-2 text-nugreen-500;
 }
 
 .subheading {
