@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
 
   try {
     await transporter.sendMail({
-      from: `"NuView Website" <${process.env.SMTP_USER}>`,
+      from: `"NuView Website" <${process.env.CONTACT_EMAIL}>`,
       replyTo: `${name} <${email}>`,
       to: process.env.CONTACT_EMAIL,
       subject: `New Contact Form Submission from ${name}`,
