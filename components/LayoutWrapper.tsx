@@ -395,6 +395,18 @@ const LayoutWrapper = ({ children, servicePages = [], industryPages = [] }: Layo
                 &copy; {new Date().getFullYear()} nuview. All rights reserved.
               </p>
             </div>
+            <ul className="mt-auto flex gap-6 md:gap-12">
+              {/*<li>*/}
+              {/*  <Link href={'/terms'} className="underline">*/}
+              {/*    Terms of Service*/}
+              {/*  </Link>*/}
+              {/*</li>*/}
+              <li>
+                <Link href={'/privacy-policy'} className="underline">
+                  Privacy Policy
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </footer>
