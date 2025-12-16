@@ -29,11 +29,13 @@ export async function POST(req: NextRequest) {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
+    logger: true,
+    debug: true,
   });
 
   try {
     await transporter.sendMail({
-      from: `"NuView Website" <${process.env.CONTACT_EMAIL}>`,
+      from: `"NuView Website" <${process.env.SMTP_USER}>`,
       replyTo: `${name} <${email}>`,
       to: process.env.CONTACT_EMAIL,
       subject: `New Contact Form Submission from ${name}`,
