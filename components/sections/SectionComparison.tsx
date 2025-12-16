@@ -65,7 +65,7 @@ function SectionComparison({ heading, body, nuview, competitor }: Props) {
           {/* Competitor panel */}
           <div className="shadow-lg mb-2">
             {competitor.heading && (
-              <header className="mb-2 pt-5 pb-5 text-center border-magenta-100 border-t-5 border-b-50 min-h-38 content-center">
+              <header className="mb-2 pt-5 pb-5 text-center border-magenta-300 border-t-5 border-b-50 min-h-38 content-center">
                 <h3>
                   <PortableText value={competitor.heading} />
                 </h3>
