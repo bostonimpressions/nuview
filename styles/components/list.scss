@@ -190,3 +190,14 @@
   border-radius: 50px;
   align-self: stretch;
 }
+
+/* theme overrides */
+.midnight {
+  .list {
+    &[data-theme='cards-blue'] {
+      .list-item {
+        @apply text-white border-2 border-perano-500 bg-white/5;
+      }
+    }
+  }
+}

@@ -15,6 +15,7 @@ export default defineType({
         list: [
           { title: 'Light', value: 'light' },
           { title: 'Dark', value: 'dark' },
+          { title: 'Midnight', value: 'midnight' },
         ],
         layout: 'radio',
       },
@@ -32,6 +33,21 @@ export default defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: 'imageRatio',
+      title: 'Image Ratio',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Square', value: 'square' },
+          { title: 'Landscape', value: 'landscape' },
+          { title: 'Portrait', value: 'portrait' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'landscape',
+      hidden: ({ parent }) => !parent?.image,
+    }),
+    defineField({
       name: 'imageLayout',
       title: 'Image Layout',
       type: 'string',
@@ -46,13 +62,15 @@ export default defineType({
     }),
     defineField({
       name: 'imageGrid',
-      title: 'Image Grid',
+      title: 'Layout Grid',
       type: 'string',
       options: {
         list: [
           { title: '1/1 (two equal columns)', value: '1/1' },
           { title: '2/3', value: '2/3' },
           { title: '3/2', value: '3/2' },
+          { title: '1/3', value: '1/3' },
+          { title: '3/1', value: '3/1' },
         ],
         layout: 'radio',
       },

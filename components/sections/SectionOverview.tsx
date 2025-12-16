@@ -37,13 +37,15 @@ interface Props {
   subheading?: PortableTextBlock[];
   body?: PortableTextBlock[];
   image?: SanityImageSource;
+  imageRatio?: 'square' | 'landscape' | 'portrait';
   imageLayout?: 'imgLeft' | 'imgRight';
-  imageGrid?: '1/1' | '2/3' | '3/2';
+  imageGrid?: '1/1' | '2/3' | '3/2' | '1/3' | '3/1';
+
   listColumns?: 1 | 2;
   list?: ListSection;
   lists?: ListSection[];
   cta?: CTA;
-  theme?: 'light' | 'dark';
+  theme?: 'light' | 'dark' | 'midnight';
 }
 
 export default function SectionOverview({
@@ -51,6 +53,7 @@ export default function SectionOverview({
                                           subheading,
                                           body,
                                           image,
+                                          imageRatio = 'landscape',
                                           imageLayout = 'imgLeft',
                                           imageGrid = '3/2',
                                           listColumns = 1,
@@ -68,6 +71,19 @@ export default function SectionOverview({
 
   const isImageLeft = imageLayout === 'imgLeft';
 
+  const getImageAspectClass = () => {
+    switch (imageRatio) {
+      case 'square':
+        return 'aspect-square max-w-[340px]';
+      case 'portrait':
+        return 'aspect-[2/3]';
+      case 'landscape':
+      default:
+        return 'aspect-[3/2]';
+    }
+  };
+
+
   const getGridClasses = () => {
     if (!image) return 'md:grid-cols-[3fr_2fr]'; // default when no image
 
@@ -76,6 +92,10 @@ export default function SectionOverview({
         return 'md:grid-cols-[2fr_3fr]';
       case '3/2':
         return 'md:grid-cols-[3fr_2fr]';
+      case '1/3':
+        return 'md:grid-cols-[1.5fr_3.5fr]';
+      case '3/1':
+        return 'md:grid-cols-[1.5fr_3.5fr]';
       case '1/1':
         return 'md:grid-cols-2';
       default:
@@ -83,12 +103,25 @@ export default function SectionOverview({
     }
   };
 
+  const isMidnight = theme === 'midnight';
+
+  const sectionBgClass =
+    theme === 'dark'
+      ? 'bg-perano-200'
+      : 'bg-white';
+
+  const containerClass = isMidnight
+    ? 'sm:rounded-xl bg-biscay-500 text-white px-10! py-20! md:px-20!'
+    : '';
+
+  const proseClass = isMidnight ? 'prose-invert' : '';
+
 
   return (
     <section
-      className={`relative overflow-hidden py-12 ${theme === 'dark' ? 'bg-perano-200' : 'bg-white'}`}
+      className={`relative overflow-hidden py-12 ${sectionBgClass}`}
     >
-      <div className="container mx-auto px-4">
+      <div className={`container mx-auto px-4 ${containerClass}`}>
         {/* Top grid with image and text */}
         <div
           className={`grid ${getGridClasses()} items-center gap-10`}
@@ -96,7 +129,7 @@ export default function SectionOverview({
           {/* Image left */}
           {image && isImageLeft && (
             <div className="order-1 md:order-1">
-              <div className="relative aspect-[3/2] h-auto w-full">
+              <div className={`relative ${getImageAspectClass()} h-auto w-full`}>
                 <Image
                   src={urlFor(image).url()}
                   alt={`Illustration ${heading ? '- ' + toPlainText(heading) : ''}`}
@@ -108,9 +141,9 @@ export default function SectionOverview({
           )}
 
           {/* Text */}
-          <div className="order-2 md:order-2">
+          <div className={`order-2 md:order-2 ${proseClass}`}>
             {heading && (
-              <TextHeading level="h2">
+              <TextHeading level="h2" color={proseClass}>
                 <PortableText value={heading} />
               </TextHeading>
             )}
@@ -125,7 +158,7 @@ export default function SectionOverview({
           {/* Image right */}
           {image && !isImageLeft && (
             <div className="order-1 md:order-3 justify-items-center">
-              <div className="relative aspect-[3/2] h-auto w-full">
+              <div className={`relative ${getImageAspectClass()} h-auto w-full`}>
                 <Image
                   src={urlFor(image).url()}
                   alt={`Illustration ${heading ? '- ' + toPlainText(heading) : ''}`}
@@ -145,7 +178,10 @@ export default function SectionOverview({
             }`}
           >
             {allLists.map((listSection, i) => (
-              <div key={i} className={listSection.heading ? 'mt-10' : 'mt-10'}>
+              <div
+                key={i}
+                className={`mt-10 ${proseClass} ${theme}`}
+              >
                 {listSection.heading && (
                   <h3>
                     <PortableText value={listSection.heading} />
