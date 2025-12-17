@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { SanityImageSource } from '@sanity/image-url';
 import { urlFor } from '@/sanity/lib/image';
-import TextHeading from '@/components/ui/TextHeading'; // Adjust path to your sanity client
+import TextHeading from '@/components/ui/TextHeading';
+import { usePathname } from 'next/navigation';
 
 interface Button {
   title: string;
@@ -51,6 +52,9 @@ export default function SectionHeroMain({ slides }: Props) {
     }, 6000);
     return () => clearInterval(interval);
   }, [slides.length]);
+
+  const pathname = usePathname();
+  const isHome = pathname === '/';
 
   const slide = slides[current];
 
@@ -184,7 +188,9 @@ export default function SectionHeroMain({ slides }: Props) {
                   value={slide.lead}
                   components={{
                     block: {
-                      normal: ({ children }) => <p className="text-white text-lg font-semibold">{children}</p>,
+                      normal: ({ children }) => (
+                        <p className="text-lg font-semibold text-white">{children}</p>
+                      ),
                     },
                     marks: {
                       highlight: ({ children }) => (
@@ -234,6 +240,14 @@ export default function SectionHeroMain({ slides }: Props) {
                       {btn.title}
                     </a>
                   ))}
+                </div>
+              )}
+
+              {isHome && (
+                <div className="mt-20 flex gap-3 text-lg font-semibold text-perano-500 md:text-3xl">
+                  <span>Secure.</span>
+                  <span>Support.</span>
+                  <span>Empower.</span>
                 </div>
               )}
             </div>
