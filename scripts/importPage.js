@@ -94,7 +94,7 @@ function convertMarkdownToBlocks(text) {
   let currentList = [];
 
   function flushList() {
-    currentList.forEach(item => blocks.push(item));
+    currentList.forEach((item) => blocks.push(item));
     currentList = [];
   }
 
@@ -185,8 +185,21 @@ async function importPage(mdFilePath) {
   const pageType = data.pageType || 'page';
   console.log(`📝 Page type: ${pageType}`);
 
-  // Get the next orderRank
-  const orderRank = await getLastOrderRank(pageType);
+  // -------------------------------------------
+  // Find existing page by slug + type
+  // -------------------------------------------
+  const existing = await client.fetch(
+    `*[_type == $type && slug.current == $slug][0]{ _id, orderRank }`,
+    {
+      type: pageType,
+      slug: data.slug,
+    }
+  );
+
+  // Preserve orderRank if page exists
+  const orderRank = existing?.orderRank || (await getLastOrderRank(pageType));
+
+  console.log(existing ? `♻️  Overwriting existing page: ${existing._id}` : `🆕 Creating new page`);
   console.log(`📊 Setting orderRank: ${orderRank}`);
 
   if (!data.sections) {
@@ -220,10 +233,9 @@ async function importPage(mdFilePath) {
       section.backgroundImage = await handleImage(section.backgroundImage);
     }
 
-
     // -------------------------------------------
-// SECTION: sectionDetails
-// -------------------------------------------
+    // SECTION: sectionDetails
+    // -------------------------------------------
     if (section._type === 'sectionDetails') {
       //
       // Convert top-level text fields
@@ -300,10 +312,9 @@ async function importPage(mdFilePath) {
       }
     }
 
-
     // -------------------------------------------
-// SECTION: sectionSnapshots
-// -------------------------------------------
+    // SECTION: sectionSnapshots
+    // -------------------------------------------
     if (section._type === 'sectionSnapshots') {
       // Convert section heading
       if (section.heading && typeof section.heading === 'string') {
@@ -315,14 +326,7 @@ async function importPage(mdFilePath) {
         section.panels = section.panels.map((panel) => {
           panel._key = generateKey();
 
-          [
-            'heading',
-            'subheading',
-            'body',
-            'challenge',
-            'solution',
-            'impact',
-          ].forEach((key) => {
+          ['heading', 'subheading', 'body', 'challenge', 'solution', 'impact'].forEach((key) => {
             if (panel[key] && typeof panel[key] === 'string') {
               panel[key] = convertMarkdownToBlocks(panel[key]);
             }
@@ -332,8 +336,6 @@ async function importPage(mdFilePath) {
         });
       }
     }
-
-
 
     // Handle CTAs (no _type field needed based on your JSON)
     if (section.cta) {
@@ -375,7 +377,7 @@ async function importPage(mdFilePath) {
     }
   }
 
-  const safeId = `${data.slug}-import`;
+  const safeId = existing?._id || `${data.slug}-import`;
 
   const doc = {
     _id: safeId,
