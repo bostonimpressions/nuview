@@ -38,35 +38,34 @@
       color: var(--color-sapphire-500);
     }
     .list-content {
-      @apply max-w-[400px]
+      @apply max-w-[400px];
     }
   }
 
   &[data-theme='image-only'] {
     @apply gap-8 md:gap-4;
     .list-item {
-      @apply p-0 overflow-hidden;
+      @apply overflow-hidden p-0;
     }
 
     .icon-wrapper {
       @apply aspect-3/2 max-w-[200px] md:max-w-[140px] lg:max-w-[200px];
-
     }
   }
 
   &[data-theme='snapshot'] {
     @apply gap-8 md:justify-self-end;
     .list-item {
-      @apply p-0 max-w-[480px];
+      @apply max-w-[480px] p-0;
       color: var(--color-sapphire-500);
 
       .heading {
-        @apply text-nugreen-500 font-bold;
+        @apply font-bold;
       }
     }
 
     .icon-wrapper {
-      @apply rounded-2xl bg-sapphire-500 max-w-16 md:max-w-[100px];
+      @apply max-w-16 rounded-2xl bg-sapphire-500 md:max-w-[100px];
       img {
         @apply relative p-3 md:p-4;
       }
@@ -107,13 +106,12 @@
   &[data-theme='checks'] {
     @apply gap-1;
     .list-item {
-      @apply text-sapphire-500 bg-transparent pl-0;
+      @apply bg-transparent pl-0 text-sapphire-500;
     }
     .list-content {
       @apply max-w-[320px] lg:max-w-[480px];
     }
   }
-
 
   &[data-theme='negatives'] {
     @apply gap-4;
@@ -134,7 +132,7 @@
   &[data-theme='flags'] {
     @apply gap-12;
     .list-item {
-      @apply text-sapphire-700 items-start gap-8 bg-transparent p-0;
+      @apply items-start gap-8 bg-transparent p-0 text-sapphire-700;
     }
   }
 
@@ -142,7 +140,7 @@
   &[data-theme='bad'] {
     @apply gap-4;
     .list-item {
-      @apply p-0 pt-2 pb-2;
+      @apply p-0 pb-2 pt-2;
     }
   }
 
@@ -171,7 +169,7 @@
   &.compact {
     @apply gap-4;
     .list-item {
-      @apply p-0 bg-transparent border-0;
+      @apply border-0 bg-transparent p-0;
     }
   }
 }
@@ -181,7 +179,7 @@
 }
 
 .list-content {
-  @apply flex-1 max-w-[480px];
+  @apply max-w-[480px] flex-1;
 }
 
 .heading {
@@ -204,7 +202,7 @@
   .list {
     &[data-theme='cards-blue'] {
       .list-item {
-        @apply text-white border-2 border-perano-500 bg-white/5;
+        @apply border-2 border-perano-500 bg-white/5 text-white;
       }
     }
   }
