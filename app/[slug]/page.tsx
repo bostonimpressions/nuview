@@ -37,7 +37,6 @@ const sectionComponents: Record<string, React.ComponentType<any>> = {
 // Utility: generate safe anchor ID from heading or type
 function generateAnchorId(section: any, index: number) {
   const title = section?.heading && toPlainText(section.heading[0]);
-  console.log(section)
   const base = title || section._type || `section-${index}`;
   return base
     .toString()

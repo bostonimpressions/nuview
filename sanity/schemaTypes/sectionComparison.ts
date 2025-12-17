@@ -6,7 +6,6 @@ export default defineType({
   title: 'Comparison Section',
   type: 'object',
   fields: [
-
     defineField({
       name: 'heading',
       title: 'Heading',
@@ -14,10 +13,10 @@ export default defineType({
     }),
     defineField({ name: 'body', title: 'Body', type: 'blockContent' }),
 
-    // nuview Features
+    // NuView Features
     defineField({
       name: 'nuview',
-      title: 'nuview Panel',
+      title: 'NuView Panel',
       type: 'object',
       fields: [
         {
@@ -29,17 +28,13 @@ export default defineType({
               name: 'item',
               title: 'Item',
               type: 'object',
-              fields: [
-                { name: 'heading', title: 'Heading', type: 'blockContentMinimal' },
-              ],
+              fields: [{ name: 'heading', title: 'Heading', type: 'blockContentMinimal' }],
               preview: {
                 select: {
                   titleHeading: 'heading',
                 },
                 prepare({ titleHeading }) {
-                  const title =
-                    (titleHeading && toPlainText(titleHeading)) ||
-                    'List item';
+                  const title = (titleHeading && toPlainText(titleHeading)) || 'List item';
 
                   return {
                     title,
@@ -52,7 +47,6 @@ export default defineType({
         },
       ],
     }),
-
 
     // competitor
     defineField({
@@ -89,17 +83,13 @@ export default defineType({
               name: 'item',
               title: 'Item',
               type: 'object',
-              fields: [
-                { name: 'heading', title: 'Heading', type: 'blockContentMinimal' },
-              ],
+              fields: [{ name: 'heading', title: 'Heading', type: 'blockContentMinimal' }],
               preview: {
                 select: {
                   titleHeading: 'heading',
                 },
                 prepare({ titleHeading }) {
-                  const title =
-                    (titleHeading && toPlainText(titleHeading)) ||
-                    'List item';
+                  const title = (titleHeading && toPlainText(titleHeading)) || 'List item';
 
                   return {
                     title,

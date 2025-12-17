@@ -6,19 +6,13 @@ export async function POST(req: NextRequest) {
   // Server-side BotID check
   const verification = await checkBotId();
   if (verification.isBot) {
-    return NextResponse.json(
-      { error: 'Bot detected. Access denied.' },
-      { status: 403 }
-    );
+    return NextResponse.json({ error: 'Bot detected. Access denied.' }, { status: 403 });
   }
 
   const { name, email, message } = await req.json();
 
   if (!name || !email || !message) {
-    return NextResponse.json(
-      { error: 'Please fill in all fields.' },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: 'Please fill in all fields.' }, { status: 400 });
   }
 
   const transporter = nodemailer.createTransport({
@@ -58,9 +52,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('Email error:', err);
-    return NextResponse.json(
-      { error: 'Failed to send message.' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Failed to send message.' }, { status: 500 });
   }
 }

@@ -34,7 +34,6 @@ interface LayoutWrapperProps {
   industryPages?: Array<{ title: string; slug: string }>;
 }
 
-
 const Menu = (props: SVGIconProps) => (
   <svg
     {...props}
@@ -93,20 +92,19 @@ const useScrollEffect = (threshold: number = 400): boolean => {
 
 // Dropdown menu component
 const DropdownMenu = ({
-                        items,
-                        isScrolled,
-                        isMobile = false,
-                        onLinkClick,
-                      }: {
+  items,
+  isScrolled,
+  isMobile = false,
+  onLinkClick,
+}: {
   items: NavListItem[];
   isScrolled: boolean;
   isMobile?: boolean;
   onLinkClick?: LinkClickHandler;
 }) => {
-
   if (isMobile) {
     return (
-      <div className="ml-4 space-y-1 border-l-2 border-blue-100 pl-4 py-2">
+      <div className="ml-4 space-y-1 border-l-2 border-blue-100 py-2 pl-4">
         {items.map((subItem) => (
           <Link
             key={subItem.href}
@@ -122,13 +120,13 @@ const DropdownMenu = ({
   }
 
   return (
-    <div className="absolute left-0 top-full pt-2 z-50">
-      <div className="min-w-[280px] w-max max-w-xs rounded-xl bg-white py-2 shadow-2xl ring-1 ring-gray-900/5">
+    <div className="absolute left-0 top-full z-50 pt-2">
+      <div className="w-max min-w-[280px] max-w-xs rounded-xl bg-white py-2 shadow-2xl ring-1 ring-gray-900/5">
         {items.map((subItem) => (
           <Link
             key={subItem.href}
             href={subItem.href}
-            className="block px-4 py-2.5 text-sm font-medium text-gray-700 transition-all hover:bg-blue-50 hover:text-blue-600 hover:pl-5"
+            className="block px-4 py-2.5 text-sm font-medium text-gray-700 transition-all hover:bg-blue-50 hover:pl-5 hover:text-blue-600"
           >
             {subItem.name}
           </Link>
@@ -301,7 +299,7 @@ const Header = ({ isScrolled, servicePages, industryPages }: HeaderProps) => {
                 onClick={handleLinkClick}
               />
             ))}
-            <Link href="/contact" onClick={handleLinkClick} className="block mt-4">
+            <Link href="/contact" onClick={handleLinkClick} className="mt-4 block">
               <button className="w-full rounded-lg bg-blue-600 px-4 py-3 text-base font-semibold text-white transition duration-150 hover:bg-blue-700">
                 Contact
               </button>
@@ -377,7 +375,7 @@ const LayoutWrapper = ({ children, servicePages = [], industryPages = [] }: Layo
                   href="https://www.linkedin.com/company/nuview-it/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-nugreen-500 transition hover:text-nugreen-600"
+                  className="text-nugreen-500 hover:text-nugreen-600 transition"
                   aria-label="LinkedIn"
                 >
                   <FaLinkedin size={30} />
@@ -389,10 +387,10 @@ const LayoutWrapper = ({ children, servicePages = [], industryPages = [] }: Layo
           <div className="flex flex-col justify-between py-10 md:flex-row">
             <div>
               <div className="pb-5">
-                <Image src="/logo-white.png" alt="nuview" width={140} height={40} />
+                <Image src="/logo-white.png" alt="NuView" width={140} height={40} />
               </div>
               <p className="text-sm opacity-80">
-                &copy; {new Date().getFullYear()} nuview. All rights reserved.
+                &copy; {new Date().getFullYear()} NuView. All rights reserved.
               </p>
             </div>
             <ul className="mt-auto flex gap-6 md:gap-12">
@@ -410,7 +408,6 @@ const LayoutWrapper = ({ children, servicePages = [], industryPages = [] }: Layo
           </div>
         </div>
       </footer>
-
     </div>
   );
 };
