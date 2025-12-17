@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation';
 import { defaultMetadata } from '@/lib/seo';
 import { getPageData, PageData } from '@/lib/getPageData';
 
-import ContactForm from '@/components/contact/ContactForm';
+import ContactTabs from '@/components/contact/ContactTabs';
 import SectionBanner from '@/components/sections/SectionBanner';
 import SectionHeroMain from '@/components/sections/SectionHeroMain';
 import SectionOverview from '@/components/sections/SectionOverview';
@@ -22,12 +22,14 @@ export default async function ContactPage() {
   return (
     <main className="font-sans">
       {sections.map((section, i) =>
-        section._type === 'sectionHeroMain' ? <SectionHeroMain key={`hero-${i}`} {...section} /> : null
+        section._type === 'sectionHeroMain' ? (
+          <SectionHeroMain key={`hero-${i}`} {...section} />
+        ) : null
       )}
 
       <section className="relative overflow-hidden bg-white py-12">
         <div className="container">
-          <ContactForm /> {/* this component itself can be 'use client' */}
+          <ContactTabs />
         </div>
       </section>
 
