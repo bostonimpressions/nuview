@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { SanityImageSource } from '@sanity/image-url';
 import { urlFor } from '@/sanity/lib/image';
 import type { PortableTextBlock } from '@portabletext/types';
+import AnimatedElement from '@/components/AnimatedElement';
 
 interface ListItemProps {
   heading?: PortableTextBlock[];
@@ -108,9 +109,18 @@ export default function List({
     >
       {items.map((item, i) => {
         const src = getImageUrl(item, i);
+        // Alternate animations: even items from left, odd items from right
+        const animation = i % 2 === 0 ? 'fadeLeft' : 'fadeRight';
 
         return (
-          <li key={i} className="list-item">
+          <AnimatedElement
+            key={i}
+            as="li"
+            animation={animation}
+            delay={i * 0.1}
+            duration={0.5}
+            className="list-item"
+          >
             {theme === 'flags' && <span className="flag-bar" />}
 
             {shouldShowImage(item) && src && (
@@ -144,7 +154,7 @@ export default function List({
                 )}
               </div>
             )}
-          </li>
+          </AnimatedElement>
         );
       })}
     </ul>

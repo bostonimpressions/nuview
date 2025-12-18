@@ -22,7 +22,6 @@ export default function SectionBody({ body, theme = 'light' }: Props) {
     >
       <div className="container mx-auto px-4">
         <PortableText value={body} />
-
       </div>
     </section>
   );

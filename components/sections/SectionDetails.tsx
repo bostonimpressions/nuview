@@ -5,6 +5,7 @@ import type { PortableTextBlock } from '@portabletext/types';
 import TextHeading from '@/components/ui/TextHeading';
 import StepsList from '@/components/ui/StepsList';
 import StatsList from '@/components/ui/StatsList';
+import AnimatedElement from '@/components/AnimatedElement';
 import React from 'react';
 
 interface StepItem {
@@ -56,9 +57,27 @@ export default function SectionDetails({
 
           {/* Top heading/subheading/body */}
           <div className="mb-12 px-10 py-10! md:pt-20! sm:px-14! md:px-20!">
-            {heading && <TextHeading level="h2" color={'text-white'}><PortableText value={heading} /></TextHeading>}
-            {subheading && <h3 className="mt-2"><PortableText value={subheading} /></h3>}
-            {body && <div className="mt-2"><PortableText value={body} /></div>}
+            {heading && (
+              <AnimatedElement animation="fade" delay={0}>
+                <TextHeading level="h2" color={'text-white'}>
+                  <PortableText value={heading} />
+                </TextHeading>
+              </AnimatedElement>
+            )}
+            {subheading && (
+              <AnimatedElement animation="fadeLeft" delay={0.1}>
+                <h3 className="mt-2">
+                  <PortableText value={subheading} />
+                </h3>
+              </AnimatedElement>
+            )}
+            {body && (
+              <AnimatedElement animation="fadeLeft" delay={0.2}>
+                <div className="mt-2">
+                  <PortableText value={body} />
+                </div>
+              </AnimatedElement>
+            )}
           </div>
 
           {/* Steps List */}
@@ -71,9 +90,27 @@ export default function SectionDetails({
           {/* Secondary content row */}
           {secondary && (secondary.heading || secondary.subheading || secondary.body) && (
             <div className="mt-16 px-10 sm:px-14! md:px-20! pb-20">
-              {secondary.heading && <h3 className="font-semibold"><PortableText value={secondary.heading} /></h3>}
-              {secondary.subheading && <h4 className="mt-1"><PortableText value={secondary.subheading} /></h4>}
-              {secondary.body && <div className="text-perano-500 mt-2"><PortableText value={secondary.body} /></div>}
+              {secondary.heading && (
+                <AnimatedElement animation="fade" delay={0}>
+                  <h3 className="font-semibold">
+                    <PortableText value={secondary.heading} />
+                  </h3>
+                </AnimatedElement>
+              )}
+              {secondary.subheading && (
+                <AnimatedElement animation="fadeRight" delay={0.1}>
+                  <h4 className="mt-1">
+                    <PortableText value={secondary.subheading} />
+                  </h4>
+                </AnimatedElement>
+              )}
+              {secondary.body && (
+                <AnimatedElement animation="fadeRight" delay={0.2}>
+                  <div className="text-perano-500 mt-2">
+                    <PortableText value={secondary.body} />
+                  </div>
+                </AnimatedElement>
+              )}
             </div>
           )}
 

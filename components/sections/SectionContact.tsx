@@ -2,12 +2,14 @@
 
 import TextHeading from '@/components/ui/TextHeading';
 import React from 'react';
+import AnimatedSection from '@/components/AnimatedSection';
 
 
 export default function SectionContact() {
 
   return (
-    <section
+    <AnimatedSection
+      animation="fade"
       className={`relative overflow-hidden py-12 bg-white`}
     >
 
@@ -43,6 +45,6 @@ export default function SectionContact() {
 
 
       </div>
-    </section>
+    </AnimatedSection>
   );
 }

@@ -5,6 +5,7 @@ import type { PortableTextBlock } from '@portabletext/types';
 import { SanityImageSource } from '@sanity/image-url';
 import List from '@/components/ui/List';
 import TextHeading from '@/components/ui/TextHeading';
+import AnimatedElement from '@/components/AnimatedElement';
 import React from 'react';
 
 interface ListItem {
@@ -36,16 +37,24 @@ export default function SectionFeatureList({ heading, subheading, body, list, th
       <div className="container mx-auto px-4">
         <div className="pb-10 max-w-xl">
           {heading && (
-            <TextHeading level={'h2'}>
-              <PortableText value={heading} />
-            </TextHeading>
+            <AnimatedElement animation="fade" delay={0}>
+              <TextHeading level={'h2'}>
+                <PortableText value={heading} />
+              </TextHeading>
+            </AnimatedElement>
           )}
           {subheading && (
-            <h4>
-              <PortableText value={subheading} />
-            </h4>
+            <AnimatedElement animation="fadeLeft" delay={0.1}>
+              <h4>
+                <PortableText value={subheading} />
+              </h4>
+            </AnimatedElement>
           )}
-          {body && <PortableText value={body} />}
+          {body && (
+            <AnimatedElement animation="fadeLeft" delay={0.2}>
+              <PortableText value={body} />
+            </AnimatedElement>
+          )}
         </div>
 
         {/* List Section */}

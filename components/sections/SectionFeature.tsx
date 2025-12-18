@@ -7,6 +7,7 @@ import { SanityImageSource } from '@sanity/image-url';
 import { urlFor } from '@/sanity/lib/image';
 import List from '@/components/ui/List';
 import TextHeading from '@/components/ui/TextHeading';
+import AnimatedElement from '@/components/AnimatedElement';
 import React from 'react';
 
 interface ListItem {
@@ -51,7 +52,7 @@ export default function SectionFeature({
         <div className="grid grid-cols-1 items-center gap-20 md:grid-cols-2">
           {/* Image Column */}
           {image && isImageLeft && (
-            <div className="order-1 md:order-1">
+            <AnimatedElement animation="fadeRight" delay={0} className="order-1 md:order-1">
               <div className="relative aspect-square h-auto w-full">
                 <Image
                   src={urlFor(image).url()}
@@ -60,22 +61,30 @@ export default function SectionFeature({
                   className="h-auto w-full rounded-xl object-cover"
                 />
               </div>
-            </div>
+            </AnimatedElement>
           )}
 
           {/* Text Column */}
           <div className="order-2 md:order-2">
             {heading && (
-              <TextHeading level={'h2'}>
-                <PortableText value={heading} />
-              </TextHeading>
+              <AnimatedElement animation="fade" delay={0.1}>
+                <TextHeading level={'h2'}>
+                  <PortableText value={heading} />
+                </TextHeading>
+              </AnimatedElement>
             )}
             {subheading && (
-              <h4>
-                <PortableText value={subheading} />
-              </h4>
+              <AnimatedElement animation={isImageLeft ? 'fadeLeft' : 'fadeRight'} delay={0.2}>
+                <h4>
+                  <PortableText value={subheading} />
+                </h4>
+              </AnimatedElement>
             )}
-            {body && <PortableText value={body} />}
+            {body && (
+              <AnimatedElement animation={isImageLeft ? 'fadeLeft' : 'fadeRight'} delay={0.3}>
+                <PortableText value={body} />
+              </AnimatedElement>
+            )}
 
             {/* List Section */}
             {list?.items && list.items.length > 0 && (
@@ -85,7 +94,7 @@ export default function SectionFeature({
 
           {/* Image Column on right */}
           {image && !isImageLeft && (
-            <div className="order-1 md:order-3">
+            <AnimatedElement animation="fadeLeft" delay={0} className="order-1 md:order-3">
               <div className="relative aspect-square h-auto w-full">
                 <Image
                   src={urlFor(image).url()}
@@ -94,7 +103,7 @@ export default function SectionFeature({
                   className="h-auto w-full rounded-xl object-cover"
                 />
               </div>
-            </div>
+            </AnimatedElement>
           )}
         </div>
       </div>
