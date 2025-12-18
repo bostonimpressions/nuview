@@ -43,7 +43,7 @@ export default function StatsList({ stats }: StatsListProps) {
             <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-14 p-4 relative">
               {row.list.map((item, j) => {
                 // Alternate stat items: left, up, right pattern
-                const animations = ['fadeLeft', 'fadeUp', 'fadeRight'];
+                const animations = ['fadeLeft', 'fadeUp', 'fadeRight'] as const;
                 const animation = animations[j % 3];
                 
                 return (
