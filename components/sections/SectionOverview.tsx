@@ -7,6 +7,7 @@ import { SanityImageSource } from '@sanity/image-url';
 import { urlFor } from '@/sanity/lib/image';
 import List from '@/components/ui/List';
 import TextHeading from '@/components/ui/TextHeading';
+import AnimatedElement from '@/components/AnimatedElement';
 import React from 'react';
 
 interface ListItem {
@@ -20,7 +21,15 @@ interface ListSection {
   heading?: PortableTextBlock[];
   subheading?: PortableTextBlock[];
   body?: PortableTextBlock[];
-  theme?: 'default' | 'cards' | 'cards-blue' | 'cards-white' | 'checks' | 'flags' | 'negatives' | 'positives';
+  theme?:
+    | 'default'
+    | 'cards'
+    | 'cards-blue'
+    | 'cards-white'
+    | 'checks'
+    | 'flags'
+    | 'negatives'
+    | 'positives';
   columns?: 1 | 2 | 3 | 4;
   items: ListItem[];
 }
@@ -49,25 +58,21 @@ interface Props {
 }
 
 export default function SectionOverview({
-                                          heading,
-                                          subheading,
-                                          body,
-                                          image,
-                                          imageRatio = 'landscape',
-                                          imageLayout = 'imgLeft',
-                                          imageGrid = '3/2',
-                                          listColumns = 1,
-                                          list,
-                                          lists,
-                                          cta,
-                                          theme = 'light',
-                                        }: Props) {
+  heading,
+  subheading,
+  body,
+  image,
+  imageRatio = 'landscape',
+  imageLayout = 'imgLeft',
+  imageGrid = '3/2',
+  listColumns = 1,
+  list,
+  lists,
+  cta,
+  theme = 'light',
+}: Props) {
   // Combine legacy list with new lists array for backwards compatibility
-  const allLists: ListSection[] = lists?.length
-    ? lists
-    : list
-      ? [list]
-      : [];
+  const allLists: ListSection[] = lists?.length ? lists : list ? [list] : [];
 
   const isImageLeft = imageLayout === 'imgLeft';
 
@@ -82,7 +87,6 @@ export default function SectionOverview({
         return 'aspect-[3/2]';
     }
   };
-
 
   const getGridClasses = () => {
     if (!image) return 'md:grid-cols-[3fr_2fr]'; // default when no image
@@ -105,10 +109,7 @@ export default function SectionOverview({
 
   const isMidnight = theme === 'midnight';
 
-  const sectionBgClass =
-    theme === 'dark'
-      ? 'bg-perano-200'
-      : 'bg-white';
+  const sectionBgClass = theme === 'dark' ? 'bg-perano-200' : 'bg-white';
 
   const containerClass = isMidnight
     ? 'sm:rounded-xl bg-biscay-500 text-white px-10! py-20! md:px-20!'
@@ -116,19 +117,14 @@ export default function SectionOverview({
 
   const proseClass = isMidnight ? 'prose-invert' : '';
 
-
   return (
-    <section
-      className={`relative overflow-hidden py-12 ${sectionBgClass}`}
-    >
+    <section className={`relative overflow-hidden py-12 ${sectionBgClass}`}>
       <div className={`container mx-auto px-4 ${containerClass}`}>
         {/* Top grid with image and text */}
-        <div
-          className={`grid ${getGridClasses()} items-center gap-10`}
-        >
+        <div className={`grid ${getGridClasses()} items-center gap-10`}>
           {/* Image left */}
           {image && isImageLeft && (
-            <div className="order-1 md:order-1">
+            <AnimatedElement animation="fadeRight" delay={0} className="order-1 md:order-1">
               <div className={`relative ${getImageAspectClass()} h-auto w-full`}>
                 <Image
                   src={urlFor(image).url()}
@@ -137,27 +133,39 @@ export default function SectionOverview({
                   className="h-auto w-full rounded-xl object-contain"
                 />
               </div>
-            </div>
+            </AnimatedElement>
           )}
 
           {/* Text */}
           <div className={`order-2 md:order-2 ${proseClass}`}>
             {heading && (
-              <TextHeading level="h2" color={proseClass}>
-                <PortableText value={heading} />
-              </TextHeading>
+              <AnimatedElement animation="fadeUp" delay={0.1}>
+                <TextHeading level="h2" color={proseClass}>
+                  <PortableText value={heading} />
+                </TextHeading>
+              </AnimatedElement>
             )}
             {subheading && (
-              <h4>
-                <PortableText value={subheading} />
-              </h4>
+              <AnimatedElement animation="fadeUp" delay={0.2}>
+                <h4>
+                  <PortableText value={subheading} />
+                </h4>
+              </AnimatedElement>
             )}
-            {body && <PortableText value={body} />}
+            {body && (
+              <AnimatedElement animation="fadeUp" delay={0.3}>
+                <PortableText value={body} />
+              </AnimatedElement>
+            )}
           </div>
 
           {/* Image right */}
           {image && !isImageLeft && (
-            <div className="order-1 md:order-3 justify-items-center">
+            <AnimatedElement
+              animation="fadeLeft"
+              delay={0}
+              className="order-1 justify-items-center md:order-3"
+            >
               <div className={`relative ${getImageAspectClass()} h-auto w-full`}>
                 <Image
                   src={urlFor(image).url()}
@@ -166,36 +174,35 @@ export default function SectionOverview({
                   className="h-auto w-full rounded-xl object-contain"
                 />
               </div>
-            </div>
+            </AnimatedElement>
           )}
         </div>
 
         {/* Lists */}
         {allLists.length > 0 && (
-          <div
-            className={`grid gap-10 ${
-              listColumns === 2 ? 'md:grid-cols-2' : 'md:grid-cols-1'
-            }`}
-          >
+          <div className={`grid gap-10 ${listColumns === 2 ? 'md:grid-cols-2' : 'md:grid-cols-1'}`}>
             {allLists.map((listSection, i) => (
-              <div
-                key={i}
-                className={`mt-10 ${proseClass} ${theme}`}
-              >
+              <div key={i} className={`mt-10 ${proseClass} ${theme}`}>
                 {listSection.heading && (
-                  <h3>
-                    <PortableText value={listSection.heading} />
-                  </h3>
+                  <AnimatedElement animation="fadeUp" delay={0.4 + i * 0.1}>
+                    <h3>
+                      <PortableText value={listSection.heading} />
+                    </h3>
+                  </AnimatedElement>
                 )}
                 {listSection.subheading && (
-                  <h4>
-                    <PortableText value={listSection.subheading} />
-                  </h4>
+                  <AnimatedElement animation="fadeUp" delay={0.5 + i * 0.1}>
+                    <h4>
+                      <PortableText value={listSection.subheading} />
+                    </h4>
+                  </AnimatedElement>
                 )}
                 {listSection.body && (
-                  <div className="mb-2">
-                    <PortableText value={listSection.body} />
-                  </div>
+                  <AnimatedElement animation="fadeUp" delay={0.6 + i * 0.1}>
+                    <div className="mb-2">
+                      <PortableText value={listSection.body} />
+                    </div>
+                  </AnimatedElement>
                 )}
                 <List
                   items={listSection.items || []}
@@ -209,13 +216,13 @@ export default function SectionOverview({
 
         {/* CTA */}
         {cta && (
-          <div className="call-to-action mt-8">
+          <AnimatedElement animation="scale" delay={0.5} className="call-to-action mt-8">
             {cta.heading && (
               <h3>
                 <PortableText value={cta.heading} />
               </h3>
             )}
-            <div className="bg-sapphire-500 flex items-center gap-5 rounded-lg p-5 text-white md:gap-8 md:p-10">
+            <div className="flex items-center gap-5 rounded-lg bg-sapphire-500 p-5 text-white md:gap-8 md:p-10">
               {cta.icon ? (
                 <div className="icon-wrapper">
                   <Image src={urlFor(cta.icon).url()} alt="Icon" fill />
@@ -232,7 +239,7 @@ export default function SectionOverview({
                 </a>
               )}
             </div>
-          </div>
+          </AnimatedElement>
         )}
       </div>
     </section>

@@ -1,8 +1,11 @@
+'use client';
+
 import React from 'react';
 import TextHeading from '@/components/ui/TextHeading';
 import List from '@/components/ui/List';
 import { PortableText } from '@portabletext/react';
 import type { PortableTextBlock } from '@portabletext/types';
+import AnimatedElement from '@/components/AnimatedElement';
 
 interface SnapshotPanel {
   heading?: PortableTextBlock[];
@@ -30,17 +33,21 @@ function SectionSnapshots({ theme, heading, panels }: Props) {
     <div className="container mx-auto">
         {/* Top-level heading */}
         {heading && (
-          <TextHeading level="h2">
-            <PortableText value={heading} />
-          </TextHeading>
+          <AnimatedElement animation="fadeUp" delay={0}>
+            <TextHeading level="h2">
+              <PortableText value={heading} />
+            </TextHeading>
+          </AnimatedElement>
         )}
     </div>
     <div className="max-w-full md:max-w-3xl lg:max-w-5xl xl:max-w-7xl 2xl:max-w-[96rem] mx-auto 2xl:px-6">
 
       {/* Panels */}
       {panels?.map((panel, idx) => (
-        <div
+        <AnimatedElement
           key={idx}
+          animation="fadeUp"
+          delay={idx * 0.2}
           className="panel w-full bg-perano-200 p-8 pb-20 md:p-12 border-b-5 last:border-0 border-perano-300 md:border-0 md:mb-6 md:rounded-lg"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -77,7 +84,7 @@ function SectionSnapshots({ theme, heading, panels }: Props) {
               />
             </div>
           </div>
-        </div>
+        </AnimatedElement>
         ))}
       </div>
     </section>

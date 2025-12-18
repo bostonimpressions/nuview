@@ -3,6 +3,7 @@
 import React from 'react';
 import { PortableText } from '@portabletext/react';
 import type { PortableTextBlock } from '@portabletext/types';
+import AnimatedElement from '@/components/AnimatedElement';
 
 export interface StatItem {
   heading?: PortableTextBlock[];
@@ -26,7 +27,12 @@ export default function StatsList({ stats }: StatsListProps) {
   return (
     <div className="stats space-y-12">
       {stats.map((row, i) => (
-        <div key={i} className="relative border-2 border-white p-6 rounded-xl">
+        <AnimatedElement
+          key={i}
+          animation="fadeUp"
+          delay={i * 0.2}
+          className="relative border-2 border-white p-6 rounded-xl"
+        >
           {row.heading && (
             <h4 className="relative w-fit font-semibold mb-2 bg-sapphire-500 p-4 mt-[-55px]">
               <PortableText value={row.heading} />
@@ -36,7 +42,13 @@ export default function StatsList({ stats }: StatsListProps) {
           {row.list && row.list.length > 0 && (
             <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-14 p-4 relative">
               {row.list.map((item, j) => (
-                <li key={j} className="relative">
+                <AnimatedElement
+                  key={j}
+                  as="li"
+                  animation="fadeUp"
+                  delay={i * 0.2 + j * 0.1}
+                  className="relative"
+                >
 
                   {/* Heading + Label */}
                   {(item.heading || item.label) && (
@@ -78,13 +90,13 @@ export default function StatsList({ stats }: StatsListProps) {
                     </div>
                   )}
 
-                </li>
+                </AnimatedElement>
               ))}
             </ul>
 
           )}
 
-        </div>
+        </AnimatedElement>
       ))}
     </div>
   );

@@ -1,7 +1,10 @@
+'use client';
+
 import React from 'react';
 import { PortableText } from '@portabletext/react';
 import type { PortableTextBlock } from '@portabletext/types';
 import Link from 'next/link';
+import AnimatedSection from '@/components/AnimatedSection';
 
 interface Link {
   text: string;
@@ -17,7 +20,7 @@ interface Props {
 
 function SectionCallToAction({ heading, subheading, body, link }: Props) {
   return (
-    <section className="bg-white py-12">
+    <AnimatedSection animation="scale" className="bg-white py-12">
       <div className="container mx-auto">
         <div className="relative rounded-xl overflow-hidden p-10 md:p-20">
 
@@ -55,7 +58,7 @@ function SectionCallToAction({ heading, subheading, body, link }: Props) {
 
         </div>
       </div>
-    </section>
+    </AnimatedSection>
 
   );
 }
