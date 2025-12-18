@@ -19,7 +19,7 @@ export default function StepsList({ items }: StepsListProps) {
     <ol className="steps-list grid sm:grid-cols-3 gap-12 md:gap-20">
       {items.map((item, i) => {
         // Vary the animation based on position
-        const animations = ['fadeUp', 'fadeLeft', 'fadeRight'];
+        const animations = ['fadeUp', 'fadeLeft', 'fadeRight'] as const;
         const animation = animations[i % 3];
         
         return (
