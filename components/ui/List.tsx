@@ -109,12 +109,14 @@ export default function List({
     >
       {items.map((item, i) => {
         const src = getImageUrl(item, i);
+        // Alternate animations: even items from left, odd items from right
+        const animation = i % 2 === 0 ? 'fadeLeft' : 'fadeRight';
 
         return (
           <AnimatedElement
             key={i}
             as="li"
-            animation="fadeUp"
+            animation={animation}
             delay={i * 0.1}
             duration={0.5}
             className="list-item"

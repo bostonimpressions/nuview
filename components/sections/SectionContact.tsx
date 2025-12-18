@@ -9,7 +9,7 @@ export default function SectionContact() {
 
   return (
     <AnimatedSection
-      animation="fadeUp"
+      animation="fade"
       className={`relative overflow-hidden py-12 bg-white`}
     >
 

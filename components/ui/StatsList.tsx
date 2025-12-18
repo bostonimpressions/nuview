@@ -29,7 +29,7 @@ export default function StatsList({ stats }: StatsListProps) {
       {stats.map((row, i) => (
         <AnimatedElement
           key={i}
-          animation="fadeUp"
+          animation="scale"
           delay={i * 0.2}
           className="relative border-2 border-white p-6 rounded-xl"
         >
@@ -41,14 +41,19 @@ export default function StatsList({ stats }: StatsListProps) {
 
           {row.list && row.list.length > 0 && (
             <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-14 p-4 relative">
-              {row.list.map((item, j) => (
-                <AnimatedElement
-                  key={j}
-                  as="li"
-                  animation="fadeUp"
-                  delay={i * 0.2 + j * 0.1}
-                  className="relative"
-                >
+              {row.list.map((item, j) => {
+                // Alternate stat items: left, up, right pattern
+                const animations = ['fadeLeft', 'fadeUp', 'fadeRight'];
+                const animation = animations[j % 3];
+                
+                return (
+                  <AnimatedElement
+                    key={j}
+                    as="li"
+                    animation={animation}
+                    delay={i * 0.2 + j * 0.1}
+                    className="relative"
+                  >
 
                   {/* Heading + Label */}
                   {(item.heading || item.label) && (
@@ -91,7 +96,8 @@ export default function StatsList({ stats }: StatsListProps) {
                   )}
 
                 </AnimatedElement>
-              ))}
+                );
+              })}
             </ul>
 
           )}

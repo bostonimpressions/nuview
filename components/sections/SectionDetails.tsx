@@ -58,21 +58,21 @@ export default function SectionDetails({
           {/* Top heading/subheading/body */}
           <div className="mb-12 px-10 py-10! md:pt-20! sm:px-14! md:px-20!">
             {heading && (
-              <AnimatedElement animation="fadeUp" delay={0}>
+              <AnimatedElement animation="fade" delay={0}>
                 <TextHeading level="h2" color={'text-white'}>
                   <PortableText value={heading} />
                 </TextHeading>
               </AnimatedElement>
             )}
             {subheading && (
-              <AnimatedElement animation="fadeUp" delay={0.1}>
+              <AnimatedElement animation="fadeLeft" delay={0.1}>
                 <h3 className="mt-2">
                   <PortableText value={subheading} />
                 </h3>
               </AnimatedElement>
             )}
             {body && (
-              <AnimatedElement animation="fadeUp" delay={0.2}>
+              <AnimatedElement animation="fadeLeft" delay={0.2}>
                 <div className="mt-2">
                   <PortableText value={body} />
                 </div>
@@ -91,21 +91,21 @@ export default function SectionDetails({
           {secondary && (secondary.heading || secondary.subheading || secondary.body) && (
             <div className="mt-16 px-10 sm:px-14! md:px-20! pb-20">
               {secondary.heading && (
-                <AnimatedElement animation="fadeUp" delay={0}>
+                <AnimatedElement animation="fade" delay={0}>
                   <h3 className="font-semibold">
                     <PortableText value={secondary.heading} />
                   </h3>
                 </AnimatedElement>
               )}
               {secondary.subheading && (
-                <AnimatedElement animation="fadeUp" delay={0.1}>
+                <AnimatedElement animation="fadeRight" delay={0.1}>
                   <h4 className="mt-1">
                     <PortableText value={secondary.subheading} />
                   </h4>
                 </AnimatedElement>
               )}
               {secondary.body && (
-                <AnimatedElement animation="fadeUp" delay={0.2}>
+                <AnimatedElement animation="fadeRight" delay={0.2}>
                   <div className="text-perano-500 mt-2">
                     <PortableText value={secondary.body} />
                   </div>

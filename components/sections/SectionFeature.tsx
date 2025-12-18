@@ -67,21 +67,21 @@ export default function SectionFeature({
           {/* Text Column */}
           <div className="order-2 md:order-2">
             {heading && (
-              <AnimatedElement animation="fadeUp" delay={0.1}>
+              <AnimatedElement animation="fade" delay={0.1}>
                 <TextHeading level={'h2'}>
                   <PortableText value={heading} />
                 </TextHeading>
               </AnimatedElement>
             )}
             {subheading && (
-              <AnimatedElement animation="fadeUp" delay={0.2}>
+              <AnimatedElement animation={isImageLeft ? 'fadeLeft' : 'fadeRight'} delay={0.2}>
                 <h4>
                   <PortableText value={subheading} />
                 </h4>
               </AnimatedElement>
             )}
             {body && (
-              <AnimatedElement animation="fadeUp" delay={0.3}>
+              <AnimatedElement animation={isImageLeft ? 'fadeLeft' : 'fadeRight'} delay={0.3}>
                 <PortableText value={body} />
               </AnimatedElement>
             )}

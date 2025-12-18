@@ -19,7 +19,7 @@ const themeClasses: Record<string, string> = {
 export default function SectionBody({ body, theme = 'light' }: Props) {
   return (
     <AnimatedSection
-      animation="fadeUp"
+      animation="fade"
       className={`relative overflow-hidden py-12 ${themeClasses[theme] || themeClasses.light}`}
     >
       <div className="container mx-auto px-4">

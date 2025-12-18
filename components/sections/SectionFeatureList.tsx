@@ -37,21 +37,21 @@ export default function SectionFeatureList({ heading, subheading, body, list, th
       <div className="container mx-auto px-4">
         <div className="pb-10 max-w-xl">
           {heading && (
-            <AnimatedElement animation="fadeUp" delay={0}>
+            <AnimatedElement animation="fade" delay={0}>
               <TextHeading level={'h2'}>
                 <PortableText value={heading} />
               </TextHeading>
             </AnimatedElement>
           )}
           {subheading && (
-            <AnimatedElement animation="fadeUp" delay={0.1}>
+            <AnimatedElement animation="fadeLeft" delay={0.1}>
               <h4>
                 <PortableText value={subheading} />
               </h4>
             </AnimatedElement>
           )}
           {body && (
-            <AnimatedElement animation="fadeUp" delay={0.2}>
+            <AnimatedElement animation="fadeLeft" delay={0.2}>
               <PortableText value={body} />
             </AnimatedElement>
           )}

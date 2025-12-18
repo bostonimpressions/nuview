@@ -139,21 +139,21 @@ export default function SectionOverview({
           {/* Text */}
           <div className={`order-2 md:order-2 ${proseClass}`}>
             {heading && (
-              <AnimatedElement animation="fadeUp" delay={0.1}>
+              <AnimatedElement animation="fade" delay={0.1}>
                 <TextHeading level="h2" color={proseClass}>
                   <PortableText value={heading} />
                 </TextHeading>
               </AnimatedElement>
             )}
             {subheading && (
-              <AnimatedElement animation="fadeUp" delay={0.2}>
+              <AnimatedElement animation={isImageLeft ? 'fadeLeft' : 'fadeRight'} delay={0.2}>
                 <h4>
                   <PortableText value={subheading} />
                 </h4>
               </AnimatedElement>
             )}
             {body && (
-              <AnimatedElement animation="fadeUp" delay={0.3}>
+              <AnimatedElement animation={isImageLeft ? 'fadeLeft' : 'fadeRight'} delay={0.3}>
                 <PortableText value={body} />
               </AnimatedElement>
             )}
@@ -181,36 +181,41 @@ export default function SectionOverview({
         {/* Lists */}
         {allLists.length > 0 && (
           <div className={`grid gap-10 ${listColumns === 2 ? 'md:grid-cols-2' : 'md:grid-cols-1'}`}>
-            {allLists.map((listSection, i) => (
-              <div key={i} className={`mt-10 ${proseClass} ${theme}`}>
-                {listSection.heading && (
-                  <AnimatedElement animation="fadeUp" delay={0.4 + i * 0.1}>
-                    <h3>
-                      <PortableText value={listSection.heading} />
-                    </h3>
-                  </AnimatedElement>
-                )}
-                {listSection.subheading && (
-                  <AnimatedElement animation="fadeUp" delay={0.5 + i * 0.1}>
-                    <h4>
-                      <PortableText value={listSection.subheading} />
-                    </h4>
-                  </AnimatedElement>
-                )}
-                {listSection.body && (
-                  <AnimatedElement animation="fadeUp" delay={0.6 + i * 0.1}>
-                    <div className="mb-2">
-                      <PortableText value={listSection.body} />
-                    </div>
-                  </AnimatedElement>
-                )}
-                <List
-                  items={listSection.items || []}
-                  columns={listSection.columns}
-                  theme={listSection.theme}
-                />
-              </div>
-            ))}
+            {allLists.map((listSection, i) => {
+              // Alternate list section animations
+              const headingAnimation = i % 2 === 0 ? 'fadeLeft' : 'fadeRight';
+
+              return (
+                <div key={i} className={`mt-10 ${proseClass} ${theme}`}>
+                  {listSection.heading && (
+                    <AnimatedElement animation="fade" delay={0.4 + i * 0.1}>
+                      <h3>
+                        <PortableText value={listSection.heading} />
+                      </h3>
+                    </AnimatedElement>
+                  )}
+                  {listSection.subheading && (
+                    <AnimatedElement animation={headingAnimation} delay={0.5 + i * 0.1}>
+                      <h4>
+                        <PortableText value={listSection.subheading} />
+                      </h4>
+                    </AnimatedElement>
+                  )}
+                  {listSection.body && (
+                    <AnimatedElement animation={headingAnimation} delay={0.6 + i * 0.1}>
+                      <div className="mb-2">
+                        <PortableText value={listSection.body} />
+                      </div>
+                    </AnimatedElement>
+                  )}
+                  <List
+                    items={listSection.items || []}
+                    columns={listSection.columns}
+                    theme={listSection.theme}
+                  />
+                </div>
+              );
+            })}
           </div>
         )}
 

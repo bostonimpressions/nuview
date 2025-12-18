@@ -30,7 +30,7 @@ function SectionComparison({ heading, body, nuview, competitor }: Props) {
       <div className="container mx-auto">
         <div className="grid grid-cols-1 gap-4 pb-10 md:grid-cols-3">
           {heading && (
-            <AnimatedElement animation="fadeUp" delay={0} className="md:col-span-1">
+            <AnimatedElement animation="fade" delay={0} className="md:col-span-1">
               <TextHeading level="h2">
                 <PortableText value={heading} />
               </TextHeading>
@@ -38,7 +38,7 @@ function SectionComparison({ heading, body, nuview, competitor }: Props) {
           )}
 
           {body && (
-            <AnimatedElement animation="fadeUp" delay={0.1} className="md:col-span-2">
+            <AnimatedElement animation="fadeLeft" delay={0.1} className="md:col-span-2">
               <PortableText value={body} />
             </AnimatedElement>
           )}
