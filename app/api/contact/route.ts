@@ -5,7 +5,10 @@ import { checkBotId } from 'botid/server';
 export async function POST(req: NextRequest) {
   const verification = await checkBotId();
   if (verification.isBot) {
-    return NextResponse.json({ error: 'Bot detected. Access denied.' }, { status: 403 });
+    return NextResponse.json(
+      { error: 'Bot detected. Access denied.' },
+      { status: 403 }
+    );
   }
 
   const body = await req.json();
@@ -23,6 +26,17 @@ export async function POST(req: NextRequest) {
     debug: true,
   });
 
+  /**
+   * Provider-safe FROM address
+   * - SendGrid requires verified CONTACT_EMAIL
+   * - SMTP2GO requires SMTP_USER
+   */
+  const isSendGrid = process.env.SMTP_USER === 'apikey';
+
+  const fromAddress = isSendGrid
+    ? `"NuView Website" <${process.env.CONTACT_EMAIL}>`
+    : `"NuView Website" <${process.env.SMTP_USER}>`;
+
   try {
     if (type === 'partnership') {
       const {
@@ -39,14 +53,24 @@ export async function POST(req: NextRequest) {
         notes,
       } = body;
 
-      if (!organization || !firstName || !lastName || !email || !role || !industry) {
-        return NextResponse.json({ error: 'Please fill in all required fields.' }, { status: 400 });
+      if (
+        !organization ||
+        !firstName ||
+        !lastName ||
+        !email ||
+        !role ||
+        !industry
+      ) {
+        return NextResponse.json(
+          { error: 'Please fill in all required fields.' },
+          { status: 400 }
+        );
       }
 
       await transporter.sendMail({
-        from: `"NuView Website" <${process.env.CONTACT_EMAIL}>`,
-        replyTo: `${firstName} ${lastName} <${email}>`,
+        from: fromAddress,
         to: process.env.CONTACT_EMAIL,
+        replyTo: `${firstName} ${lastName} <${email}>`,
         subject: `New Partnership Inquiry – ${organization}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width:600px; margin:auto; padding:20px; border:1px solid #e0e0e0; border-radius:12px; background:#ffffff; line-height:1.5; color:#111;">
@@ -62,8 +86,19 @@ export async function POST(req: NextRequest) {
               <tr><td style="font-weight:bold; padding:5px 0;">Compliance Frameworks:</td><td>${(frameworks || []).join(', ') || 'N/A'}</td></tr>
               <tr><td style="font-weight:bold; padding:5px 0;">Timeline:</td><td>${timeline || 'N/A'}</td></tr>
             </table>
-            ${notes ? `<div style="margin-top:15px; padding:10px; background:#f5f5f5; border-left:4px solid #394FA2; border-radius:6px;"><strong>Additional Notes:</strong><br>${notes.replace(/\n/g, '<br>')}</div>` : ''}
-            <p style="margin-top:20px; font-size:12px; color:#888;">This message was submitted via the New Partnership Contact form.</p>
+
+            ${
+          notes
+            ? `<div style="margin-top:15px; padding:10px; background:#f5f5f5; border-left:4px solid #394FA2; border-radius:6px;">
+                    <strong>Additional Notes:</strong><br>
+                    ${notes.replace(/\n/g, '<br>')}
+                  </div>`
+            : ''
+        }
+
+            <p style="margin-top:20px; font-size:12px; color:#888;">
+              Submitted via the Partnership Contact Form.
+            </p>
           </div>
         `,
       });
@@ -72,13 +107,16 @@ export async function POST(req: NextRequest) {
       const { name, email, message } = body;
 
       if (!name || !email || !message) {
-        return NextResponse.json({ error: 'Please fill in all fields.' }, { status: 400 });
+        return NextResponse.json(
+          { error: 'Please fill in all fields.' },
+          { status: 400 }
+        );
       }
 
       await transporter.sendMail({
-        from: `"NuView Website" <${process.env.CONTACT_EMAIL}>`,
-        replyTo: `${name} <${email}>`,
+        from: fromAddress,
         to: process.env.CONTACT_EMAIL,
+        replyTo: `${name} <${email}>`,
         subject: `New Contact Form Submission from ${name}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width:600px; margin:auto; padding:20px; border:1px solid #e0e0e0; border-radius:12px; background:#ffffff; line-height:1.5; color:#111;">
@@ -87,10 +125,14 @@ export async function POST(req: NextRequest) {
               <tr><td style="font-weight:bold; padding:5px 0; width:100px;">Name:</td><td>${name}</td></tr>
               <tr><td style="font-weight:bold; padding:5px 0;">Email:</td><td>${email}</td></tr>
             </table>
+
             <div style="margin-top:15px; padding:10px; background:#f5f5f5; border-left:4px solid #394FA2; border-radius:6px;">
               ${message.replace(/\n/g, '<br>')}
             </div>
-            <p style="margin-top:20px; font-size:12px; color:#888;">This message was submitted via the General Contact form.</p>
+
+            <p style="margin-top:20px; font-size:12px; color:#888;">
+              Submitted via the General Contact Form.
+            </p>
           </div>
         `,
       });
@@ -99,6 +141,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ success: true });
   } catch (err) {
     console.error('Email error:', err);
-    return NextResponse.json({ error: 'Failed to send message.' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Failed to send message.' },
+      { status: 500 }
+    );
   }
 }
