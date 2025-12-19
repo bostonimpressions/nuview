@@ -27,15 +27,11 @@ export async function POST(req: NextRequest) {
   });
 
   /**
-   * Provider-safe FROM address
-   * - SendGrid requires verified CONTACT_EMAIL
-   * - SMTP2GO requires SMTP_USER
+   * FROM address must be a valid email with domain
+   * - Both SendGrid and SMTP2GO require this
+   * - Use CONTACT_EMAIL which should be verified in both services
    */
-  const isSendGrid = process.env.SMTP_USER === 'apikey';
-
-  const fromAddress = isSendGrid
-    ? `"NuView Website" <${process.env.CONTACT_EMAIL}>`
-    : `"NuView Website" <${process.env.SMTP_USER}>`;
+  const fromAddress = `"NuView Website" <${process.env.CONTACT_EMAIL}>`;
 
   try {
     if (type === 'partnership') {
