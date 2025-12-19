@@ -51,9 +51,9 @@ export default function AnimatedElement({
   className = '',
   animation = 'fadeUp',
   delay = 0,
-  duration = 0.5,
-  once = true,
-  amount = 0.2,
+  duration = 0.3,
+  once = false,
+  amount = 0.3,
   as = 'div',
   style,
 }: AnimatedElementProps) {
