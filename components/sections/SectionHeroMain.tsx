@@ -81,7 +81,7 @@ export default function SectionHeroMain({ slides }: Props) {
 
   return (
     <section
-      className={`${slide.autoHeight ? 'h-auto' : 'min-h-[700px]'} relative overflow-hidden py-[20] pb-[40] md:py-[60]`}
+      className={`${slide.autoHeight ? 'h-auto' : 'min-h-[600px] md:min-h-[700px]'} relative overflow-hidden py-[20] pb-[40] md:py-[60]`}
       style={{ ...backgroundStyle }}
     >
       <AnimatePresence mode="wait">
