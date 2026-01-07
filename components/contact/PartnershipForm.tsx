@@ -137,7 +137,7 @@ export default function PartnershipForm() {
 
   return (
     <div className="shadow-xs max-w-2xl rounded-2xl border border-gray-100 bg-white p-8">
-      <TextHeading level="h2">New Partnership</TextHeading>
+      <TextHeading level="h2">New Client</TextHeading>
       <p className="mb-6 text-gray-600">
         Share a few details so we can route your inquiry correctly.
       </p>
@@ -263,7 +263,7 @@ export default function PartnershipForm() {
           disabled={status === 'sending'}
           className="bg-nugreen-500 hover:bg-nugreen-600 flex items-center justify-center gap-2 rounded-lg py-3 font-semibold text-white transition"
         >
-          {status === 'sending' ? 'Sending...' : 'Submit Partnership Request'}
+          {status === 'sending' ? 'Sending...' : 'Send Message'}
           {status === 'sending' && <FiSend className="animate-spin" />}
         </button>
 

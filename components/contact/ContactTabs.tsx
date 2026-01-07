@@ -28,7 +28,7 @@ export default function ContactTabs() {
               : 'text-gray-500 hover:text-gray-700'
           }`}
         >
-          New Partnership
+          New Client
         </button>
       </div>
 
