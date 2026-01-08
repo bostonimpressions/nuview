@@ -34,7 +34,8 @@ export async function POST(req: NextRequest) {
   const fromAddress = `"NuView Website" <${process.env.CONTACT_EMAIL}>`;
 
   try {
-    if (type === 'partnership') {
+    if (type === 'client' || type === 'partnership') {
+      // Support both 'client' and 'partnership' for backward compatibility
       const {
         organization,
         firstName,
@@ -67,10 +68,10 @@ export async function POST(req: NextRequest) {
         from: fromAddress,
         to: process.env.CONTACT_EMAIL,
         replyTo: `${firstName} ${lastName} <${email}>`,
-        subject: `New Partnership Inquiry – ${organization}`,
+        subject: `New Client Inquiry – ${organization}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width:600px; margin:auto; padding:20px; border:1px solid #e0e0e0; border-radius:12px; background:#ffffff; line-height:1.5; color:#111;">
-            <h2 style="color:#394FA2; border-bottom:2px solid #394FA2; padding-bottom:8px;">New Partnership Inquiry</h2>
+            <h2 style="color:#394FA2; border-bottom:2px solid #394FA2; padding-bottom:8px;">New Client Inquiry</h2>
             <table style="width:100%; margin-top:10px; border-collapse:collapse;">
               <tr><td style="font-weight:bold; padding:5px 0; width:150px;">Organization:</td><td>${organization}</td></tr>
               <tr><td style="font-weight:bold; padding:5px 0;">Name:</td><td>${firstName} ${lastName}</td></tr>
@@ -93,7 +94,7 @@ export async function POST(req: NextRequest) {
         }
 
             <p style="margin-top:20px; font-size:12px; color:#888;">
-              Submitted via the Partnership Contact Form.
+              Submitted via the Client Contact Form.
             </p>
           </div>
         `,
