@@ -77,7 +77,19 @@ async function handleImage(imagePath) {
       },
     };
   } catch (error) {
-    console.error(`❌ Failed to upload image: ${fullPath}`, error.message);
+    // Check if it's a permissions error
+    if (
+      error.message?.includes('permission') ||
+      error.message?.includes('Insufficient permissions')
+    ) {
+      console.warn(`⚠️  Skipping image upload (permissions issue): ${path.basename(fullPath)}`);
+      console.warn(
+        `   Tip: Check your SANITY_WRITE_TOKEN has "Editor" or "Administrator" role with asset upload permissions`
+      );
+    } else {
+      console.warn(`⚠️  Failed to upload image: ${path.basename(fullPath)} - ${error.message}`);
+    }
+    // Return null so the import continues without the image
     return null;
   }
 }
@@ -425,8 +437,8 @@ if (filePath) {
 } else {
   // Show usage if run directly without arguments (but not when imported)
   // Check if this is being run as a script (not imported)
-  const isMainScript = process.argv[1]?.endsWith('importPage.js') || 
-                       process.argv[1]?.includes('importPage.js');
+  const isMainScript =
+    process.argv[1]?.endsWith('importPage.js') || process.argv[1]?.includes('importPage.js');
   if (isMainScript) {
     console.error('Usage: node scripts/importPage.js <markdown-file>');
     console.error('Example: node scripts/importPage.js ./content/cybersecurity.md');
