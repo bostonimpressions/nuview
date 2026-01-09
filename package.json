@@ -10,7 +10,8 @@
     "lint": "eslint",
     "backup": "node scripts/sanityBackup.js",
     "import:all": "node scripts/importAllPages.js",
-    "import:page": "node scripts/importPage.js"
+    "import:page": "node scripts/importPage.js",
+    "sanity:deploy": "npx sanity schema deploy"
   },
   "dependencies": {
     "@portabletext/react": "^5.0.0",
