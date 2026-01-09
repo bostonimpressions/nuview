@@ -7,11 +7,50 @@ export default function ContactTabs() {
   const [active, setActive] = useState<'general' | 'client'>('general');
 
   useEffect(() => {
-    // Check URL hash on mount
+    // Check URL hash on mount and when hash changes
     const checkHash = () => {
       const hash = window.location.hash;
-      if (hash === '#client') {
-        setActive('client');
+
+      if (hash) {
+        // Remove the # symbol
+        const hashValue = hash.substring(1);
+
+        // Parse hash format: #contact?client or #contact or #client
+        // Format: #<anchor>?<tab> or #<tab> or #<anchor>
+        if (hashValue.includes('?')) {
+          // Format: #contact?client
+          const [anchor, tab] = hashValue.split('?');
+
+          // Set the active tab based on the query parameter
+          if (tab === 'client') {
+            setActive('client');
+          } else if (tab === 'general') {
+            setActive('general');
+          }
+
+          // Scroll to the anchor section
+          if (anchor) {
+            setTimeout(() => {
+              const element = document.getElementById(anchor);
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }, 100);
+          }
+        } else {
+          // Simple hash format: #client or #contact
+          if (hashValue === 'client') {
+            setActive('client');
+          } else if (hashValue === 'contact') {
+            // Just scroll to contact section, don't change tab
+            setTimeout(() => {
+              const element = document.getElementById('contact');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }, 100);
+          }
+        }
       }
     };
 

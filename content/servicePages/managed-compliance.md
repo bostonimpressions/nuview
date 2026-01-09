@@ -164,7 +164,7 @@ sections:
     body: 'Let’s assess your current readiness and design a plan that aligns security, governance, and strategy—without adding full-time cost.'
     link:
       text: 'Schedule a Compliance Consultation'
-      url: '/contact'
+      url: '/contact#contact?client'
 
   - type: sectionBanner
     theme: light

@@ -152,7 +152,7 @@ sections:
     body: 'We’ll assess your environment, identify gaps, and deliver a clear roadmap to exam-ready compliance and operational resilience.'
     link:
       text: 'Schedule a Financial Services IT & Security Assessment'
-      url: '/contact'
+      url: '/contact#contact?client'
 
   - type: sectionBanner
     theme: light

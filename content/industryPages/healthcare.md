@@ -122,7 +122,7 @@ sections:
     body: 'We’ll assess your environment, identify gaps, and deliver a clear roadmap to HIPAA compliance and operational resilience.'
     link:
       text: 'Schedule a Healthcare IT & Cybersecurity Assessment'
-      url: '/contact'
+      url: '/contact#contact?client'
 
   - type: sectionBanner
     theme: light

@@ -135,7 +135,7 @@ sections:
     body: 'We’ll assess your environment, identify gaps, and deliver a clear roadmap to privacy‑aligned security and operational resilience.'
     link:
       text: 'Schedule an Education IT & Security Assessment'
-      url: '/contact'
+      url: '/contact#contact?client'
 
   - type: sectionBanner
     theme: light

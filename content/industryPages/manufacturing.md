@@ -138,7 +138,7 @@ sections:
     body: 'We’ll assess your environment, identify gaps, and deliver a clear roadmap to compliance, OT resilience, and production continuity.'
     link:
       text: 'Schedule a Manufacturing IT & Security Assessment'
-      url: '/contact'
+      url: '/contact#contact?client'
 
   - type: sectionBanner
     theme: light

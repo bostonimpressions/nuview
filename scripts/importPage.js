@@ -406,20 +406,30 @@ async function importPage(mdFilePath) {
   console.log(`   Order Rank: ${orderRank}`);
 }
 
+// Export the function for use in other scripts
+export { importPage };
+
 // ------------------------
 // CLI
 // ------------------------
+// Only run CLI if this file is executed directly (has a file path argument)
 const filePath = process.argv[2];
-if (!filePath) {
-  console.error('Usage: node scripts/importPage.js <markdown-file>');
-  console.error('Example: node scripts/importPage.js ./content/cybersecurity.md');
-  process.exit(1);
-}
-
-importPage(filePath)
-  .then(() => console.log('\n🎉 Import complete!'))
-  .catch((err) => {
-    console.error('\n❌ Import failed:', err.message);
-    console.error(err);
+if (filePath) {
+  importPage(filePath)
+    .then(() => console.log('\n🎉 Import complete!'))
+    .catch((err) => {
+      console.error('\n❌ Import failed:', err.message);
+      console.error(err);
+      process.exit(1);
+    });
+} else {
+  // Show usage if run directly without arguments (but not when imported)
+  // Check if this is being run as a script (not imported)
+  const isMainScript = process.argv[1]?.endsWith('importPage.js') || 
+                       process.argv[1]?.includes('importPage.js');
+  if (isMainScript) {
+    console.error('Usage: node scripts/importPage.js <markdown-file>');
+    console.error('Example: node scripts/importPage.js ./content/cybersecurity.md');
     process.exit(1);
-  });
+  }
+}

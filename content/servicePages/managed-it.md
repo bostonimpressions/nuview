@@ -150,7 +150,7 @@ sections:
     body: 'We’ll evaluate your environment, identify opportunities, and deliver a strategic plan for long-term reliability and compliance.'
     link:
       text: 'Schedule a Managed IT Consultation'
-      url: '/contact'
+      url: '/contact#contact?client'
 
   - type: sectionBanner
     theme: light

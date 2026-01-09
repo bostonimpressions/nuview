@@ -144,7 +144,7 @@ sections:
     body: 'Let’s assess your IT and security governance needs and design a leadership plan that fits your goals and regulatory environment.'
     link:
       text: 'Schedule a Fractional Leadership Consultation'
-      url: '/contact'
+      url: '/contact#contact?client'
 
   - type: sectionBanner
     theme: light

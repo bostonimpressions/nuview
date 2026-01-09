@@ -87,7 +87,7 @@ sections:
     body: 'We’ll assess your environment, identify gaps, and deliver a practical plan for reliable, secure operations.'
     link:
       text: 'Schedule an SMB IT Assessment'
-      url: '/contact'
+      url: '/contact#contact?client'
 
   - type: sectionBanner
     theme: light

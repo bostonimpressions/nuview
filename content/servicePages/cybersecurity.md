@@ -149,7 +149,7 @@ sections:
     body: 'We’ll evaluate your environment, identify vulnerabilities, and deliver a clear roadmap for resilience, compliance, and operational freedom.'
     link:
       text: 'Schedule a Cybersecurity Assessment'
-      url: '/contact'
+      url: '/contact#contact?client'
 
   - type: sectionBanner
     theme: light

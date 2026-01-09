@@ -131,7 +131,7 @@ sections:
     body: 'We’ll assess your IT environment, identify collaboration opportunities, and provide a roadmap for security, performance, and peace of mind.'
     link:
       text: 'Schedule a Co‑Managed IT Consultation'
-      url: '/contact'
+      url: '/contact#contact?client'
 
   - type: sectionBanner
     theme: light
