@@ -136,7 +136,7 @@ export default function ClientForm() {
     'border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-nugreen-500';
 
   return (
-    <div className="shadow-xs max-w-2xl rounded-2xl border border-gray-100 bg-white p-8">
+    <div className="shadow-xs rounded-2xl border border-gray-100 bg-white p-8">
       <TextHeading level="h2">New Client</TextHeading>
       <p className="mb-6 text-gray-600">
         Share a few details so we can route your inquiry correctly.

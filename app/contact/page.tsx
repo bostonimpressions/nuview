@@ -27,9 +27,30 @@ export default async function ContactPage() {
         ) : null
       )}
 
-      <section className="relative overflow-hidden bg-white py-12">
+      <section id="contact" className="relative overflow-hidden bg-white py-12">
         <div className="container">
-          <ContactTabs />
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
+            <div className="lg:col-span-2">
+              <ContactTabs />
+            </div>
+
+            <div className="lg:mt-21 rounded-2xl bg-gray-50 p-10 lg:col-span-1">
+              <h3>Contact Details:</h3>
+              <div className="contact-details flex flex-col gap-4">
+                <div className="text-lg">
+                  <span className="mr-2 font-semibold">Phone:</span>
+                  <p className="inline-block">
+                    <a
+                      href="tel:18556884390"
+                      className="text-nugreen-600 hover:text-nugreen-700 font-semibold"
+                    >
+                      (855) 688-4390
+                    </a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -27,7 +27,7 @@ export default function ContactTabs() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-2xl">
+    <div className="mx-auto">
       {/* Tabs */}
       <div className="mb-8 flex border-b">
         <button
